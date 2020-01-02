@@ -1,63 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_indicators/src/effects/worm_effect.dart';
 
 import 'indicator_painter.dart';
 
 class WormEffectPainter extends IndicatorPainter {
-  final Color activeDotColor;
-  final Paint _activePaint;
+  final WormEffect effect;
 
   WormEffectPainter({
-    this.activeDotColor,
-    double offset,
-    bool isRTL,
-    double dotWidth,
-    double dotHeight,
-    double hSpacing,
-    double vSpacing,
-    double radius,
-    Color dotColor,
-    double strokeWidth,
-    PaintingStyle paintingStyle,
-    int count,
-    PaintingStyle paintStyle,
-  })  : _activePaint = Paint()..color = activeDotColor,
-        super(
-          rawOffset: offset,
-          isRTL: isRTL,
-          dotWidth: dotWidth,
-          dotHeight: dotHeight,
-          hSpacing: hSpacing,
-          vSpacing: vSpacing,
-          radius: radius,
-          count: count,
-          strokeWidth: strokeWidth,
-          paintStyle: paintingStyle,
-          dotColor: dotColor,
-        );
+    @required this.effect,
+    @required int count,
+    @required double offset,
+  }) : super(offset, count, effect);
 
   @override
   void paint(Canvas canvas, Size size) {
-
-    for (int i = 0; i < count; i++) {
-      final bounds = _calcBounds(i);
-      RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
-      canvas.drawRRect(rect, dotPaint);
-    }
+    // paint still dots
+    super.paint(canvas, size);
+    final activeDotPaint = Paint()..color = effect.activeDotColor;
     final dotOffset = offset - offset.toInt();
     final bounds = _calcBounds(offset.floor(), dotOffset * 2);
     final worm = RRect.fromLTRBR(bounds.left, bounds.top, bounds.right, bounds.bottom, dotRadius);
-    canvas.drawRRect(worm, _activePaint);
+    canvas.drawRRect(worm, activeDotPaint);
   }
 
   Rect _calcBounds(num i, [double dotOffset = 0]) {
-    final xPos = hSpacing / 2 + (i * (dotWidth + hSpacing));
-    final yPos = (dotHeight + vSpacing) / 2;
+    final xPos = effect.spacing / 2 + (i * (effect.dotWidth + effect.spacing));
+    final yPos = (effect.dotHeight) / 2;
     double left = xPos;
-    double right = xPos + dotWidth + (dotOffset * (dotWidth + hSpacing));
+    double right = xPos + effect.dotWidth + (dotOffset * (effect.dotWidth + effect.spacing));
     if (dotOffset > 1) {
-      right = xPos + dotWidth + (1 * (dotWidth + hSpacing));
-      left = xPos + ((hSpacing + dotWidth) * (dotOffset - 1));
+      right = xPos + effect.dotWidth + (1 * (effect.dotWidth + effect.spacing));
+      left = xPos + ((effect.spacing + effect.dotWidth) * (dotOffset - 1));
     }
-    return Rect.fromLTRB(left, yPos - dotHeight / 2, right, yPos + dotHeight / 2);
+    return Rect.fromLTRB(left, yPos - effect.dotHeight / 2, right, yPos + effect.dotHeight / 2);
   }
 }

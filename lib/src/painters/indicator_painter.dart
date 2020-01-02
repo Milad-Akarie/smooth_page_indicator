@@ -1,54 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_indicators/src/effects/indicator_effect.dart';
 
 abstract class IndicatorPainter extends CustomPainter {
-  final Paint dotPaint;
+  final double _rawOffset;
   final double offset;
-  final Radius dotRadius;
-  final bool isRTL;
-  final double rawOffset;
-  final double dotWidth;
-  final double dotHeight;
-  final double hSpacing;
-  final double vSpacing;
-  final double radius;
-  final Color dotColor;
   final int count;
-  final PaintingStyle paintStyle;
-  final double strokeWidth;
+  final IndicatorEffect _effect;
+  final Paint dotPaint;
+  final Radius dotRadius;
 
-  IndicatorPainter({
-    @required this.rawOffset,
-    @required this.strokeWidth,
-    @required this.isRTL,
-    @required this.dotWidth,
-    @required this.dotHeight,
-    @required this.hSpacing,
-    @required this.vSpacing,
-    @required this.radius,
-    @required this.dotColor,
-    @required this.count,
-    @required this.paintStyle,
-  })  : assert(isRTL != null, 'isRTL must not be null'),
-        assert(radius != null || radius < 0, 'radius must not be null or less than 0'),
-        assert(dotColor != null && paintStyle != null && strokeWidth != null, "dotColor, paintStyle and strokeWidth must not be null "),
-        assert(strokeWidth > 0, 'strokeWidth must not be less than 0'),
-        assert(rawOffset != null && rawOffset.ceil() < count , 'current page index is bigger bigger than total count'),
-        offset = _getDirectionalOffset(isRTL, count, rawOffset),
-        dotRadius = Radius.circular(radius),
+  IndicatorPainter(
+    this._rawOffset,
+    this.count,
+    this._effect,
+  )   : dotRadius = Radius.circular(_effect.radius),
         dotPaint = Paint()
-          ..color = dotColor
-          ..style = paintStyle
-          ..strokeWidth = strokeWidth;
+          ..color = _effect.dotColor
+          ..style = _effect.paintStyle
+          ..strokeWidth = _effect.strokeWidth,
+        offset = _effect.isRTL ? (count - 1) - _rawOffset : _rawOffset;
+
+  double get distance => _effect.dotWidth + _effect.spacing + _effect.strokeWidth;
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return (oldDelegate as IndicatorPainter).rawOffset != rawOffset;
+  void paint(Canvas canvas, Size size) {
+    print(size);
+    for (int i = 0; i < count; i++) {
+      final xPos = _effect.strokeWidth / 2 + (i * distance);
+      print(xPos + _effect.dotWidth);
+      final yPos = size.height / 2;
+      final bounds =
+          Rect.fromLTRB(xPos, yPos - _effect.dotHeight / 2, xPos + _effect.dotWidth, yPos + _effect.dotHeight / 2);
+      RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
+      canvas.drawRRect(rect, dotPaint);
+    }
   }
 
-  static double _getDirectionalOffset(bool isRTL, int count, double rawOffset) {
-    if (isRTL) {
-      return (count - 1) - (rawOffset ?? 0.0);
-    } else
-      return rawOffset ?? 0.0;
+  @override
+  bool shouldRepaint(IndicatorPainter oldDelegate) {
+    return oldDelegate._rawOffset != _rawOffset;
   }
 }
