@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/painters/indicator_painter.dart';
-import 'package:smooth_indicators/src/painters/slide_effect_painter.dart';
+import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
+import 'package:smooth_page_indicator/src/painters/slide_painter.dart';
 
 import 'indicator_effect.dart';
 
@@ -32,6 +32,6 @@ class SlideEffect extends IndicatorEffect {
 
   @override
   IndicatorPainter buildPainter(int count, double offset) {
-    return SlideEffectPainter(count: count, offset: offset, effect: this);
+    return SlidePainter(count: count, offset: offset, effect: this);
   }
 }

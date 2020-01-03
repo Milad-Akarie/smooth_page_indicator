@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/effects/scrolling_dots_effect.dart';
+import 'package:smooth_page_indicator/smooth_page_indicators.dart';
 
 import 'indicator_painter.dart';
 
@@ -53,7 +53,6 @@ class ScrollingDotsPainter extends IndicatorPainter {
 
     final xPos = startingPoint + (newWidth + effect.spacing) * i;
     final yPos = canvasHeight / 2;
-    print(yPos);
     return Rect.fromLTRB(xPos - newWidth / 2, yPos - height / 2, xPos + newWidth / 2, yPos + height / 2);
   }
 }

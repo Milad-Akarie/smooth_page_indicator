@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/painters/expanding_dots_painter.dart';
-import 'package:smooth_indicators/src/painters/indicator_painter.dart';
+import 'package:smooth_page_indicator/src/painters/expanding_dots_painter.dart';
+import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
 
 import 'indicator_effect.dart';
 
@@ -14,8 +14,7 @@ class ExpandingDotsEffect extends IndicatorEffect {
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
-    double vSpace = 16.0,
-    double radius = 16,
+    double radius = 16.0,
     Color dotColor = Colors.indigo,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
@@ -34,7 +33,7 @@ class ExpandingDotsEffect extends IndicatorEffect {
 
   @override
   Size calculateSize(int count) {
-    return Size(((fullWidth) * count) + (spacing * (count - 1)) * (expansionFactor - 1), fullHeight);
+    return Size(((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth), dotHeight);
   }
 
   @override

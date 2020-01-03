@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/painters/indicator_painter.dart';
-import 'package:smooth_indicators/src/painters/jumpting_dot_effect_painter.dart';
+import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
+import 'package:smooth_page_indicator/src/painters/swap_painter.dart';
 
 import 'indicator_effect.dart';
 
-class JumpingDotEffect extends IndicatorEffect {
+class SwapEffect extends IndicatorEffect {
   final Color activeDotColor;
-  final double elevation;
 
-  const JumpingDotEffect({
+  const SwapEffect({
     this.activeDotColor = Colors.indigo,
-    this.elevation = 15.0,
     double offset,
     bool isRTL = false,
     double dotWidth = 16.0,
@@ -21,7 +19,6 @@ class JumpingDotEffect extends IndicatorEffect {
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
   })  : assert(activeDotColor != null),
-        assert(elevation != null),
         super(
           isRTL: isRTL,
           dotWidth: dotWidth,
@@ -35,6 +32,6 @@ class JumpingDotEffect extends IndicatorEffect {
 
   @override
   IndicatorPainter buildPainter(int count, double offset) {
-    return JumpingDotPainter(count: count, offset: offset, effect: this);
+    return SwapPainter(count: count, offset: offset, effect: this);
   }
 }

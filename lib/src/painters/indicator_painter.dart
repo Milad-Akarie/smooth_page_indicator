@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/effects/indicator_effect.dart';
+import 'package:smooth_page_indicator/src/effects/indicator_effect.dart';
 
 abstract class IndicatorPainter extends CustomPainter {
   final double _rawOffset;
@@ -20,14 +20,12 @@ abstract class IndicatorPainter extends CustomPainter {
           ..strokeWidth = _effect.strokeWidth,
         offset = _effect.isRTL ? (count - 1) - _rawOffset : _rawOffset;
 
-  double get distance => _effect.dotWidth + _effect.spacing + _effect.strokeWidth;
+  double get distance => _effect.dotWidth + _effect.spacing;
 
   @override
   void paint(Canvas canvas, Size size) {
-    print(size);
     for (int i = 0; i < count; i++) {
-      final xPos = _effect.strokeWidth / 2 + (i * distance);
-      print(xPos + _effect.dotWidth);
+      final xPos = (i * distance);
       final yPos = size.height / 2;
       final bounds =
           Rect.fromLTRB(xPos, yPos - _effect.dotHeight / 2, xPos + _effect.dotWidth, yPos + _effect.dotHeight / 2);

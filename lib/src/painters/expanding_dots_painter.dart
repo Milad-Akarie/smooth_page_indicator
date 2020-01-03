@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/effects/expanding_dots_effect.dart';
+import 'package:smooth_page_indicator/src/effects/expanding_dots_effect.dart';
 
 import 'indicator_painter.dart';
 
@@ -15,7 +15,7 @@ class ExpandingDotsPainter extends IndicatorPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final int current = offset.floor();
-    double lastPos = effect.strokeWidth / 2;
+    double lastPos = -effect.spacing;
     for (int i = 0; i < count; i++) {
       final active = i == current;
       final dotOffset = offset - offset.toInt();
@@ -31,7 +31,7 @@ class ExpandingDotsPainter extends IndicatorPainter {
     final activeDotWidth = effect.dotWidth * effect.expansionFactor;
     final expansion = (dotOffset / 2 * ((activeDotWidth - effect.dotWidth) / .5));
 
-    final xPos = startingPoint;
+    final xPos = startingPoint +effect.spacing;
     double width = effect.dotWidth;
     if (isActive) {
       width = activeDotWidth - expansion;

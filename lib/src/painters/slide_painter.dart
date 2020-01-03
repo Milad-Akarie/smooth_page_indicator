@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/effects/slide_effect.dart';
+import 'package:smooth_page_indicator/src/effects/slide_effect.dart';
 
 import 'indicator_painter.dart';
 
-class SlideEffectPainter extends IndicatorPainter {
+class SlidePainter extends IndicatorPainter {
   final SlideEffect effect;
 
-  SlideEffectPainter({
+  SlidePainter({
     @required this.effect,
     @required int count,
     @required double offset,

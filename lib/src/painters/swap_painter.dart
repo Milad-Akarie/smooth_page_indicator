@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/effects/swap_dots_effect.dart';
+import 'package:smooth_page_indicator/src/effects/swap_effect.dart';
 
 import 'indicator_painter.dart';
 
-class SwapDotsPainter extends IndicatorPainter {
-  final SwapDotsEffect effect;
+class SwapPainter extends IndicatorPainter {
+  final SwapEffect effect;
 
-  SwapDotsPainter({
+  SwapPainter({
     @required double offset,
     @required this.effect,
     @required int count,

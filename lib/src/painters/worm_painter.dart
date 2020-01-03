@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/effects/worm_effect.dart';
+import 'package:smooth_page_indicator/src/effects/worm_effect.dart';
 
 import 'indicator_painter.dart';
 
-class WormEffectPainter extends IndicatorPainter {
+class WormPainter extends IndicatorPainter {
   final WormEffect effect;
 
-  WormEffectPainter({
+  WormPainter({
     @required this.effect,
     @required int count,
     @required double offset,
@@ -24,7 +24,7 @@ class WormEffectPainter extends IndicatorPainter {
   }
 
   Rect _calcBounds(num i, [double dotOffset = 0]) {
-    final xPos = effect.spacing / 2 + (i * (effect.dotWidth + effect.spacing));
+    final xPos =  (i * distance);
     final yPos = (effect.dotHeight) / 2;
     double left = xPos;
     double right = xPos + effect.dotWidth + (dotOffset * (effect.dotWidth + effect.spacing));

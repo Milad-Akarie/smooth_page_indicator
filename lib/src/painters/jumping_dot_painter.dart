@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/effects/jumpting_dot_effect.dart';
+import 'package:smooth_page_indicator/src/effects/jumping_dot_effect.dart';
 
 import 'indicator_painter.dart';
 
@@ -32,7 +32,7 @@ class JumpingDotPainter extends IndicatorPainter {
   }
 
   Rect _calcBounds(num i, [double expansion = 0]) {
-    final xPos = effect.spacing / 2 + (i * (effect.dotWidth + effect.spacing));
+    final xPos =  (i * (effect.dotWidth + effect.spacing));
     final yPos = (effect.dotHeight) / 2;
     final height = effect.dotHeight + expansion;
     final width = effect.dotWidth + expansion;

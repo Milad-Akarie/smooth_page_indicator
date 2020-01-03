@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/painters/indicator_painter.dart';
+import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
 
 abstract class IndicatorEffect {
   final bool isRTL;
@@ -30,10 +30,7 @@ abstract class IndicatorEffect {
 
   IndicatorPainter buildPainter(int count, double offset);
 
-  double get fullWidth => dotWidth + strokeWidth;
-  double get fullHeight => dotHeight + strokeWidth;
-
   Size calculateSize(int count) {
-    return Size(fullWidth * count + (spacing * (count - 1)), fullHeight);
+    return Size(dotWidth * count + (spacing * (count - 1)), dotHeight);
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_indicators/src/effects/scale_effect.dart';
+import 'package:smooth_page_indicator/src/effects/scale_effect.dart';
 
 import 'indicator_painter.dart';
 
-class ScaleEffectPainter extends IndicatorPainter {
+class ScalePainter extends IndicatorPainter {
   final ScaleEffect effect;
 
-  ScaleEffectPainter({
+  ScalePainter({
     @required double offset,
     @required this.effect,
     @required int count,
@@ -39,8 +39,7 @@ class ScaleEffectPainter extends IndicatorPainter {
       }
 
       final activeBounds = _calcBounds(size.height, i, scale);
-      RRect activeRect =
-          RRect.fromRectAndRadius(activeBounds, Radius.circular(effect.radius + effect.radius * effect.scale));
+      RRect activeRect = RRect.fromRectAndRadius(activeBounds, Radius.circular(effect.radius + effect.radius * effect.scale));
       canvas.drawRRect(activeRect, activePaint);
     }
   }
@@ -49,9 +48,9 @@ class ScaleEffectPainter extends IndicatorPainter {
     final width = effect.dotWidth + hScale;
     final calculatedScale = width - effect.dotWidth;
     final height = effect.dotHeight + calculatedScale;
-    final startPoint = effect.dotWidth * effect.scale;
-    final xPos = startPoint / 4 + (effect.spacing + effect.dotWidth) / 2 + (i * (effect.dotWidth + effect.spacing));
+    final startingPoint = effect.dotWidth * effect.scale;
+    final xPos = startingPoint  /2 - calculatedScale/2 + (i * (effect.dotWidth + effect.spacing));
     final yPos = canvasHeight / 2;
-    return Rect.fromLTRB(xPos - width / 2, yPos - height / 2, xPos + width / 2, yPos + height / 2);
+    return Rect.fromLTRB(xPos, yPos - height / 2, xPos + width, yPos + height / 2);
   }
 }
