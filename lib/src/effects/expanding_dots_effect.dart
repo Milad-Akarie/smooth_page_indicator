@@ -33,7 +33,9 @@ class ExpandingDotsEffect extends IndicatorEffect {
 
   @override
   Size calculateSize(int count) {
-    return Size(((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth), dotHeight);
+    return Size(
+        ((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth),
+        dotHeight);
   }
 
   @override

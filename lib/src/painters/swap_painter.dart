@@ -38,6 +38,7 @@ class SwapPainter extends IndicatorPainter {
   Rect _calcBounds(num i) {
     final xPos = effect.spacing / 2 + (i * (effect.dotWidth + effect.spacing));
     final yPos = (effect.dotHeight) / 2;
-    return Rect.fromLTRB(xPos, yPos - effect.dotHeight / 2, xPos + effect.dotWidth, yPos + effect.dotHeight / 2);
+    return Rect.fromLTRB(xPos, yPos - effect.dotHeight / 2,
+        xPos + effect.dotWidth, yPos + effect.dotHeight / 2);
   }
 }

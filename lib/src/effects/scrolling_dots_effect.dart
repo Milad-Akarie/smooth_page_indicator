@@ -40,7 +40,8 @@ class ScrollingDotsEffect extends IndicatorEffect {
   @override
   Size calculateSize(int count) {
     final scaledWidth = dotWidth + (dotWidth * activeDotScale) - dotWidth;
-    return Size((dotWidth + spacing) * ((count * 2) - 1), dotHeight + scaledWidth);
+    return Size(
+        (dotWidth + spacing) * ((count * 2) - 1), dotHeight + scaledWidth);
   }
 
   @override

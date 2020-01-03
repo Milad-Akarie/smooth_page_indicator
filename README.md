@@ -1,14 +1,59 @@
-# smooth_indicators
+## smooth_page_indicator
+##### Customizable animated Page indicators
 
-Flutter Smooth PageView indicators
+### Effects
+- Worm
+- Expanding Dots
+- Scrolling Dots
+- Jumping dot
+- Slide
+- Scale
+- Swap
 
-## Getting Started
+![](/demo/smooth_page_indicator_demo_1.gif)
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+### Usage
+---
+```dart
+SmoothPageIndicator(
+  controller: controller, // PageController
+  count: 6,
+  effect: WormEffect(), // your preferred effect
+)
+```
+### Customization
+---
+You can customize width, height, radius, spacnig, paint style, color and more...
+```dart
+SmoothPageIndicator(
+  controller: controller,
+  count: 6,
+  effect: SlideEffect(
+    spacing: 8.0,
+    radius: 4.0,
+    dotWidth: 24.0,
+    dotHeight: 16.0,
+    paintStyle: PaintingStyle.stroke,
+    strokeWidth: 1.5,
+    dotColor: Colors.grey,
+    activeDotColor: Colors.indigo
+  ),
+)
+```
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+![](/demo/smooth_page_indicator_demo_2.gif)
+
+### RTL Support
+---
+Smooth page indicator supports RTL.
+
+```dart
+SmoothPageIndicator(
+  controller: controller, // PageController
+  count: 6,
+  // set isRTL to true
+  effect: WormEffect(isRTL: true), 
+)
+```
+
+![](/demo/smooth_page_indicator_demo_3.gif)

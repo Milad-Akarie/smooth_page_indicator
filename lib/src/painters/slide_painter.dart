@@ -26,6 +26,7 @@ class SlidePainter extends IndicatorPainter {
   Rect _calcBounds(double canvasHeight, num i) {
     final xPos = effect.strokeWidth / 2 + (i * distance);
     final yPos = canvasHeight / 2;
-    return Rect.fromLTRB(xPos, yPos - effect.dotHeight / 2, xPos + effect.dotWidth, yPos + effect.dotHeight / 2);
+    return Rect.fromLTRB(xPos, yPos - effect.dotHeight / 2,
+        xPos + effect.dotWidth, yPos + effect.dotHeight / 2);
   }
 }

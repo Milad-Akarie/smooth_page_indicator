@@ -39,7 +39,8 @@ class ScaleEffect extends IndicatorEffect {
   @override
   Size calculateSize(int count) {
     final scaledWidth = (dotWidth + (dotWidth * scale)) - dotWidth;
-    return Size((dotWidth  * count) +(spacing * (count -1)) + scaledWidth , (dotHeight + scaledWidth));
+    return Size((dotWidth * count) + (spacing * (count - 1)) + scaledWidth,
+        (dotHeight + scaledWidth));
   }
 
   @override

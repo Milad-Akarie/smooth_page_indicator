@@ -27,15 +27,17 @@ class JumpingDotPainter extends IndicatorPainter {
 
     final bounds = _calcBounds(offset, expansion);
 
-    RRect activeDot = RRect.fromLTRBR(bounds.left, bounds.top, bounds.right, bounds.bottom, dotRadius);
+    RRect activeDot = RRect.fromLTRBR(
+        bounds.left, bounds.top, bounds.right, bounds.bottom, dotRadius);
     canvas.drawRRect(activeDot, activeDotPainter);
   }
 
   Rect _calcBounds(num i, [double expansion = 0]) {
-    final xPos =  (i * (effect.dotWidth + effect.spacing));
+    final xPos = (i * (effect.dotWidth + effect.spacing));
     final yPos = (effect.dotHeight) / 2;
     final height = effect.dotHeight + expansion;
     final width = effect.dotWidth + expansion;
-    return Rect.fromLTRB(xPos, yPos - height / 2, xPos + width, yPos + height / 2);
+    return Rect.fromLTRB(
+        xPos, yPos - height / 2, xPos + width, yPos + height / 2);
   }
 }

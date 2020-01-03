@@ -20,18 +20,21 @@ class ExpandingDotsPainter extends IndicatorPainter {
       final active = i == current;
       final dotOffset = offset - offset.toInt();
       final bool isNext = i - 1 == current;
-      final bounds = _calcBounds(lastPos, size.height, i, active, isNext, dotOffset);
+      final bounds =
+          _calcBounds(lastPos, size.height, i, active, isNext, dotOffset);
       lastPos = bounds.right;
       RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
       canvas.drawRRect(rect, dotPaint);
     }
   }
 
-  Rect _calcBounds(double startingPoint, double canvasHeight, num i, bool isActive, bool isNext, double dotOffset) {
+  Rect _calcBounds(double startingPoint, double canvasHeight, num i,
+      bool isActive, bool isNext, double dotOffset) {
     final activeDotWidth = effect.dotWidth * effect.expansionFactor;
-    final expansion = (dotOffset / 2 * ((activeDotWidth - effect.dotWidth) / .5));
+    final expansion =
+        (dotOffset / 2 * ((activeDotWidth - effect.dotWidth) / .5));
 
-    final xPos = startingPoint +effect.spacing;
+    final xPos = startingPoint + effect.spacing;
     double width = effect.dotWidth;
     if (isActive) {
       width = activeDotWidth - expansion;
@@ -39,6 +42,7 @@ class ExpandingDotsPainter extends IndicatorPainter {
       width = effect.dotWidth + expansion;
     }
     final yPos = canvasHeight / 2;
-    return Rect.fromLTRB(xPos, yPos - effect.dotHeight / 2, xPos + width, yPos + effect.dotHeight / 2);
+    return Rect.fromLTRB(xPos, yPos - effect.dotHeight / 2, xPos + width,
+        yPos + effect.dotHeight / 2);
   }
 }
