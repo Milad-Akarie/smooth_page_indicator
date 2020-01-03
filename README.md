@@ -1,6 +1,9 @@
 ## smooth_page_indicator
 ##### Customizable animated Page indicators
 
+
+![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_1.gif?raw=true)
+
 ### Effects
 - Worm
 - Expanding Dots
@@ -9,8 +12,6 @@
 - Slide
 - Scale
 - Swap
-
-![](/demo/smooth_page_indicator_demo_1.gif)
 
 ### Usage
 ---
@@ -23,7 +24,7 @@ SmoothPageIndicator(
 ```
 ### Customization
 ---
-You can customize width, height, radius, spacnig, paint style, color and more...
+You can customize width, height, radius, spacing, paint style, color and more...
 ```dart
 SmoothPageIndicator(
   controller: controller,
@@ -41,7 +42,7 @@ SmoothPageIndicator(
 )
 ```
 
-![](/demo/smooth_page_indicator_demo_2.gif)
+![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_2.gif?raw=true)
 
 ### RTL Support
 ---
@@ -56,4 +57,4 @@ SmoothPageIndicator(
 )
 ```
 
-![](/demo/smooth_page_indicator_demo_3.gif)
+![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_3.gif?raw=true)
