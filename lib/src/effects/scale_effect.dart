@@ -5,8 +5,14 @@ import 'package:smooth_page_indicator/src/painters/scale_painter.dart';
 import 'indicator_effect.dart';
 
 class ScaleEffect extends IndicatorEffect {
+  // Inactive dots paint style (fill|stroke) defaults to fill.
   final PaintingStyle activePaintStyle;
+
+  /// This is ignored if [activePaintStyle] is PaintStyle.fill
   final double activeStrokeWidth;
+
+  /// [scale] is multiplied by [dotWidth] to resolve
+  /// active dot scaling
   final double scale;
 
   const ScaleEffect({
@@ -38,6 +44,7 @@ class ScaleEffect extends IndicatorEffect {
 
   @override
   Size calculateSize(int count) {
+    // Add the scaled dot width to our size calculation
     final scaledWidth = (dotWidth + (dotWidth * scale)) - dotWidth;
     return Size((dotWidth * count) + (spacing * (count - 1)) + scaledWidth,
         (dotHeight + scaledWidth));

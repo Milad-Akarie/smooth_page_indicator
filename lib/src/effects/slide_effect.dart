@@ -5,6 +5,7 @@ import 'package:smooth_page_indicator/src/painters/slide_painter.dart';
 import 'indicator_effect.dart';
 
 class SlideEffect extends IndicatorEffect {
+  // Active dot color
   final Color activeDotColor;
 
   const SlideEffect({

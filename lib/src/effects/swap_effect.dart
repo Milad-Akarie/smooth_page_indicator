@@ -5,6 +5,7 @@ import 'package:smooth_page_indicator/src/painters/swap_painter.dart';
 import 'indicator_effect.dart';
 
 class SwapEffect extends IndicatorEffect {
+  // Active dot color
   final Color activeDotColor;
 
   const SwapEffect({

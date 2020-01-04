@@ -1,5 +1,5 @@
 ## smooth_page_indicator
-##### Customizable animated Page indicators
+##### Customizable animated page indicator with a set of built-in effects.
 
 
 ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_1.gif?raw=true)

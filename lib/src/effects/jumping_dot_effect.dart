@@ -5,7 +5,10 @@ import 'package:smooth_page_indicator/src/painters/jumping_dot_painter.dart';
 import 'indicator_effect.dart';
 
 class JumpingDotEffect extends IndicatorEffect {
+  // The color of the Active dot
   final Color activeDotColor;
+
+  // Defines how high the dot will jump
   final double elevation;
 
   const JumpingDotEffect({

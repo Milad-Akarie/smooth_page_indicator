@@ -5,8 +5,13 @@ import 'package:smooth_page_indicator/src/painters/scrolling_dots_painter.dart';
 import 'indicator_effect.dart';
 
 class ScrollingDotsEffect extends IndicatorEffect {
+  // The active dot color
   final Color activeDotColor;
+  // The active dot strokeWidth
   final double activeStrokeWidth;
+
+  /// [activeDotScale] is multiplied by [dotWidth] to resolve
+  /// active dot scaling
   final double activeDotScale;
 
   const ScrollingDotsEffect({
@@ -39,6 +44,7 @@ class ScrollingDotsEffect extends IndicatorEffect {
 
   @override
   Size calculateSize(int count) {
+    // Add the scaled dot width to our size calculation
     final scaledWidth = dotWidth + (dotWidth * activeDotScale) - dotWidth;
     return Size(
         (dotWidth + spacing) * ((count * 2) - 1), dotHeight + scaledWidth);
