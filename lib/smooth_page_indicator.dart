@@ -7,4 +7,5 @@ export 'src/effects/scrolling_dots_effect.dart';
 export 'src/effects/slide_effect.dart';
 export 'src/effects/swap_effect.dart';
 export 'src/effects/worm_effect.dart';
+export 'src/effects/color_transition_effect.dart';
 export 'src/smooth_page_indicator.dart';

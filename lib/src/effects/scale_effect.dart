@@ -20,7 +20,6 @@ class ScaleEffect extends IndicatorEffect {
     this.scale = 0.3,
     this.activeStrokeWidth = 1.0,
     double offset,
-    bool isRTL = false,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 16.0,
@@ -32,7 +31,6 @@ class ScaleEffect extends IndicatorEffect {
         assert(scale != null),
         assert(activeStrokeWidth != null),
         super(
-          isRTL: isRTL,
           dotWidth: dotWidth,
           dotHeight: dotHeight,
           spacing: spacing,
@@ -51,7 +49,8 @@ class ScaleEffect extends IndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return ScalePainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
+    return ScalePainter(
+        count: count, offset: offset, effect: this, isRTL: isRTL);
   }
 }

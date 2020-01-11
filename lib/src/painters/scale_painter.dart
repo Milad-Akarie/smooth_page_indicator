@@ -10,7 +10,8 @@ class ScalePainter extends IndicatorPainter {
     @required double offset,
     @required this.effect,
     @required int count,
-  }) : super(offset, count, effect);
+    @required bool isRTL,
+  }) : super(offset, count, effect, isRTL);
 
   @override
   void paint(Canvas canvas, Size size) {

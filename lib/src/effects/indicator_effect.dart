@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
 
 abstract class IndicatorEffect {
-  // Reverse the offset if isRTL is true
-  final bool isRTL;
-
   // Singe dot width
   final double dotWidth;
 
@@ -28,15 +25,13 @@ abstract class IndicatorEffect {
 
   const IndicatorEffect({
     @required this.strokeWidth,
-    @required this.isRTL,
     @required this.dotWidth,
     @required this.dotHeight,
     @required this.spacing,
     @required this.radius,
     @required this.dotColor,
     @required this.paintStyle,
-  })  : assert(isRTL != null),
-        assert(radius != null),
+  })  : assert(radius != null),
         assert(dotColor != null || paintStyle != null || strokeWidth != null),
         assert(dotWidth != null),
         assert(dotHeight != null),
@@ -47,7 +42,7 @@ abstract class IndicatorEffect {
             strokeWidth >= 0);
 
   // Builds a new painter every time the page offset changes
-  IndicatorPainter buildPainter(int count, double offset);
+  IndicatorPainter buildPainter(int count, double offset, bool isRTL);
 
   // Calculates the size of canvas based on
   // dots count, size and spacing

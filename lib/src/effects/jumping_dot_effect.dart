@@ -15,7 +15,6 @@ class JumpingDotEffect extends IndicatorEffect {
     this.activeDotColor = Colors.indigo,
     this.elevation = 15.0,
     double offset,
-    bool isRTL = false,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
@@ -26,7 +25,6 @@ class JumpingDotEffect extends IndicatorEffect {
   })  : assert(activeDotColor != null),
         assert(elevation != null),
         super(
-          isRTL: isRTL,
           dotWidth: dotWidth,
           dotHeight: dotHeight,
           spacing: spacing,
@@ -37,7 +35,8 @@ class JumpingDotEffect extends IndicatorEffect {
         );
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return JumpingDotPainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
+    return JumpingDotPainter(
+        count: count, offset: offset, effect: this, isRTL: isRTL);
   }
 }

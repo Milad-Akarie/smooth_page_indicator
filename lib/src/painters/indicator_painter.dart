@@ -28,12 +28,14 @@ abstract class IndicatorPainter extends CustomPainter {
     this._rawOffset,
     this.count,
     this._effect,
-  )   : dotRadius = Radius.circular(_effect.radius),
+    bool _isRTL,
+  )   : assert(_isRTL != null),
+        dotRadius = Radius.circular(_effect.radius),
         dotPaint = Paint()
           ..color = _effect.dotColor
           ..style = _effect.paintStyle
           ..strokeWidth = _effect.strokeWidth,
-        offset = _effect.isRTL ? (count - 1) - _rawOffset : _rawOffset;
+        offset = _isRTL ? (count - 1) - _rawOffset : _rawOffset;
 
   // The distance between dot lefts
   double get distance => _effect.dotWidth + _effect.spacing;

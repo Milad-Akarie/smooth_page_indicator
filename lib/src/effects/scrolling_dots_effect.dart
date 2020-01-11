@@ -7,6 +7,7 @@ import 'indicator_effect.dart';
 class ScrollingDotsEffect extends IndicatorEffect {
   // The active dot color
   final Color activeDotColor;
+
   // The active dot strokeWidth
   final double activeStrokeWidth;
 
@@ -19,7 +20,6 @@ class ScrollingDotsEffect extends IndicatorEffect {
     this.activeStrokeWidth = 1.5,
     this.activeDotScale = 0.3,
     double offset,
-    bool isRTL = false,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
@@ -32,7 +32,6 @@ class ScrollingDotsEffect extends IndicatorEffect {
         assert(activeDotScale != null),
         assert(activeDotScale >= 0.0),
         super(
-          isRTL: isRTL,
           dotWidth: dotWidth,
           dotHeight: dotHeight,
           spacing: spacing,
@@ -51,7 +50,8 @@ class ScrollingDotsEffect extends IndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return ScrollingDotsPainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
+    return ScrollingDotsPainter(
+        count: count, offset: offset, effect: this, isRTL: isRTL);
   }
 }

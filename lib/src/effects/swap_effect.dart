@@ -11,7 +11,6 @@ class SwapEffect extends IndicatorEffect {
   const SwapEffect({
     this.activeDotColor = Colors.indigo,
     double offset,
-    bool isRTL = false,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
@@ -21,7 +20,6 @@ class SwapEffect extends IndicatorEffect {
     PaintingStyle paintStyle = PaintingStyle.fill,
   })  : assert(activeDotColor != null),
         super(
-          isRTL: isRTL,
           dotWidth: dotWidth,
           dotHeight: dotHeight,
           spacing: spacing,
@@ -32,7 +30,8 @@ class SwapEffect extends IndicatorEffect {
         );
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return SwapPainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
+    return SwapPainter(
+        count: count, offset: offset, effect: this, isRTL: isRTL);
   }
 }

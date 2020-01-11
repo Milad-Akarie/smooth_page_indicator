@@ -10,13 +10,17 @@ class ScrollingDotsPainter extends IndicatorPainter {
     @required this.effect,
     @required int count,
     @required double offset,
-  }) : super(offset, count, effect);
+    @required bool isRTL,
+  }) : super(offset, count, effect, isRTL);
 
   @override
   void paint(Canvas canvas, Size size) {
     final int current = offset.floor();
+    final dotOffset = offset - offset.toInt();
+    final dotPaint = Paint()
+      ..strokeWidth = effect.strokeWidth
+      ..style = effect.paintStyle;
     for (int i = 0; i < count; i++) {
-      final dotOffset = offset - offset.toInt();
       Color color = effect.dotColor;
       if (i == current) {
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
@@ -31,11 +35,8 @@ class ScrollingDotsPainter extends IndicatorPainter {
       final bounds = _calcBounds(
           size.height, size.width / 2 - (offset * (width + effect.spacing)), i);
       RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
-      final dotPaint = Paint()
-        ..color = color
-        ..strokeWidth = effect.strokeWidth
-        ..style = effect.paintStyle;
-      canvas.drawRRect(rect, dotPaint);
+
+      canvas.drawRRect(rect, dotPaint..color = color);
     }
 
     final bounds =

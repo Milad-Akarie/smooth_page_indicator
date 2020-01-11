@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                 child: SmoothPageIndicator(
                   controller: controller,
                   count: 6,
-                  effect: WormEffect(isRTL: true),
+                  effect: WormEffect(),
                 ),
               ),
               Padding(
@@ -57,7 +57,6 @@ class _HomePageState extends State<HomePage> {
                   count: 6,
                   effect: ExpandingDotsEffect(
                     expansionFactor: 4,
-                    isRTL: true,
                   ),
                 ),
               ),
@@ -85,7 +84,6 @@ class _HomePageState extends State<HomePage> {
                   effect: ScrollingDotsEffect(
                     activeStrokeWidth: 2.6,
                     activeDotScale: .4,
-                    isRTL: true,
                     radius: 8,
                     spacing: 10,
                   )),

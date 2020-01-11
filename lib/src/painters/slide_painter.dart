@@ -10,7 +10,8 @@ class SlidePainter extends IndicatorPainter {
     @required this.effect,
     @required int count,
     @required double offset,
-  }) : super(offset, count, effect);
+    @required bool isRTL,
+  }) : super(offset, count, effect, isRTL);
 
   @override
   void paint(Canvas canvas, Size size) {

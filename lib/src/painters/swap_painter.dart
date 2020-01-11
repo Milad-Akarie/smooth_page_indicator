@@ -10,14 +10,16 @@ class SwapPainter extends IndicatorPainter {
     @required double offset,
     @required this.effect,
     @required int count,
-  }) : super(offset, count, effect);
+    @required bool isRTL,
+  }) : super(offset, count, effect, isRTL);
 
   @override
   void paint(Canvas canvas, Size size) {
     final int current = offset.floor();
+    final dotOffset = offset - offset.toInt();
+
     for (int i = 0; i < count; i++) {
       final active = i == current;
-      final dotOffset = offset - offset.toInt();
       final bool isNext = i - 1 == current;
       double posOffset = i.toDouble();
       Paint paint = dotPaint;
