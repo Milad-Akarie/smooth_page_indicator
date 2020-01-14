@@ -6,14 +6,24 @@
 
 ### Effects
 
-- Worm
+---
+
+- Worm  
+  ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/worm.gif?raw=true)
 - Expanding Dots
-- Scrolling Dots
-- Jumping dot
+  ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/expanding-dot.gif?raw=true)
+- Jumping dot  
+  ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/jumping-dot.gif?raw=true)
+  Scrolling Dots
+  ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/scrolling-dots.gif?raw=true)
 - Slide
+  ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/slide.gif?raw=true)
 - Scale
+- ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/scale.gif?raw=true)
 - Swap
-- Color Transition | **added in v0.1.2**
+- ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/swap.gif?raw=true)
+- Color Transition -> 0.1.2  
+  ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/color-transition.gif?raw=true)
 
 ### Usage
 
@@ -76,4 +86,4 @@ SmoothPageIndicator(
 
 ### Support the Library
 
-You can support the library by staring in on Github or report any bugs you encounter.
+You can support the library by staring it on Github or report any bugs you encounter.
