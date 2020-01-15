@@ -38,7 +38,11 @@ class SmoothPageIndicator extends AnimatedWidget {
       // so we calculate size based on the provided effect
       size: effect.calculateSize(count),
       // rebuild the painter with the new offset every time it updates
-      painter: effect.buildPainter(count, controller.page ?? 0.0, isRTL),
+      painter: effect.buildPainter(
+        count,
+        controller.page ?? controller.initialPage.toDouble(),
+        isRTL,
+      ),
     );
   }
 }

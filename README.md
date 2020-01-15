@@ -6,16 +6,16 @@
 
 ### Effects
 
-| Effect                        |                                                  Preview                                                  |
-| :---------------------------- | :-------------------------------------------------------------------------------------------------------: |
-| Worm                          |       ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/worm.gif?raw=true)       |
-| Expanding Dots                |  ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/expanding-dot.gif?raw=true)   |
-| Jumping dot                   |   ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/jumping-dot.gif?raw=true)    |
-| Scrolling Dots                |  ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/scrolling-dots.gif?raw=true)  |
-| Slide                         |      ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/slide.gif?raw=true)       |
-| Scale                         |      ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/scale.gif?raw=true)       |
-| Swap                          |       ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/swap.gif?raw=true)       |
-| ### Color Transition -> 0.1.2 | ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/color-transition.gif?raw=true) |
+| Effect                    |                                                  Preview                                                  |
+| :------------------------ | :-------------------------------------------------------------------------------------------------------: |
+| Worm                      |       ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/worm.gif?raw=true)       |
+| Expanding Dots            |  ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/expanding-dot.gif?raw=true)   |
+| Jumping dot               |   ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/jumping-dot.gif?raw=true)    |
+| Scrolling Dots            |  ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/scrolling-dots.gif?raw=true)  |
+| Slide                     |      ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/slide.gif?raw=true)       |
+| Scale                     |      ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/scale.gif?raw=true)       |
+| Swap                      |       ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/swap.gif?raw=true)       |
+| Color Transition -> 0.1.2 | ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/color-transition.gif?raw=true) |
 
 ### Usage
 

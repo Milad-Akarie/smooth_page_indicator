@@ -1,3 +1,11 @@
+## [0.1.3]
+
+- Fix indicator always starts at zero indexe regardless of the controller's initial page
+
+## [0.1.2+1]
+
+- Add individual demos for each effect to README file
+
 ## [0.1.2]
 
 - Add Color Transition effect
