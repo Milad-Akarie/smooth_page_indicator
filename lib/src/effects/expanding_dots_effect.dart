@@ -8,6 +8,8 @@ class ExpandingDotsEffect extends IndicatorEffect {
   /// [expansionFactor] is multiplied by [dotWidth] to resolve
   /// the width of the expanded dot.
   final double expansionFactor;
+  // Active dot color
+  final Color activeDotColor;
 
   const ExpandingDotsEffect({
     this.expansionFactor = 3,
@@ -16,7 +18,8 @@ class ExpandingDotsEffect extends IndicatorEffect {
     double dotHeight = 16.0,
     double spacing = 8.0,
     double radius = 16.0,
-    Color dotColor = Colors.indigo,
+    this.activeDotColor = Colors.indigo,
+    Color dotColor = Colors.grey,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
   })  : assert(expansionFactor != null),

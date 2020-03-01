@@ -1,3 +1,9 @@
+# ChangeLog
+
+## [0.1.4]
+
+- Add Active color with transtion to ExpendingDotEffect
+
 ## [0.1.3]
 
 - Fix indicator always starts at zero indexe regardless of the controller's initial page

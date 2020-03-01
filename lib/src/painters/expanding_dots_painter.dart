@@ -25,8 +25,16 @@ class ExpandingDotsPainter extends IndicatorPainter {
       final bounds =
           _calcBounds(lastPos, size.height, i, active, isNext, dotOffset);
       lastPos = bounds.right;
+      Color color = effect.dotColor;
+      if (active) {
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
+      }
+      if (isNext) {
+        color =
+            Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
+      }
       RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
-      canvas.drawRRect(rect, dotPaint);
+      canvas.drawRRect(rect, dotPaint..color = color);
     }
   }
 
