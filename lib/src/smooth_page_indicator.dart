@@ -40,9 +40,17 @@ class SmoothPageIndicator extends AnimatedWidget {
       // rebuild the painter with the new offset every time it updates
       painter: effect.buildPainter(
         count,
-        controller.page ?? controller.initialPage.toDouble(),
+        _currentPage,
         isRTL,
       ),
     );
+  }
+
+  double get _currentPage {
+    try {
+      return controller.page ?? controller.initialPage.toDouble();
+    } catch (Exception) {
+      return controller.initialPage.toDouble();
+    }
   }
 }

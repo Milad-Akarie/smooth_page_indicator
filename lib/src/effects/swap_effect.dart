@@ -5,11 +5,8 @@ import 'package:smooth_page_indicator/src/painters/swap_painter.dart';
 import 'indicator_effect.dart';
 
 class SwapEffect extends IndicatorEffect {
-  // Active dot color
-  final Color activeDotColor;
-
   const SwapEffect({
-    this.activeDotColor = Colors.indigo,
+    Color activeDotColor = Colors.indigo,
     double offset,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
@@ -27,11 +24,11 @@ class SwapEffect extends IndicatorEffect {
           strokeWidth: strokeWidth,
           paintStyle: paintStyle,
           dotColor: dotColor,
+          activeDotColor: activeDotColor,
         );
 
   @override
   IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return SwapPainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+    return SwapPainter(count: count, offset: offset, effect: this, isRTL: isRTL);
   }
 }

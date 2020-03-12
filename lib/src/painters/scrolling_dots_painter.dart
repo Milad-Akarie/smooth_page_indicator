@@ -20,29 +20,58 @@ class ScrollingDotsPainter extends IndicatorPainter {
     final dotPaint = Paint()
       ..strokeWidth = effect.strokeWidth
       ..style = effect.paintStyle;
+
     for (int i = 0; i < count; i++) {
       Color color = effect.dotColor;
       if (i == current) {
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
       }
       if (i - 1 == current) {
-        color =
-            Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset);
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset);
       }
 
-      double width = effect.dotWidth;
+      double scale = 1.0;
+      final revDotOffset = 1 - dotOffset;
+      final v = (effect.maxVisibleDots - 1) / 2;
+
+      if (count > effect.maxVisibleDots) {
+        if (i >= current - v && i <= current + (v + 1)) {
+          if (i == (current + v)) {
+            scale = (0.5 + dotOffset / 2);
+          } else if (i == current - (v - 1)) {
+            scale = 1 - (dotOffset / 2);
+          } else if (i == current - v) {
+            scale = (0.5 * revDotOffset);
+          } else if (i == current + (v + 1)) {
+            scale = (0.5 * dotOffset);
+          }
+        } else {
+          continue;
+        }
+      }
 
       final bounds = _calcBounds(
-          size.height, size.width / 2 - (offset * (width + effect.spacing)), i);
+        size.height,
+        size.width / 2 - (offset * (effect.dotWidth + effect.spacing)),
+        i,
+        scale,
+      );
       RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
 
       canvas.drawRRect(rect, dotPaint..color = color);
     }
 
-    final bounds =
-        _calcBounds(size.height, size.width / 2, 0, effect.activeDotScale);
-    RRect rect = RRect.fromRectAndRadius(bounds,
-        Radius.circular(effect.radius + effect.radius * effect.activeDotScale));
+    final bounds = _calcBounds(
+      size.height,
+      size.width / 2,
+      0,
+      effect.activeDotScale + 1.0,
+    );
+
+    RRect rect = RRect.fromRectAndRadius(
+      bounds,
+      Radius.circular(effect.radius + effect.radius * effect.activeDotScale + 1.0),
+    );
     canvas.drawRRect(
         rect,
         Paint()
@@ -51,14 +80,12 @@ class ScrollingDotsPainter extends IndicatorPainter {
           ..style = PaintingStyle.stroke);
   }
 
-  Rect _calcBounds(double canvasHeight, double startingPoint, num i,
-      [double scale = 0]) {
-    final newWidth = effect.dotWidth + (effect.dotWidth * scale);
+  Rect _calcBounds(double canvasHeight, double startingPoint, num i, [double scale = 1.0]) {
+    final newWidth = (effect.dotWidth * scale);
     final height = (newWidth - effect.dotWidth) + effect.dotHeight;
 
-    final xPos = startingPoint + (newWidth + effect.spacing) * i;
+    final xPos = startingPoint + (effect.dotWidth + effect.spacing) * i;
     final yPos = canvasHeight / 2;
-    return Rect.fromLTRB(xPos - newWidth / 2, yPos - height / 2,
-        xPos + newWidth / 2, yPos + height / 2);
+    return Rect.fromLTRB(xPos - newWidth / 2, yPos - height / 2, xPos + newWidth / 2, yPos + height / 2);
   }
 }

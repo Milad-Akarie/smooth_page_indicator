@@ -5,17 +5,14 @@ import 'package:smooth_page_indicator/src/painters/worm_painter.dart';
 import 'indicator_effect.dart';
 
 class WormEffect extends IndicatorEffect {
-  // Active dot color
-  final Color activeDotColor;
-
   const WormEffect({
-    this.activeDotColor = Colors.indigo,
     double offset,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
     double radius = 16,
     Color dotColor = Colors.grey,
+    Color activeDotColor = Colors.indigo,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
   })  : assert(activeDotColor != null),
@@ -27,11 +24,11 @@ class WormEffect extends IndicatorEffect {
           strokeWidth: strokeWidth,
           paintStyle: paintStyle,
           dotColor: dotColor,
+          activeDotColor: activeDotColor,
         );
 
   @override
   IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return WormPainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+    return WormPainter(count: count, offset: offset, effect: this, isRTL: isRTL);
   }
 }

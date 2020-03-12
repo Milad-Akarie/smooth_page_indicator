@@ -5,11 +5,8 @@ import 'package:smooth_page_indicator/src/painters/slide_painter.dart';
 import 'indicator_effect.dart';
 
 class SlideEffect extends IndicatorEffect {
-  // Active dot color
-  final Color activeDotColor;
-
   const SlideEffect({
-    this.activeDotColor = Colors.indigo,
+    Color activeDotColor = Colors.indigo,
     double offset,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
@@ -20,18 +17,17 @@ class SlideEffect extends IndicatorEffect {
     PaintingStyle paintStyle = PaintingStyle.fill,
   })  : assert(activeDotColor != null),
         super(
-          dotWidth: dotWidth,
-          dotHeight: dotHeight,
-          spacing: spacing,
-          radius: radius,
-          strokeWidth: strokeWidth,
-          paintStyle: paintStyle,
-          dotColor: dotColor,
-        );
+            dotWidth: dotWidth,
+            dotHeight: dotHeight,
+            spacing: spacing,
+            radius: radius,
+            strokeWidth: strokeWidth,
+            paintStyle: paintStyle,
+            dotColor: dotColor,
+            activeDotColor: activeDotColor);
 
   @override
   IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return SlidePainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+    return SlidePainter(count: count, offset: offset, effect: this, isRTL: isRTL);
   }
 }

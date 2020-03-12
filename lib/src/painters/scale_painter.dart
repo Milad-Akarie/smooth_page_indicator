@@ -31,19 +31,22 @@ class ScalePainter extends IndicatorPainter {
       RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
       canvas.drawRRect(rect, dotPaint);
 
+      Color color = effect.dotColor;
+
       double scale = 0.0;
       if (active) {
-        scale = effect.dotWidth * effect.scale -
-            (effect.dotWidth * effect.scale * dotOffset);
+        scale = effect.dotWidth * effect.scale - (effect.dotWidth * effect.scale * dotOffset);
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
       }
       if (isNext) {
         scale = effect.dotWidth * effect.scale * dotOffset;
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
       }
 
       final activeBounds = _calcBounds(size.height, i, scale);
-      RRect activeRect = RRect.fromRectAndRadius(activeBounds,
-          Radius.circular(effect.radius + effect.radius * effect.scale));
-      canvas.drawRRect(activeRect, activePaint);
+      RRect activeRect =
+          RRect.fromRectAndRadius(activeBounds, Radius.circular(effect.radius + effect.radius * effect.scale));
+      canvas.drawRRect(activeRect, activePaint..color = color);
     }
   }
 
@@ -52,11 +55,8 @@ class ScalePainter extends IndicatorPainter {
     final calculatedScale = width - effect.dotWidth;
     final height = effect.dotHeight + calculatedScale;
     final startingPoint = effect.dotWidth * effect.scale;
-    final xPos = startingPoint / 2 -
-        calculatedScale / 2 +
-        (i * (effect.dotWidth + effect.spacing));
+    final xPos = startingPoint / 2 - calculatedScale / 2 + (i * (effect.dotWidth + effect.spacing));
     final yPos = canvasHeight / 2;
-    return Rect.fromLTRB(
-        xPos, yPos - height / 2, xPos + width, yPos + height / 2);
+    return Rect.fromLTRB(xPos, yPos - height / 2, xPos + width, yPos + height / 2);
   }
 }
