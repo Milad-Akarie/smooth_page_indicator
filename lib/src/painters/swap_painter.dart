@@ -16,31 +16,26 @@ class SwapPainter extends IndicatorPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final int current = offset.floor();
-    final dotOffset = offset - offset.toInt();
-
-    for (int i = 0; i < count; i++) {
-      final active = i == current;
-      final bool isNext = i - 1 == current;
+    final dotOffset = offset - offset.floor();
+    final activePaint = Paint()..color = effect.activeDotColor;
+    for (int i = count - 1; i >= 0; i--) {
       double posOffset = i.toDouble();
       Paint paint = dotPaint;
 
-      if (active) {
-        paint = Paint()..color = effect.activeDotColor;
+      if (i == current) {
+        paint = activePaint;
         posOffset = offset;
-      }
-      if (isNext) {
+      } else if (i - 1 == current) {
         posOffset = i - dotOffset;
       }
-      final bounds = _calcBounds(posOffset);
-      RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
-      canvas.drawRRect(rect, paint);
-    }
-  }
 
-  Rect _calcBounds(num i) {
-    final xPos = effect.spacing / 2 + (i * (effect.dotWidth + effect.spacing));
-    final yPos = (effect.dotHeight) / 2;
-    return Rect.fromLTRB(xPos, yPos - effect.dotHeight / 2,
-        xPos + effect.dotWidth, yPos + effect.dotHeight / 2);
+      final xPos =
+          effect.spacing / 2 + (posOffset * (effect.dotWidth + effect.spacing));
+      final yPos = (effect.dotHeight) / 2;
+      final rRect = RRect.fromLTRBR(xPos, yPos - effect.dotHeight / 2,
+          xPos + effect.dotWidth, yPos + effect.dotHeight / 2, dotRadius);
+
+      canvas.drawRRect(rRect, paint);
+    }
   }
 }

@@ -17,6 +17,9 @@ abstract class IndicatorEffect {
   // Inactive dots color or all dots in some effects
   final Color dotColor;
 
+  // The active dot color
+  final Color activeDotColor;
+
   // Inactive dots paint style (fill|stroke) defaults to fill.
   final PaintingStyle paintStyle;
 
@@ -31,8 +34,10 @@ abstract class IndicatorEffect {
     @required this.radius,
     @required this.dotColor,
     @required this.paintStyle,
+    @required this.activeDotColor,
   })  : assert(radius != null),
         assert(dotColor != null || paintStyle != null || strokeWidth != null),
+        assert(activeDotColor != null),
         assert(dotWidth != null),
         assert(dotHeight != null),
         assert(spacing != null),

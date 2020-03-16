@@ -16,43 +16,34 @@ class ExpandingDotsPainter extends IndicatorPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final int current = offset.floor();
-    double lastPos = -effect.spacing;
-    final dotOffset = offset - offset.toInt();
+    double drawingOffset = -effect.spacing;
+    final dotOffset = offset - current;
 
     for (int i = 0; i < count; i++) {
-      final active = i == current;
-      final bool isNext = i - 1 == current;
-      final bounds =
-          _calcBounds(lastPos, size.height, i, active, isNext, dotOffset);
-      lastPos = bounds.right;
       Color color = effect.dotColor;
-      if (active) {
+      final activeDotWidth = effect.dotWidth * effect.expansionFactor;
+      final expansion =
+          (dotOffset / 2 * ((activeDotWidth - effect.dotWidth) / .5));
+      final xPos = drawingOffset + effect.spacing;
+      double width = effect.dotWidth;
+      if (i == current) {
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
-      }
-      if (isNext) {
+        width = activeDotWidth - expansion;
+      } else if (i - 1 == current) {
+        width = effect.dotWidth + expansion;
         color =
             Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
       }
-      RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
-      canvas.drawRRect(rect, dotPaint..color = color);
+      final yPos = size.height / 2;
+      final rRect = RRect.fromLTRBR(
+        xPos,
+        yPos - effect.dotHeight / 2,
+        xPos + width,
+        yPos + effect.dotHeight / 2,
+        dotRadius,
+      );
+      drawingOffset = rRect.right;
+      canvas.drawRRect(rRect, dotPaint..color = color);
     }
-  }
-
-  Rect _calcBounds(double startingPoint, double canvasHeight, num i,
-      bool isActive, bool isNext, double dotOffset) {
-    final activeDotWidth = effect.dotWidth * effect.expansionFactor;
-    final expansion =
-        (dotOffset / 2 * ((activeDotWidth - effect.dotWidth) / .5));
-
-    final xPos = startingPoint + effect.spacing;
-    double width = effect.dotWidth;
-    if (isActive) {
-      width = activeDotWidth - expansion;
-    } else if (isNext) {
-      width = effect.dotWidth + expansion;
-    }
-    final yPos = canvasHeight / 2;
-    return Rect.fromLTRB(xPos, yPos - effect.dotHeight / 2, xPos + width,
-        yPos + effect.dotHeight / 2);
   }
 }

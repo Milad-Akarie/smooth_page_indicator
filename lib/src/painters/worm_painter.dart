@@ -19,12 +19,11 @@ class WormPainter extends IndicatorPainter {
     super.paint(canvas, size);
     final activeDotPaint = Paint()..color = effect.activeDotColor;
     final dotOffset = offset - offset.toInt();
-    final bounds = _calcBounds(offset.floor(), dotOffset * 2);
-    final worm = RRect.fromRectAndRadius(bounds, dotRadius);
+    final worm = _calcBounds(offset.floor(), dotOffset * 2);
     canvas.drawRRect(worm, activeDotPaint);
   }
 
-  Rect _calcBounds(num i, [double dotOffset = 0]) {
+  RRect _calcBounds(num i, double dotOffset) {
     final xPos = (i * distance);
     final yPos = (effect.dotHeight) / 2;
     double left = xPos;
@@ -35,7 +34,12 @@ class WormPainter extends IndicatorPainter {
       right = xPos + effect.dotWidth + (1 * (effect.dotWidth + effect.spacing));
       left = xPos + ((effect.spacing + effect.dotWidth) * (dotOffset - 1));
     }
-    return Rect.fromLTRB(
-        left, yPos - effect.dotHeight / 2, right, yPos + effect.dotHeight / 2);
+    return RRect.fromLTRBR(
+      left,
+      yPos - effect.dotHeight / 2,
+      right,
+      yPos + effect.dotHeight / 2,
+      dotRadius,
+    );
   }
 }

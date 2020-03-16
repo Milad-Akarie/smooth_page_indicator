@@ -1,6 +1,6 @@
 name: smooth_page_indicator
 description: Customizable animated page indicator with a set of built-in effects.
-version: 0.1.4
+version: 0.1.5
 homepage: https://github.com/Milad-Akarie/smooth_page_indicator
 
 environment:

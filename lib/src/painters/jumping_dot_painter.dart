@@ -19,26 +19,21 @@ class JumpingDotPainter extends IndicatorPainter {
     super.paint(canvas, size);
     final activeDotPainter = Paint()..color = effect.activeDotColor;
     final dotOffset = offset - offset.toInt();
-    double expansion = 0;
+    double scale = 1.0;
     if (dotOffset < .5) {
-      expansion = dotOffset * effect.elevation;
+      scale = dotOffset * effect.elevation;
     } else {
-      expansion = (1 - dotOffset) * effect.elevation;
+      scale = (1 - dotOffset) * effect.elevation;
     }
 
-    final bounds = _calcBounds(offset, expansion);
-
-    RRect activeDot = RRect.fromLTRBR(
-        bounds.left, bounds.top, bounds.right, bounds.bottom, dotRadius);
-    canvas.drawRRect(activeDot, activeDotPainter);
-  }
-
-  Rect _calcBounds(num i, [double expansion = 0]) {
-    final xPos = (i * (effect.dotWidth + effect.spacing));
+    final xPos = (offset * (effect.dotWidth + effect.spacing));
     final yPos = (effect.dotHeight) / 2;
-    final height = effect.dotHeight + expansion;
-    final width = effect.dotWidth + expansion;
-    return Rect.fromLTRB(
-        xPos, yPos - height / 2, xPos + width, yPos + height / 2);
+    final height = effect.dotHeight + scale;
+    final width = effect.dotWidth + scale;
+    final scaleRatio = width / effect.dotWidth;
+    final rRect = RRect.fromLTRBR(xPos, yPos - height / 2, xPos + width,
+        yPos + height / 2, dotRadius * scaleRatio);
+
+    canvas.drawRRect(rRect, activeDotPainter);
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -15,50 +17,84 @@ class ScrollingDotsPainter extends IndicatorPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final int current = offset.floor();
+    final current = super.offset.floor();
+    final switchPoint = (effect.maxVisibleDots / 2).floor();
+    final firstVisibleDot =
+        (current < switchPoint || count - 1 < effect.maxVisibleDots)
+            ? 0
+            : min(current - switchPoint, count - effect.maxVisibleDots);
+    final lastVisibleDot =
+        min(firstVisibleDot + effect.maxVisibleDots, count - 1);
+    final inPreScrollRange = current < switchPoint;
+    final inAfterScrollRange = current >= (count - 1) - switchPoint;
+    final willStartScrolling = (current + 1) == switchPoint + 1;
+    final willStopScrolling = current + 1 == (count - 1) - switchPoint;
+
     final dotOffset = offset - offset.toInt();
     final dotPaint = Paint()
       ..strokeWidth = effect.strokeWidth
       ..style = effect.paintStyle;
-    for (int i = 0; i < count; i++) {
+
+    final drawingAnchor = (inPreScrollRange || inAfterScrollRange)
+        ? -(firstVisibleDot * distance)
+        : -((offset - switchPoint) * distance);
+
+    final smallDotScale = 0.66;
+    final activeScale = effect.activeDotScale - 1.0;
+    for (int index = firstVisibleDot; index <= lastVisibleDot; index++) {
       Color color = effect.dotColor;
-      if (i == current) {
+
+      double scale = 1.0;
+
+      if (index == current) {
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
+        scale = effect.activeDotScale - (activeScale * dotOffset);
+      } else if (index - 1 == current) {
+        color = Color.lerp(effect.dotColor, effect.activeDotColor, dotOffset);
+        scale = 1.0 + (activeScale * dotOffset);
+      } else if (count - 1 < effect.maxVisibleDots) {
+        scale = 1.0;
+      } else if (index == firstVisibleDot) {
+        if (willStartScrolling) {
+          scale = (1.0 * (1.0 - dotOffset));
+        } else if (inAfterScrollRange) {
+          scale = smallDotScale;
+        } else if (!inPreScrollRange) {
+          scale = smallDotScale * (1.0 - dotOffset);
+        }
+      } else if (index == firstVisibleDot + 1 &&
+          !(inPreScrollRange || inAfterScrollRange)) {
+        scale = 1.0 - (dotOffset * (1.0 - smallDotScale));
+      } else if (index == lastVisibleDot - 1.0) {
+        if (inPreScrollRange) {
+          scale = smallDotScale;
+        } else if (!inAfterScrollRange) {
+          scale = smallDotScale + ((1.0 - smallDotScale) * dotOffset);
+        }
+      } else if (index == lastVisibleDot) {
+        if (inPreScrollRange) {
+          scale = 0.0;
+        } else if (willStopScrolling) {
+          scale = dotOffset;
+        } else if (!inAfterScrollRange) {
+          scale = smallDotScale * dotOffset;
+        }
       }
-      if (i - 1 == current) {
-        color =
-            Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset);
-      }
 
-      double width = effect.dotWidth;
+      final scaledWidth = (effect.dotWidth * scale);
+      final scaledHeight = effect.dotHeight * scale;
+      final yPos = size.height / 2;
+      final xPos = effect.dotWidth / 2 + drawingAnchor + (index * distance);
 
-      final bounds = _calcBounds(
-          size.height, size.width / 2 - (offset * (width + effect.spacing)), i);
-      RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
+      final rRect = RRect.fromLTRBR(
+        xPos - scaledWidth / 2 + effect.spacing / 2,
+        yPos - scaledHeight / 2,
+        xPos + scaledWidth / 2 + effect.spacing / 2,
+        yPos + scaledHeight / 2,
+        dotRadius * scale,
+      );
 
-      canvas.drawRRect(rect, dotPaint..color = color);
+      canvas.drawRRect(rRect, dotPaint..color = color);
     }
-
-    final bounds =
-        _calcBounds(size.height, size.width / 2, 0, effect.activeDotScale);
-    RRect rect = RRect.fromRectAndRadius(bounds,
-        Radius.circular(effect.radius + effect.radius * effect.activeDotScale));
-    canvas.drawRRect(
-        rect,
-        Paint()
-          ..color = effect.activeDotColor
-          ..strokeWidth = effect.activeStrokeWidth
-          ..style = PaintingStyle.stroke);
-  }
-
-  Rect _calcBounds(double canvasHeight, double startingPoint, num i,
-      [double scale = 0]) {
-    final newWidth = effect.dotWidth + (effect.dotWidth * scale);
-    final height = (newWidth - effect.dotWidth) + effect.dotHeight;
-
-    final xPos = startingPoint + (newWidth + effect.spacing) * i;
-    final yPos = canvasHeight / 2;
-    return Rect.fromLTRB(xPos - newWidth / 2, yPos - height / 2,
-        xPos + newWidth / 2, yPos + height / 2);
   }
 }

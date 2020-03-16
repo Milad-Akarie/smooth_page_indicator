@@ -1,12 +1,16 @@
 # ChangeLog
+## [0.1.5]
+
+- Add off-canvas scrolling effect ScrollingDotsEffect
+- Add Active color with transition to to ScaleEffect
 
 ## [0.1.4]
 
-- Add Active color with transtion to ExpendingDotEffect
+- Add Active color with transition to ExpendingDotEffect
 
 ## [0.1.3]
 
-- Fix indicator always starts at zero indexe regardless of the controller's initial page
+- Fix indicator always starts at zero index regardless of the controller's initial page
 
 ## [0.1.2+1]
 

@@ -18,16 +18,17 @@ class SlidePainter extends IndicatorPainter {
     // paint still dots
     super.paint(canvas, size);
 
-    final activeDotPainter = Paint()..color = effect.activeDotColor;
-    final bounds = _calcBounds(size.height, offset);
-    RRect activeDot = RRect.fromRectAndRadius(bounds, dotRadius);
-    canvas.drawRRect(activeDot, activeDotPainter);
-  }
+    final activePaint = Paint()..color = effect.activeDotColor;
+    final xPos = effect.strokeWidth / 2 + (offset * distance);
+    final yPos = size.height / 2;
+    final rRect = RRect.fromLTRBR(
+      xPos,
+      yPos - effect.dotHeight / 2,
+      xPos + effect.dotWidth,
+      yPos + effect.dotHeight / 2,
+      dotRadius,
+    );
 
-  Rect _calcBounds(double canvasHeight, num i) {
-    final xPos = effect.strokeWidth / 2 + (i * distance);
-    final yPos = canvasHeight / 2;
-    return Rect.fromLTRB(xPos, yPos - effect.dotHeight / 2,
-        xPos + effect.dotWidth, yPos + effect.dotHeight / 2);
+    canvas.drawRRect(rRect, activePaint);
   }
 }
