@@ -33,6 +33,7 @@ class ColorTransitionEffect extends IndicatorEffect {
 
   @override
   IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return TransitionPainter(count: count, offset: offset, effect: this, isRTL: isRTL);
+    return TransitionPainter(
+        count: count, offset: offset, effect: this, isRTL: isRTL);
   }
 }

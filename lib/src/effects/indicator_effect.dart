@@ -41,7 +41,10 @@ abstract class IndicatorEffect {
         assert(dotWidth != null),
         assert(dotHeight != null),
         assert(spacing != null),
-        assert(dotWidth >= 0 && dotHeight >= 0 && spacing >= 0 && strokeWidth >= 0);
+        assert(dotWidth >= 0 &&
+            dotHeight >= 0 &&
+            spacing >= 0 &&
+            strokeWidth >= 0);
 
   // Builds a new painter every time the page offset changes
   IndicatorPainter buildPainter(int count, double offset, bool isRTL);

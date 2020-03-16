@@ -21,29 +21,27 @@ class TransitionPainter extends IndicatorPainter {
       ..strokeWidth = effect.strokeWidth
       ..style = effect.paintStyle;
 
-    final dotOffset = offset - offset.toInt();
-
+    final dotOffset = offset - current;
     for (int i = 0; i < count; i++) {
       Color color = effect.dotColor;
       if (i == current) {
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
-      }
-      if (i - 1 == current) {
+      } else if (i - 1 == current) {
         color =
             Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
       }
 
-      final bounds = _calcBounds(size.height, i);
-      RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
+      final xPos = (i * distance);
+      final yPos = size.height / 2;
+      final rRect = RRect.fromLTRBR(
+        xPos,
+        yPos - effect.dotHeight / 2,
+        xPos + effect.dotWidth,
+        yPos + effect.dotHeight / 2,
+        dotRadius,
+      );
 
-      canvas.drawRRect(rect, dotPaint..color = color);
+      canvas.drawRRect(rRect, dotPaint..color = color);
     }
-  }
-
-  Rect _calcBounds(double canvasHeight, num i) {
-    final xPos = (i * distance);
-    final yPos = canvasHeight / 2;
-    return Rect.fromLTRB(xPos, yPos - effect.dotHeight / 2,
-        xPos + effect.dotWidth, yPos + effect.dotHeight / 2);
   }
 }

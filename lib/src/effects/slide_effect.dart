@@ -28,6 +28,7 @@ class SlideEffect extends IndicatorEffect {
 
   @override
   IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return SlidePainter(count: count, offset: offset, effect: this, isRTL: isRTL);
+    return SlidePainter(
+        count: count, offset: offset, effect: this, isRTL: isRTL);
   }
 }

@@ -35,11 +35,14 @@ class ExpandingDotsEffect extends IndicatorEffect {
   @override
   Size calculateSize(int count) {
     // Add the expanded dot width to our size calculation
-    return Size(((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth), dotHeight);
+    return Size(
+        ((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth),
+        dotHeight);
   }
 
   @override
   IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return ExpandingDotsPainter(count: count, offset: offset, effect: this, isRTL: isRTL);
+    return ExpandingDotsPainter(
+        count: count, offset: offset, effect: this, isRTL: isRTL);
   }
 }

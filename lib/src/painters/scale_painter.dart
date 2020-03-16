@@ -21,42 +21,35 @@ class ScalePainter extends IndicatorPainter {
       ..style = effect.activePaintStyle
       ..strokeWidth = effect.activeStrokeWidth;
 
-    final dotOffset = (offset - offset.toInt());
+    final dotOffset = offset - current;
+    final activeScale = effect.scale - 1.0;
 
-    for (int i = 0; i < count; i++) {
-      final active = i == current;
-      final bool isNext = i - 1 == current;
-
-      final bounds = _calcBounds(size.height, i);
-      RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
-      canvas.drawRRect(rect, dotPaint);
-
+    for (int index = 0; index < count; index++) {
+      canvas.drawRRect(_calcBounds(size.height, index), dotPaint);
       Color color = effect.dotColor;
-
       double scale = 0.0;
-      if (active) {
-        scale = effect.dotWidth * effect.scale - (effect.dotWidth * effect.scale * dotOffset);
+      if (index == current) {
+        scale = effect.scale - (activeScale * dotOffset);
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
+      } else if (index - 1 == current) {
+        scale = 1.0 + (activeScale * dotOffset);
+        color =
+            Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
       }
-      if (isNext) {
-        scale = effect.dotWidth * effect.scale * dotOffset;
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
-      }
-
-      final activeBounds = _calcBounds(size.height, i, scale);
-      RRect activeRect =
-          RRect.fromRectAndRadius(activeBounds, Radius.circular(effect.radius + effect.radius * effect.scale));
-      canvas.drawRRect(activeRect, activePaint..color = color);
+      canvas.drawRRect(
+          _calcBounds(size.height, index, scale), activePaint..color = color);
     }
   }
 
-  Rect _calcBounds(double canvasHeight, num i, [double hScale = 0]) {
-    final width = effect.dotWidth + hScale;
-    final calculatedScale = width - effect.dotWidth;
-    final height = effect.dotHeight + calculatedScale;
+  RRect _calcBounds(double canvasHeight, num offset, [double scale = 1.0]) {
+    final width = effect.dotWidth * scale;
+    final height = effect.dotHeight * scale;
     final startingPoint = effect.dotWidth * effect.scale;
-    final xPos = startingPoint / 2 - calculatedScale / 2 + (i * (effect.dotWidth + effect.spacing));
+    final xPos = startingPoint / 2 -
+        width / 2 +
+        (offset * (effect.dotWidth + effect.spacing));
     final yPos = canvasHeight / 2;
-    return Rect.fromLTRB(xPos, yPos - height / 2, xPos + width, yPos + height / 2);
+    return RRect.fromLTRBR(xPos, yPos - height / 2, xPos + width,
+        yPos + height / 2, dotRadius * scale);
   }
 }

@@ -29,6 +29,7 @@ class SwapEffect extends IndicatorEffect {
 
   @override
   IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return SwapPainter(count: count, offset: offset, effect: this, isRTL: isRTL);
+    return SwapPainter(
+        count: count, offset: offset, effect: this, isRTL: isRTL);
   }
 }
