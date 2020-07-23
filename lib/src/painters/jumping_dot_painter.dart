@@ -10,13 +10,12 @@ class JumpingDotPainter extends IndicatorPainter {
     @required this.effect,
     @required int count,
     @required double offset,
-    @required bool isRTL,
-  }) : super(offset, count, effect, isRTL);
+  }) : super(offset, count, effect);
 
   @override
   void paint(Canvas canvas, Size size) {
     // paint still dots
-    super.paint(canvas, size);
+    paintStillDots(canvas, size);
     final activeDotPainter = Paint()..color = effect.activeDotColor;
     final dotOffset = offset - offset.toInt();
     double scale = 1.0;
@@ -27,12 +26,11 @@ class JumpingDotPainter extends IndicatorPainter {
     }
 
     final xPos = (offset * (effect.dotWidth + effect.spacing));
-    final yPos = (effect.dotHeight) / 2;
+    final yPos = (size.height) / 2;
     final height = effect.dotHeight + scale;
     final width = effect.dotWidth + scale;
     final scaleRatio = width / effect.dotWidth;
-    final rRect = RRect.fromLTRBR(xPos, yPos - height / 2, xPos + width,
-        yPos + height / 2, dotRadius * scaleRatio);
+    final rRect = RRect.fromLTRBR(xPos, yPos - height / 2, xPos + width, yPos + height / 2, dotRadius * scaleRatio);
 
     canvas.drawRRect(rRect, activeDotPainter);
   }

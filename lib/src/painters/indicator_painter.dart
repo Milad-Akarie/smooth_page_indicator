@@ -3,11 +3,6 @@ import 'package:smooth_page_indicator/src/effects/indicator_effect.dart';
 
 abstract class IndicatorPainter extends CustomPainter {
   /// The raw offset from the [PageController].page
-  ///
-  /// This is called raw because it's used to resolve
-  /// the final [offset] based on [isRTL] property
-  final double _rawOffset;
-
   /// This holds the directional offset
   final double offset;
 
@@ -25,29 +20,25 @@ abstract class IndicatorPainter extends CustomPainter {
   final Radius dotRadius;
 
   IndicatorPainter(
-    this._rawOffset,
+    this.offset,
     this.count,
     this._effect,
-    bool _isRTL,
-  )   : assert(_isRTL != null),
+  )   : assert(offset.ceil() < count, "Current page is out of bounds"),
         dotRadius = Radius.circular(_effect.radius),
         dotPaint = Paint()
           ..color = _effect.dotColor
           ..style = _effect.paintStyle
-          ..strokeWidth = _effect.strokeWidth,
-        offset = _isRTL ? (count - 1) - _rawOffset : _rawOffset;
+          ..strokeWidth = _effect.strokeWidth;
 
   // The distance between dot lefts
   double get distance => _effect.dotWidth + _effect.spacing;
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    // Paint still dots if the sub class calls super
+  void paintStillDots(Canvas canvas, Size size) {
     for (int i = 0; i < count; i++) {
       final xPos = (i * distance);
       final yPos = size.height / 2;
-      final bounds = Rect.fromLTRB(xPos, yPos - _effect.dotHeight / 2,
-          xPos + _effect.dotWidth, yPos + _effect.dotHeight / 2);
+      final bounds =
+          Rect.fromLTRB(xPos, yPos - _effect.dotHeight / 2, xPos + _effect.dotWidth, yPos + _effect.dotHeight / 2);
       RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
       canvas.drawRRect(rect, dotPaint);
     }
@@ -56,6 +47,6 @@ abstract class IndicatorPainter extends CustomPainter {
   @override
   bool shouldRepaint(IndicatorPainter oldDelegate) {
     // only repaint if the raw offset changes
-    return oldDelegate._rawOffset != _rawOffset;
+    return oldDelegate.offset != offset;
   }
 }

@@ -28,8 +28,7 @@ class WormEffect extends IndicatorEffect {
         );
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return WormPainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+  IndicatorPainter buildPainter(int count, double offset) {
+    return WormPainter(count: count, offset: offset, effect: this);
   }
 }

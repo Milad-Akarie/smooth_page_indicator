@@ -32,8 +32,7 @@ class JumpingDotEffect extends IndicatorEffect {
             activeDotColor: activeDotColor);
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return JumpingDotPainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+  IndicatorPainter buildPainter(int count, double offset) {
+    return JumpingDotPainter(count: count, offset: offset, effect: this);
   }
 }

@@ -65,13 +65,45 @@ class ScrollingDotsEffect extends IndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
+  int hitTestDots(double dx, int count, double current) {
+    final switchPoint = (maxVisibleDots / 2).floor();
     if (fixedCenter) {
-      return ScrollingDotsWithFixedCenterPainter(
-          count: count, offset: offset, effect: this, isRTL: isRTL);
+      var anchor = 0.0;
+      for (int index = 0; index < count; index++) {
+        var widthBound = dotWidth + spacing;
+        var max = anchor + widthBound;
+        var min = max - widthBound;
+        anchor = max;
+        if (dx >= min && dx <= max) {
+          return index - switchPoint + current.floor();
+        }
+      }
     } else {
-      return ScrollingDotsPainter(
-          count: count, offset: offset, effect: this, isRTL: isRTL);
+      final firstVisibleDot = (current < switchPoint || count - 1 < maxVisibleDots)
+          ? 0
+          : min(current - switchPoint, count - maxVisibleDots).floor();
+      final lastVisibleDot = min(firstVisibleDot + maxVisibleDots, count - 1).floor();
+
+      var anchor = 0.0;
+      for (int index = firstVisibleDot; index <= lastVisibleDot; index++) {
+        var widthBound = dotWidth + spacing;
+        var max = anchor + widthBound;
+        var min = max - widthBound;
+        anchor = max;
+        if (dx >= min && dx <= max) {
+          return index;
+        }
+      }
+    }
+    return -1;
+  }
+
+  @override
+  IndicatorPainter buildPainter(int count, double offset) {
+    if (fixedCenter) {
+      return ScrollingDotsWithFixedCenterPainter(count: count, offset: offset, effect: this);
+    } else {
+      return ScrollingDotsPainter(count: count, offset: offset, effect: this);
     }
   }
 }

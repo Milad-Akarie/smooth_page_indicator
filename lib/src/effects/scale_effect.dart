@@ -18,12 +18,12 @@ class ScaleEffect extends IndicatorEffect {
   const ScaleEffect({
     Color activeDotColor = Colors.indigo,
     this.activePaintStyle = PaintingStyle.fill,
-    this.scale = 0.3,
+    this.scale = 1.4,
     this.activeStrokeWidth = 1.0,
     double offset,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
-    double spacing = 16.0,
+    double spacing = 10.0,
     double radius = 16,
     Color dotColor = Colors.grey,
     double strokeWidth = 1.0,
@@ -46,13 +46,11 @@ class ScaleEffect extends IndicatorEffect {
   Size calculateSize(int count) {
     // Add the scaled dot width to our size calculation
     final scaledWidth = (dotWidth + (dotWidth * scale)) - dotWidth;
-    return Size((dotWidth * count) + (spacing * (count - 1)) + scaledWidth,
-        (dotHeight + scaledWidth));
+    return Size((dotWidth * count) + (spacing * (count - 1)) + scaledWidth, (dotHeight + scaledWidth));
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return ScalePainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+  IndicatorPainter buildPainter(int count, double offset) {
+    return ScalePainter(count: count, offset: offset, effect: this);
   }
 }

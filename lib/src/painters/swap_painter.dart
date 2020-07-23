@@ -10,8 +10,7 @@ class SwapPainter extends IndicatorPainter {
     @required double offset,
     @required this.effect,
     @required int count,
-    @required bool isRTL,
-  }) : super(offset, count, effect, isRTL);
+  }) : super(offset, count, effect);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -29,11 +28,10 @@ class SwapPainter extends IndicatorPainter {
         posOffset = i - dotOffset;
       }
 
-      final xPos =
-          effect.spacing / 2 + (posOffset * (effect.dotWidth + effect.spacing));
-      final yPos = (effect.dotHeight) / 2;
-      final rRect = RRect.fromLTRBR(xPos, yPos - effect.dotHeight / 2,
-          xPos + effect.dotWidth, yPos + effect.dotHeight / 2, dotRadius);
+      final xPos = effect.spacing / 2 + (posOffset * (effect.dotWidth + effect.spacing));
+      final yPos = size.height / 2;
+      final rRect = RRect.fromLTRBR(
+          xPos, yPos - effect.dotHeight / 2, xPos + effect.dotWidth, yPos + effect.dotHeight / 2, dotRadius);
 
       canvas.drawRRect(rRect, paint);
     }

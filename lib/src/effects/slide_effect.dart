@@ -27,8 +27,7 @@ class SlideEffect extends IndicatorEffect {
             activeDotColor: activeDotColor);
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return SlidePainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+  IndicatorPainter buildPainter(int count, double offset) {
+    return SlidePainter(count: count, offset: offset, effect: this);
   }
 }

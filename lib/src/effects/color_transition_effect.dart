@@ -32,8 +32,7 @@ class ColorTransitionEffect extends IndicatorEffect {
             activeDotColor: activeDotColor);
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return TransitionPainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+  IndicatorPainter buildPainter(int count, double offset) {
+    return TransitionPainter(count: count, offset: offset, effect: this);
   }
 }

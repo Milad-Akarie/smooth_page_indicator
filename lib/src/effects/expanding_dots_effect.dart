@@ -35,14 +35,36 @@ class ExpandingDotsEffect extends IndicatorEffect {
   @override
   Size calculateSize(int count) {
     // Add the expanded dot width to our size calculation
-    return Size(
-        ((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth),
-        dotHeight);
+    return Size(((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth), dotHeight);
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return ExpandingDotsPainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+  IndicatorPainter buildPainter(int count, double offset) {
+    return ExpandingDotsPainter(count: count, offset: offset, effect: this);
+  }
+
+  @override
+  int hitTestDots(double dx, int count, double current) {
+    var anchor = -spacing / 2;
+    for (int index = 0; index < count; index++) {
+      var widthBound = (index == current ? (dotWidth * expansionFactor) : dotWidth) + spacing;
+      var max = anchor + widthBound;
+      var min = max - widthBound;
+      anchor = max;
+      if (dx >= min && dx <= max) {
+        return index;
+      }
+    }
+    return -1;
+  }
+}
+
+class DoubleRange {
+  final double min, max;
+
+  DoubleRange(this.min, this.max);
+
+  bool contains(double value) {
+    return value >= min && value <= max;
   }
 }

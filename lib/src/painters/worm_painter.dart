@@ -10,26 +10,24 @@ class WormPainter extends IndicatorPainter {
     @required this.effect,
     @required int count,
     @required double offset,
-    @required bool isRTL,
-  }) : super(offset, count, effect, isRTL);
+  }) : super(offset, count, effect);
 
   @override
   void paint(Canvas canvas, Size size) {
+//    super.paint(canvas, size);
     // paint still dots
-    super.paint(canvas, size);
+    paintStillDots(canvas, size);
     final activeDotPaint = Paint()..color = effect.activeDotColor;
     final dotOffset = offset - offset.toInt();
-    final worm = _calcBounds(offset.floor(), dotOffset * 2);
+    final worm = _calcBounds(size.height, offset.floor(), dotOffset * 2);
     canvas.drawRRect(worm, activeDotPaint);
   }
 
-  RRect _calcBounds(num i, double dotOffset) {
+  RRect _calcBounds(double canvasHeight, num i, double dotOffset) {
     final xPos = (i * distance);
-    final yPos = (effect.dotHeight) / 2;
+    final yPos = canvasHeight / 2;
     double left = xPos;
-    double right = xPos +
-        effect.dotWidth +
-        (dotOffset * (effect.dotWidth + effect.spacing));
+    double right = xPos + effect.dotWidth + (dotOffset * (effect.dotWidth + effect.spacing));
     if (dotOffset > 1) {
       right = xPos + effect.dotWidth + (1 * (effect.dotWidth + effect.spacing));
       left = xPos + ((effect.spacing + effect.dotWidth) * (dotOffset - 1));
