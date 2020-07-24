@@ -10,17 +10,16 @@ class SwapPainter extends IndicatorPainter {
     @required double offset,
     @required this.effect,
     @required int count,
-    @required bool isRTL,
-  }) : super(offset, count, effect, isRTL);
+  }) : super(offset, count, effect);
 
   @override
   void paint(Canvas canvas, Size size) {
-    final int current = offset.floor();
+    final current = offset.floor();
     final dotOffset = offset - offset.floor();
     final activePaint = Paint()..color = effect.activeDotColor;
-    for (int i = count - 1; i >= 0; i--) {
-      double posOffset = i.toDouble();
-      Paint paint = dotPaint;
+    for (var i = count - 1; i >= 0; i--) {
+      var posOffset = i.toDouble();
+      var paint = dotPaint;
 
       if (i == current) {
         paint = activePaint;
@@ -31,7 +30,7 @@ class SwapPainter extends IndicatorPainter {
 
       final xPos =
           effect.spacing / 2 + (posOffset * (effect.dotWidth + effect.spacing));
-      final yPos = (effect.dotHeight) / 2;
+      final yPos = size.height / 2;
       final rRect = RRect.fromLTRBR(xPos, yPos - effect.dotHeight / 2,
           xPos + effect.dotWidth, yPos + effect.dotHeight / 2, dotRadius);
 

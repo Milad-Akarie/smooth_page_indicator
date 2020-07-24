@@ -1,8 +1,13 @@
 # ChangeLog
-## [0.1.5]
 
+## [0.2.0]
+- Add support for vertical direction
+- Add on dot clicked callback
+- Add AnimatedSmoothIndicator which works without a PageController
+
+## [0.1.5]
 - Add off-canvas scrolling effect ScrollingDotsEffect
-- Add Active color with transition to to ScaleEffect
+- Add Active color with transition to ScaleEffect
 
 ## [0.1.4]
 

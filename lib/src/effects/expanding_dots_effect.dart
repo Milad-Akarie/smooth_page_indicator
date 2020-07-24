@@ -41,8 +41,21 @@ class ExpandingDotsEffect extends IndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return ExpandingDotsPainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+  IndicatorPainter buildPainter(int count, double offset) {
+    return ExpandingDotsPainter(count: count, offset: offset, effect: this);
+  }
+
+  @override
+  int hitTestDots(double dx, int count, double current) {
+    var anchor = -spacing / 2;
+    for (var index = 0; index < count; index++) {
+      var widthBound =
+          (index == current ? (dotWidth * expansionFactor) : dotWidth) +
+              spacing;
+      if (dx <= (anchor += widthBound)) {
+        return index;
+      }
+    }
+    return -1;
   }
 }

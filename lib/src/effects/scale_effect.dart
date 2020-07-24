@@ -18,12 +18,12 @@ class ScaleEffect extends IndicatorEffect {
   const ScaleEffect({
     Color activeDotColor = Colors.indigo,
     this.activePaintStyle = PaintingStyle.fill,
-    this.scale = 0.3,
+    this.scale = 1.4,
     this.activeStrokeWidth = 1.0,
     double offset,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
-    double spacing = 16.0,
+    double spacing = 10.0,
     double radius = 16,
     Color dotColor = Colors.grey,
     double strokeWidth = 1.0,
@@ -51,8 +51,7 @@ class ScaleEffect extends IndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return ScalePainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+  IndicatorPainter buildPainter(int count, double offset) {
+    return ScalePainter(count: count, offset: offset, effect: this);
   }
 }

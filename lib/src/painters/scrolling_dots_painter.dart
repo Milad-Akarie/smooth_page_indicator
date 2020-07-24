@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -12,8 +13,7 @@ class ScrollingDotsPainter extends IndicatorPainter {
     @required this.effect,
     @required int count,
     @required double offset,
-    @required bool isRTL,
-  }) : super(offset, count, effect, isRTL);
+  }) : super(offset, count, effect);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -41,10 +41,10 @@ class ScrollingDotsPainter extends IndicatorPainter {
 
     final smallDotScale = 0.66;
     final activeScale = effect.activeDotScale - 1.0;
-    for (int index = firstVisibleDot; index <= lastVisibleDot; index++) {
-      Color color = effect.dotColor;
+    for (var index = firstVisibleDot; index <= lastVisibleDot; index++) {
+      var color = effect.dotColor;
 
-      double scale = 1.0;
+      var scale = 1.0;
 
       if (index == current) {
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);

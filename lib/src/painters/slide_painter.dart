@@ -10,13 +10,13 @@ class SlidePainter extends IndicatorPainter {
     @required this.effect,
     @required int count,
     @required double offset,
-    @required bool isRTL,
-  }) : super(offset, count, effect, isRTL);
+  }) : super(offset, count, effect);
 
   @override
   void paint(Canvas canvas, Size size) {
     // paint still dots
-    super.paint(canvas, size);
+
+    paintStillDots(canvas, size);
 
     final activePaint = Paint()..color = effect.activeDotColor;
     final xPos = effect.strokeWidth / 2 + (offset * distance);

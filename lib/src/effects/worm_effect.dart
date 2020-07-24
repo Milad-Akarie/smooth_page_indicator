@@ -15,8 +15,7 @@ class WormEffect extends IndicatorEffect {
     Color activeDotColor = Colors.indigo,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
-  })  : assert(activeDotColor != null),
-        super(
+  }) : super(
           dotWidth: dotWidth,
           dotHeight: dotHeight,
           spacing: spacing,
@@ -28,8 +27,7 @@ class WormEffect extends IndicatorEffect {
         );
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return WormPainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+  IndicatorPainter buildPainter(int count, double offset) {
+    return WormPainter(count: count, offset: offset, effect: this);
   }
 }

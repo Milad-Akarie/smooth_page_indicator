@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/src/painters/color_transition_painter.dart';
-import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
+import '../painters/color_transition_painter.dart';
+import '../painters/indicator_painter.dart';
 
 import 'indicator_effect.dart';
 
+/// Holds [TransitionPainter]
 class ColorTransitionEffect extends IndicatorEffect {
   // The active dot strokeWidth
   final double activeStrokeWidth;
@@ -32,8 +33,7 @@ class ColorTransitionEffect extends IndicatorEffect {
             activeDotColor: activeDotColor);
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, bool isRTL) {
-    return TransitionPainter(
-        count: count, offset: offset, effect: this, isRTL: isRTL);
+  IndicatorPainter buildPainter(int count, double offset) {
+    return TransitionPainter(count: count, offset: offset, effect: this);
   }
 }

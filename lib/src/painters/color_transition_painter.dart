@@ -11,19 +11,18 @@ class TransitionPainter extends IndicatorPainter {
     @required this.effect,
     @required int count,
     @required double offset,
-    @required bool isRTL,
-  }) : super(offset, count, effect, isRTL);
+  }) : super(offset, count, effect);
 
   @override
   void paint(Canvas canvas, Size size) {
-    final int current = offset.floor();
+    final current = offset.floor();
     final dotPaint = Paint()
       ..strokeWidth = effect.strokeWidth
       ..style = effect.paintStyle;
 
     final dotOffset = offset - current;
-    for (int i = 0; i < count; i++) {
-      Color color = effect.dotColor;
+    for (var i = 0; i < count; i++) {
+      var color = effect.dotColor;
       if (i == current) {
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
       } else if (i - 1 == current) {
