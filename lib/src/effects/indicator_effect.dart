@@ -41,7 +41,10 @@ abstract class IndicatorEffect {
         assert(dotWidth != null),
         assert(dotHeight != null),
         assert(spacing != null),
-        assert(dotWidth >= 0 && dotHeight >= 0 && spacing >= 0 && strokeWidth >= 0);
+        assert(dotWidth >= 0 &&
+            dotHeight >= 0 &&
+            spacing >= 0 &&
+            strokeWidth >= 0);
 
   /// Builds a new painter every time the page offset changes
   IndicatorPainter buildPainter(int count, double offset);
@@ -55,14 +58,14 @@ abstract class IndicatorEffect {
     return Size(dotWidth * count + (spacing * (count - 1)), dotHeight);
   }
 
+  /// Returns the index of the section that contains [dx].
+  ///
+  /// Sections or hit-targets are calculated differently
+  /// in some effects
   int hitTestDots(double dx, int count, double current) {
-    var anchor = -spacing / 2;
-    for (int index = 0; index < count; index++) {
-      var widthBound = dotWidth + spacing;
-      var max = anchor + widthBound;
-      var min = max - widthBound;
-      anchor = max;
-      if (dx >= min && dx <= max) {
+    var offset = -spacing / 2;
+    for (var index = 0; index < count; index++) {
+      if (dx <= (offset += dotWidth + spacing)) {
         return index;
       }
     }

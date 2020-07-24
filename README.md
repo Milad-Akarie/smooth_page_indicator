@@ -2,9 +2,10 @@
 
 ##### Customizable animated page indicator with a set of built-in effects.
 
+
 ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_1.gif?raw=true)
 
-##### New! Scrolling dots effect
+##### Scrolling dots effect
 
 ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_4.gif?raw=true)
 
@@ -22,14 +23,29 @@
 | Color Transition -> 0.1.2 | ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/color-transition.gif?raw=true) |
 
 ### Usage
-
 ---
+`SmoothPageIndicator` uses the PageController's scroll offset to animate the active dot.
 
 ```dart
 SmoothPageIndicator(
 	controller: controller,  // PageController
 	count:  6,
 	effect:  WormEffect(),  // your preferred effect
+	onDotClicked: (index){
+	    
+	}
+)
+
+```
+
+### Usage without a PageController [v0.2.0+]
+---
+Unlike `SmoothPageIndicator `, `AnimatedSmoothIndicator` is self animated and all it needs is the active index.
+```dart
+AnimatedSmoothInidcator(
+	activeIndex: yourActiveIndex,
+	count:  6,
+	effect:  WormEffect(),
 )
 
 ```
@@ -38,12 +54,13 @@ SmoothPageIndicator(
 
 ---
 
-You can customize width, height, radius, spacing, paint style, color and more...
+You can customize direction, width, height, radius, spacing, paint style, color and more...
 
 ```dart
 SmoothPageIndicator(
 	controller: controller,
 	count:  6,
+	axisDirection: Axis.vertical,
 	effect:  SlideEffect(
 		spacing:  8.0,
 		radius:  4.0,
@@ -58,13 +75,10 @@ SmoothPageIndicator(
 
 ```
 
-![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_2.gif?raw=true)
-
 ### RTL Support
-
 ---
 
-Smooth page indicator will inherit directionality from it's ancestors unless you specify a directionality by passing it directly to the widget or wrapping the Indicator with a Directionality widget from the flutter package.
+Smooth page indicator will inherit directionality from its ancestors unless you specify a directionality by passing it directly to the widget or wrapping the Indicator with a Directionality widget from the flutter package.
 
 ```dart
 SmoothPageIndicator(
@@ -82,4 +96,4 @@ SmoothPageIndicator(
 
 ### Support the Library
 
-You can support the library by staring in on Github or report any bugs you encounter.
+You can support the library by liking it on pub, staring in on Github and reporting any bugs you encounter.

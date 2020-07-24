@@ -6,24 +6,24 @@ abstract class IndicatorPainter extends CustomPainter {
   /// This holds the directional offset
   final double offset;
 
-  // The count of pages
+  /// The count of pages
   final int count;
 
   // The provided effect is passed to this super class
   // to make some calculations and paint still dots
   final IndicatorEffect _effect;
 
-  // Inactive dot paint or base paint in one-color effects.
+  /// Inactive dot paint or base paint in one-color effects.
   final Paint dotPaint;
 
-  // The Radius of all dots
+  /// The Radius of all dots
   final Radius dotRadius;
 
   IndicatorPainter(
     this.offset,
     this.count,
     this._effect,
-  )   : assert(offset.ceil() < count, "Current page is out of bounds"),
+  )   : assert(offset.ceil() < count, 'Current page is out of bounds'),
         dotRadius = Radius.circular(_effect.radius),
         dotPaint = Paint()
           ..color = _effect.dotColor
@@ -34,12 +34,12 @@ abstract class IndicatorPainter extends CustomPainter {
   double get distance => _effect.dotWidth + _effect.spacing;
 
   void paintStillDots(Canvas canvas, Size size) {
-    for (int i = 0; i < count; i++) {
+    for (var i = 0; i < count; i++) {
       final xPos = (i * distance);
       final yPos = size.height / 2;
-      final bounds =
-          Rect.fromLTRB(xPos, yPos - _effect.dotHeight / 2, xPos + _effect.dotWidth, yPos + _effect.dotHeight / 2);
-      RRect rect = RRect.fromRectAndRadius(bounds, dotRadius);
+      final bounds = Rect.fromLTRB(xPos, yPos - _effect.dotHeight / 2,
+          xPos + _effect.dotWidth, yPos + _effect.dotHeight / 2);
+      var rect = RRect.fromRectAndRadius(bounds, dotRadius);
       canvas.drawRRect(rect, dotPaint);
     }
   }

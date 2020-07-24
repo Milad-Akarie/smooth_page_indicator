@@ -14,28 +14,29 @@ class ScrollingDotsWithFixedCenterPainter extends IndicatorPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-//    super.paint(canvas, size);
-    final int current = offset.floor();
-    final dotOffset = offset - current;
-    final dotPaint = Paint()
+    var current = offset.floor();
+    var dotOffset = offset - current;
+    var dotPaint = Paint()
       ..strokeWidth = effect.strokeWidth
       ..style = effect.paintStyle;
 
-    for (int index = 0; index < count; index++) {
-      Color color = effect.dotColor;
+    for (var index = 0; index < count; index++) {
+      var color = effect.dotColor;
       if (index == current) {
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
       } else if (index - 1 == current) {
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset);
+        color =
+            Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset);
       }
 
-      double scale = 1.0;
+      var scale = 1.0;
       final smallDotScale = 0.66;
       final revDotOffset = 1 - dotOffset;
       final switchPoint = (effect.maxVisibleDots - 1) / 2;
 
       if (count > effect.maxVisibleDots) {
-        if (index >= current - switchPoint && index <= current + (switchPoint + 1)) {
+        if (index >= current - switchPoint &&
+            index <= current + (switchPoint + 1)) {
           if (index == (current + switchPoint)) {
             scale = smallDotScale + ((1 - smallDotScale) * dotOffset);
           } else if (index == current - (switchPoint - 1)) {
@@ -60,7 +61,8 @@ class ScrollingDotsWithFixedCenterPainter extends IndicatorPainter {
       canvas.drawRRect(rRect, dotPaint..color = color);
     }
 
-    final rRect = _calcBounds(size.height, size.width / 2, 0, effect.activeDotScale);
+    final rRect =
+        _calcBounds(size.height, size.width / 2, 0, effect.activeDotScale);
     canvas.drawRRect(
         rRect,
         Paint()
@@ -69,7 +71,8 @@ class ScrollingDotsWithFixedCenterPainter extends IndicatorPainter {
           ..style = PaintingStyle.stroke);
   }
 
-  RRect _calcBounds(double canvasHeight, double startingPoint, num i, [double scale = 1.0]) {
+  RRect _calcBounds(double canvasHeight, double startingPoint, num i,
+      [double scale = 1.0]) {
     final scaledWidth = effect.dotWidth * scale;
     final scaledHeight = effect.dotHeight * scale;
 

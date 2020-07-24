@@ -27,7 +27,9 @@ class WormPainter extends IndicatorPainter {
     final xPos = (i * distance);
     final yPos = canvasHeight / 2;
     double left = xPos;
-    double right = xPos + effect.dotWidth + (dotOffset * (effect.dotWidth + effect.spacing));
+    double right = xPos +
+        effect.dotWidth +
+        (dotOffset * (effect.dotWidth + effect.spacing));
     if (dotOffset > 1) {
       right = xPos + effect.dotWidth + (1 * (effect.dotWidth + effect.spacing));
       left = xPos + ((effect.spacing + effect.dotWidth) * (dotOffset - 1));

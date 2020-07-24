@@ -18,7 +18,7 @@ class JumpingDotPainter extends IndicatorPainter {
     paintStillDots(canvas, size);
     final activeDotPainter = Paint()..color = effect.activeDotColor;
     final dotOffset = offset - offset.toInt();
-    double scale = 1.0;
+    var scale = 1.0;
     if (dotOffset < .5) {
       scale = dotOffset * effect.elevation;
     } else {
@@ -30,7 +30,8 @@ class JumpingDotPainter extends IndicatorPainter {
     final height = effect.dotHeight + scale;
     final width = effect.dotWidth + scale;
     final scaleRatio = width / effect.dotWidth;
-    final rRect = RRect.fromLTRBR(xPos, yPos - height / 2, xPos + width, yPos + height / 2, dotRadius * scaleRatio);
+    final rRect = RRect.fromLTRBR(xPos, yPos - height / 2, xPos + width,
+        yPos + height / 2, dotRadius * scaleRatio);
 
     canvas.drawRRect(rRect, activeDotPainter);
   }

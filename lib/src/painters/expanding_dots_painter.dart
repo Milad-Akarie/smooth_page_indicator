@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/src/effects/expanding_dots_effect.dart';
+import '../effects/expanding_dots_effect.dart';
 
 import 'indicator_painter.dart';
 
@@ -14,22 +14,24 @@ class ExpandingDotsPainter extends IndicatorPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final int current = offset.floor();
-    double drawingOffset = -effect.spacing;
+    final current = offset.floor();
+    var drawingOffset = -effect.spacing;
     final dotOffset = offset - current;
 
-    for (int i = 0; i < count; i++) {
-      Color color = effect.dotColor;
+    for (var i = 0; i < count; i++) {
+      var color = effect.dotColor;
       final activeDotWidth = effect.dotWidth * effect.expansionFactor;
-      final expansion = (dotOffset / 2 * ((activeDotWidth - effect.dotWidth) / .5));
+      final expansion =
+          (dotOffset / 2 * ((activeDotWidth - effect.dotWidth) / .5));
       final xPos = drawingOffset + effect.spacing;
-      double width = effect.dotWidth;
+      var width = effect.dotWidth;
       if (i == current) {
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
         width = activeDotWidth - expansion;
       } else if (i - 1 == current) {
         width = effect.dotWidth + expansion;
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
+        color =
+            Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
       }
       final yPos = size.height / 2;
       final rRect = RRect.fromLTRBR(

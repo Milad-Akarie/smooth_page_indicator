@@ -19,10 +19,12 @@ class ScrollingDotsPainter extends IndicatorPainter {
   void paint(Canvas canvas, Size size) {
     final current = super.offset.floor();
     final switchPoint = (effect.maxVisibleDots / 2).floor();
-    final firstVisibleDot = (current < switchPoint || count - 1 < effect.maxVisibleDots)
-        ? 0
-        : min(current - switchPoint, count - effect.maxVisibleDots);
-    final lastVisibleDot = min(firstVisibleDot + effect.maxVisibleDots, count - 1);
+    final firstVisibleDot =
+        (current < switchPoint || count - 1 < effect.maxVisibleDots)
+            ? 0
+            : min(current - switchPoint, count - effect.maxVisibleDots);
+    final lastVisibleDot =
+        min(firstVisibleDot + effect.maxVisibleDots, count - 1);
     final inPreScrollRange = current < switchPoint;
     final inAfterScrollRange = current >= (count - 1) - switchPoint;
     final willStartScrolling = (current + 1) == switchPoint + 1;
@@ -33,15 +35,16 @@ class ScrollingDotsPainter extends IndicatorPainter {
       ..strokeWidth = effect.strokeWidth
       ..style = effect.paintStyle;
 
-    final drawingAnchor =
-        (inPreScrollRange || inAfterScrollRange) ? -(firstVisibleDot * distance) : -((offset - switchPoint) * distance);
+    final drawingAnchor = (inPreScrollRange || inAfterScrollRange)
+        ? -(firstVisibleDot * distance)
+        : -((offset - switchPoint) * distance);
 
     final smallDotScale = 0.66;
     final activeScale = effect.activeDotScale - 1.0;
-    for (int index = firstVisibleDot; index <= lastVisibleDot; index++) {
-      Color color = effect.dotColor;
+    for (var index = firstVisibleDot; index <= lastVisibleDot; index++) {
+      var color = effect.dotColor;
 
-      double scale = 1.0;
+      var scale = 1.0;
 
       if (index == current) {
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
@@ -59,7 +62,8 @@ class ScrollingDotsPainter extends IndicatorPainter {
         } else if (!inPreScrollRange) {
           scale = smallDotScale * (1.0 - dotOffset);
         }
-      } else if (index == firstVisibleDot + 1 && !(inPreScrollRange || inAfterScrollRange)) {
+      } else if (index == firstVisibleDot + 1 &&
+          !(inPreScrollRange || inAfterScrollRange)) {
         scale = 1.0 - (dotOffset * (1.0 - smallDotScale));
       } else if (index == lastVisibleDot - 1.0) {
         if (inPreScrollRange) {

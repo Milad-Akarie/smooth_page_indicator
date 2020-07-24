@@ -57,7 +57,7 @@ class ScrollingDotsEffect extends IndicatorEffect {
   @override
   Size calculateSize(int count) {
     // Add the scaled dot width to our size calculation
-    double width = (dotWidth + spacing) * (min(count, maxVisibleDots));
+    var width = (dotWidth + spacing) * (min(count, maxVisibleDots));
     if (fixedCenter && count <= maxVisibleDots) {
       width = ((count * 2) - 1) * (dotWidth + spacing);
     }
@@ -68,29 +68,19 @@ class ScrollingDotsEffect extends IndicatorEffect {
   int hitTestDots(double dx, int count, double current) {
     final switchPoint = (maxVisibleDots / 2).floor();
     if (fixedCenter) {
-      var anchor = 0.0;
-      for (int index = 0; index < count; index++) {
-        var widthBound = dotWidth + spacing;
-        var max = anchor + widthBound;
-        var min = max - widthBound;
-        anchor = max;
-        if (dx >= min && dx <= max) {
-          return index - switchPoint + current.floor();
-        }
-      }
+      return super.hitTestDots(dx, count, current) -
+          switchPoint +
+          current.floor();
     } else {
-      final firstVisibleDot = (current < switchPoint || count - 1 < maxVisibleDots)
-          ? 0
-          : min(current - switchPoint, count - maxVisibleDots).floor();
-      final lastVisibleDot = min(firstVisibleDot + maxVisibleDots, count - 1).floor();
-
-      var anchor = 0.0;
-      for (int index = firstVisibleDot; index <= lastVisibleDot; index++) {
-        var widthBound = dotWidth + spacing;
-        var max = anchor + widthBound;
-        var min = max - widthBound;
-        anchor = max;
-        if (dx >= min && dx <= max) {
+      final firstVisibleDot =
+          (current < switchPoint || count - 1 < maxVisibleDots)
+              ? 0
+              : min(current - switchPoint, count - maxVisibleDots).floor();
+      final lastVisibleDot =
+          min(firstVisibleDot + maxVisibleDots, count - 1).floor();
+      var offset = 0.0;
+      for (var index = firstVisibleDot; index <= lastVisibleDot; index++) {
+        if (dx <= (offset += dotWidth + spacing)) {
           return index;
         }
       }
@@ -101,7 +91,8 @@ class ScrollingDotsEffect extends IndicatorEffect {
   @override
   IndicatorPainter buildPainter(int count, double offset) {
     if (fixedCenter) {
-      return ScrollingDotsWithFixedCenterPainter(count: count, offset: offset, effect: this);
+      return ScrollingDotsWithFixedCenterPainter(
+          count: count, offset: offset, effect: this);
     } else {
       return ScrollingDotsPainter(count: count, offset: offset, effect: this);
     }
