@@ -42,7 +42,7 @@ SmoothPageIndicator(
 ---
 Unlike `SmoothPageIndicator `, `AnimatedSmoothIndicator` is self animated and all it needs is the active index.
 ```dart
-AnimatedSmoothInidcator(
+AnimatedSmoothIndicator(
 	activeIndex: yourActiveIndex,
 	count:  6,
 	effect:  WormEffect(),
