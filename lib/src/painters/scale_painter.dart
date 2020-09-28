@@ -29,11 +29,17 @@ class ScalePainter extends IndicatorPainter {
       var scale = 0.0;
       if (index == current) {
         scale = (effect.scale) - (activeScale * dotOffset);
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
+        color = Color.lerp(effect.activeDotFillColor ?? effect.activeDotColor,
+            effect.dotColor, dotOffset);
       } else if (index - 1 == current) {
         scale = 1.0 + (activeScale * dotOffset);
-        color =
-            Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
+        color = Color.lerp(effect.activeDotFillColor ?? effect.activeDotColor,
+            effect.dotColor, 1.0 - dotOffset);
+      }
+
+      if (effect.activeDotFillColor != null) {
+        canvas.drawRRect(
+            _calcBounds(size.height, index), dotPaint..color = color);
       }
       canvas.drawRRect(
           _calcBounds(size.height, index, scale), activePaint..color = color);

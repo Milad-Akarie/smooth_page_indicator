@@ -15,7 +15,10 @@ class ScaleEffect extends IndicatorEffect {
   /// active dot scaling
   final double scale;
 
+  final Color activeDotFillColor;
+
   const ScaleEffect({
+    this.activeDotFillColor,
     Color activeDotColor = Colors.indigo,
     this.activePaintStyle = PaintingStyle.fill,
     this.scale = 1.4,
@@ -32,15 +35,14 @@ class ScaleEffect extends IndicatorEffect {
         assert(scale != null),
         assert(activeStrokeWidth != null),
         super(
-          dotWidth: dotWidth,
-          dotHeight: dotHeight,
-          spacing: spacing,
-          radius: radius,
-          strokeWidth: strokeWidth,
-          paintStyle: paintStyle,
-          dotColor: dotColor,
-          activeDotColor: activeDotColor,
-        );
+            dotWidth: dotWidth,
+            dotHeight: dotHeight,
+            spacing: spacing,
+            radius: radius,
+            strokeWidth: strokeWidth,
+            paintStyle: paintStyle,
+            dotColor: dotColor,
+            activeDotColor: activeDotColor);
 
   @override
   Size calculateSize(int count) {
