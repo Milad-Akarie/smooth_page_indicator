@@ -20,7 +20,7 @@ class ScaleEffect extends IndicatorEffect {
     this.activePaintStyle = PaintingStyle.fill,
     this.scale = 1.4,
     this.activeStrokeWidth = 1.0,
-    double offset,
+    double offset = 16.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 10.0,
@@ -28,10 +28,7 @@ class ScaleEffect extends IndicatorEffect {
     Color dotColor = Colors.grey,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
-  })  : assert(activePaintStyle != null),
-        assert(scale != null),
-        assert(activeStrokeWidth != null),
-        super(
+  }) : super(
           dotWidth: dotWidth,
           dotHeight: dotHeight,
           spacing: spacing,

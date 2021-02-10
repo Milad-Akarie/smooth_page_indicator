@@ -11,7 +11,7 @@ class ExpandingDotsEffect extends IndicatorEffect {
 
   const ExpandingDotsEffect({
     this.expansionFactor = 3,
-    double offset,
+    double offset = 16.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
@@ -20,8 +20,7 @@ class ExpandingDotsEffect extends IndicatorEffect {
     Color dotColor = Colors.grey,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
-  })  : assert(expansionFactor != null),
-        assert(expansionFactor > 1),
+  })  : assert(expansionFactor > 1),
         super(
             dotWidth: dotWidth,
             dotHeight: dotHeight,

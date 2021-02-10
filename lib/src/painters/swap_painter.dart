@@ -7,9 +7,9 @@ class SwapPainter extends IndicatorPainter {
   final SwapEffect effect;
 
   SwapPainter({
-    @required double offset,
-    @required this.effect,
-    @required int count,
+    required double offset,
+    required this.effect,
+    required int count,
   }) : super(offset, count, effect);
 
   @override

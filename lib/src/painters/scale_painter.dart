@@ -7,9 +7,9 @@ class ScalePainter extends IndicatorPainter {
   final ScaleEffect effect;
 
   ScalePainter({
-    @required double offset,
-    @required this.effect,
-    @required int count,
+    required double offset,
+    required this.effect,
+    required int count,
   }) : super(offset, count, effect);
 
   @override
@@ -29,11 +29,13 @@ class ScalePainter extends IndicatorPainter {
       var scale = 0.0;
       if (index == current) {
         scale = (effect.scale) - (activeScale * dotOffset);
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset)!;
       } else if (index - 1 == current) {
         scale = 1.0 + (activeScale * dotOffset);
-        color =
-            Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(
+            effect.activeDotColor, effect.dotColor, 1.0 - dotOffset)!;
       }
       canvas.drawRRect(
           _calcBounds(size.height, index, scale), activePaint..color = color);

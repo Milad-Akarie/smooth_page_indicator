@@ -7,9 +7,9 @@ class JumpingDotPainter extends IndicatorPainter {
   final JumpingDotEffect effect;
 
   JumpingDotPainter({
-    @required this.effect,
-    @required int count,
-    @required double offset,
+    required this.effect,
+    required int count,
+    required double offset,
   }) : super(offset, count, effect);
 
   @override

@@ -7,7 +7,7 @@ import 'indicator_effect.dart';
 class SlideEffect extends IndicatorEffect {
   const SlideEffect({
     Color activeDotColor = Colors.indigo,
-    double offset,
+    double offset = 16.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
@@ -15,8 +15,7 @@ class SlideEffect extends IndicatorEffect {
     Color dotColor = Colors.grey,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
-  })  : assert(activeDotColor != null),
-        super(
+  }) : super(
             dotWidth: dotWidth,
             dotHeight: dotHeight,
             spacing: spacing,

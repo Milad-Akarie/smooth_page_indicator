@@ -8,9 +8,9 @@ class TransitionPainter extends IndicatorPainter {
   final ColorTransitionEffect effect;
 
   TransitionPainter({
-    @required this.effect,
-    @required int count,
-    @required double offset,
+    required this.effect,
+    required int count,
+    required double offset,
   }) : super(offset, count, effect);
 
   @override
@@ -24,10 +24,12 @@ class TransitionPainter extends IndicatorPainter {
     for (var i = 0; i < count; i++) {
       var color = effect.dotColor;
       if (i == current) {
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset)!;
       } else if (i - 1 == current) {
-        color =
-            Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(
+            effect.activeDotColor, effect.dotColor, 1.0 - dotOffset)!;
       }
 
       final xPos = (i * distance);

@@ -27,21 +27,15 @@ abstract class IndicatorEffect {
   final double strokeWidth;
 
   const IndicatorEffect({
-    @required this.strokeWidth,
-    @required this.dotWidth,
-    @required this.dotHeight,
-    @required this.spacing,
-    @required this.radius,
-    @required this.dotColor,
-    @required this.paintStyle,
-    @required this.activeDotColor,
-  })  : assert(radius != null),
-        assert(dotColor != null || paintStyle != null || strokeWidth != null),
-        assert(activeDotColor != null),
-        assert(dotWidth != null),
-        assert(dotHeight != null),
-        assert(spacing != null),
-        assert(dotWidth >= 0 &&
+    required this.strokeWidth,
+    required this.dotWidth,
+    required this.dotHeight,
+    required this.spacing,
+    required this.radius,
+    required this.dotColor,
+    required this.paintStyle,
+    required this.activeDotColor,
+  }) : assert(dotWidth >= 0 &&
             dotHeight >= 0 &&
             spacing >= 0 &&
             strokeWidth >= 0);
