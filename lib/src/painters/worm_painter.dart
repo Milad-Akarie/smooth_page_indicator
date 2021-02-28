@@ -7,9 +7,9 @@ class WormPainter extends IndicatorPainter {
   final WormEffect effect;
 
   WormPainter({
-    @required this.effect,
-    @required int count,
-    @required double offset,
+    required this.effect,
+    required int count,
+    required double offset,
   }) : super(offset, count, effect);
 
   @override
@@ -26,8 +26,8 @@ class WormPainter extends IndicatorPainter {
   RRect _calcBounds(double canvasHeight, num i, double dotOffset) {
     final xPos = (i * distance);
     final yPos = canvasHeight / 2;
-    double left = xPos;
-    double right = xPos +
+    var left = xPos;
+    var right = xPos +
         effect.dotWidth +
         (dotOffset * (effect.dotWidth + effect.spacing));
     if (dotOffset > 1) {

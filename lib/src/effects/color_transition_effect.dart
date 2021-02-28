@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../painters/color_transition_painter.dart';
 import '../painters/indicator_painter.dart';
-
 import 'indicator_effect.dart';
 
 /// Holds [TransitionPainter]
@@ -11,7 +11,7 @@ class ColorTransitionEffect extends IndicatorEffect {
 
   const ColorTransitionEffect({
     this.activeStrokeWidth = 1.5,
-    double offset,
+    double offset = 16.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
@@ -20,9 +20,7 @@ class ColorTransitionEffect extends IndicatorEffect {
     Color activeDotColor = Colors.indigo,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
-  })  : assert(activeDotColor != null),
-        assert(activeStrokeWidth != null),
-        super(
+  }) : super(
             dotWidth: dotWidth,
             dotHeight: dotHeight,
             spacing: spacing,

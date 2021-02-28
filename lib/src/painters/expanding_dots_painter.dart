@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import '../effects/expanding_dots_effect.dart';
 
+import '../effects/expanding_dots_effect.dart';
 import 'indicator_painter.dart';
 
 class ExpandingDotsPainter extends IndicatorPainter {
   final ExpandingDotsEffect effect;
 
   ExpandingDotsPainter({
-    @required double offset,
-    @required this.effect,
-    @required int count,
+    required double offset,
+    required this.effect,
+    required int count,
   }) : super(offset, count, effect);
 
   @override
@@ -26,12 +26,14 @@ class ExpandingDotsPainter extends IndicatorPainter {
       final xPos = drawingOffset + effect.spacing;
       var width = effect.dotWidth;
       if (i == current) {
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset)!;
         width = activeDotWidth - expansion;
       } else if (i - 1 == current) {
         width = effect.dotWidth + expansion;
-        color =
-            Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(
+            effect.activeDotColor, effect.dotColor, 1.0 - dotOffset)!;
       }
       final yPos = size.height / 2;
       final rRect = RRect.fromLTRBR(

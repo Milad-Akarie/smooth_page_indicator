@@ -7,9 +7,9 @@ class ScrollingDotsWithFixedCenterPainter extends IndicatorPainter {
   final ScrollingDotsEffect effect;
 
   ScrollingDotsWithFixedCenterPainter({
-    @required this.effect,
-    @required int count,
-    @required double offset,
+    required this.effect,
+    required int count,
+    required double offset,
   }) : super(offset, count, effect);
 
   @override
@@ -23,10 +23,12 @@ class ScrollingDotsWithFixedCenterPainter extends IndicatorPainter {
     for (var index = 0; index < count; index++) {
       var color = effect.dotColor;
       if (index == current) {
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset)!;
       } else if (index - 1 == current) {
+        // ! Both a and b are non nullable
         color =
-            Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset);
+            Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset)!;
       }
 
       var scale = 1.0;

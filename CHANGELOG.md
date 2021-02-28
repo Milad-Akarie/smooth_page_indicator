@@ -1,5 +1,10 @@
 # ChangeLog
 
+## [0.3.0-nullsafety.0]
+- Move to null safety
+- Add runnable example
+- change default offset value to 16.0 
+
 ## [0.2.0]
 - Add support for vertical direction
 - Add on dot clicked callback

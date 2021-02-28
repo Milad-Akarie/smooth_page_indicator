@@ -7,9 +7,9 @@ class SlidePainter extends IndicatorPainter {
   final SlideEffect effect;
 
   SlidePainter({
-    @required this.effect,
-    @required int count,
-    @required double offset,
+    required this.effect,
+    required int count,
+    required double offset,
   }) : super(offset, count, effect);
 
   @override

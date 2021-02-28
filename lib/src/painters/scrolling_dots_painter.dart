@@ -10,9 +10,9 @@ class ScrollingDotsPainter extends IndicatorPainter {
   final ScrollingDotsEffect effect;
 
   ScrollingDotsPainter({
-    @required this.effect,
-    @required int count,
-    @required double offset,
+    required this.effect,
+    required int count,
+    required double offset,
   }) : super(offset, count, effect);
 
   @override
@@ -47,10 +47,12 @@ class ScrollingDotsPainter extends IndicatorPainter {
       var scale = 1.0;
 
       if (index == current) {
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset)!;
         scale = effect.activeDotScale - (activeScale * dotOffset);
       } else if (index - 1 == current) {
-        color = Color.lerp(effect.dotColor, effect.activeDotColor, dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(effect.dotColor, effect.activeDotColor, dotOffset)!;
         scale = 1.0 + (activeScale * dotOffset);
       } else if (count - 1 < effect.maxVisibleDots) {
         scale = 1.0;

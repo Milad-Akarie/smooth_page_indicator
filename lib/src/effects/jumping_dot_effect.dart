@@ -11,7 +11,7 @@ class JumpingDotEffect extends IndicatorEffect {
   const JumpingDotEffect({
     Color activeDotColor = Colors.indigo,
     this.elevation = 15.0,
-    double offset,
+    double offset = 16.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
@@ -19,9 +19,7 @@ class JumpingDotEffect extends IndicatorEffect {
     Color dotColor = Colors.grey,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
-  })  : assert(activeDotColor != null),
-        assert(elevation != null),
-        super(
+  }) : super(
             dotWidth: dotWidth,
             dotHeight: dotHeight,
             spacing: spacing,
