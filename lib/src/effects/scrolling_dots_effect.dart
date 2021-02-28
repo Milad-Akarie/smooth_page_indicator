@@ -29,7 +29,7 @@ class ScrollingDotsEffect extends IndicatorEffect {
     this.activeDotScale = 1.3,
     this.maxVisibleDots = 5,
     this.fixedCenter = false,
-    double offset = 16.0,
+    double offset = 0.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,

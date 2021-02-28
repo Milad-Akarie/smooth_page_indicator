@@ -43,10 +43,8 @@ class _HomePageState extends State<HomePage> {
                   children: List.generate(
                       6,
                       (_) => Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16)),
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 4),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                             child: Container(height: 280),
                           )),
                 ),
@@ -98,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                   count: 6,
                   effect: ScrollingDotsEffect(
                     activeStrokeWidth: 2.6,
-                    activeDotScale: .4,
+                    activeDotScale: 1.3,
                     radius: 8,
                     spacing: 10,
                   )),

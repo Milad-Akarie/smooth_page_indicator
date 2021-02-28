@@ -11,7 +11,7 @@ class JumpingDotEffect extends IndicatorEffect {
   const JumpingDotEffect({
     Color activeDotColor = Colors.indigo,
     this.elevation = 15.0,
-    double offset = 16.0,
+    double offset = 0.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
