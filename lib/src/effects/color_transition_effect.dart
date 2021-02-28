@@ -11,7 +11,7 @@ class ColorTransitionEffect extends IndicatorEffect {
 
   const ColorTransitionEffect({
     this.activeStrokeWidth = 1.5,
-    double offset = 0.0,
+    double offset = 16.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,

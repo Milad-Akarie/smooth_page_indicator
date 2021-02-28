@@ -20,7 +20,7 @@ class ScaleEffect extends IndicatorEffect {
     this.activePaintStyle = PaintingStyle.fill,
     this.scale = 1.4,
     this.activeStrokeWidth = 1.0,
-    double offset = 0.0,
+    double offset = 16.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 10.0,
