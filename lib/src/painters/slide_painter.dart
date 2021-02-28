@@ -19,7 +19,7 @@ class SlidePainter extends IndicatorPainter {
     paintStillDots(canvas, size);
 
     final activePaint = Paint()..color = effect.activeDotColor;
-    final xPos = effect.strokeWidth / 2 + (offset * distance);
+    final xPos = (offset * distance);
     final yPos = size.height / 2;
     final rRect = RRect.fromLTRBR(
       xPos,

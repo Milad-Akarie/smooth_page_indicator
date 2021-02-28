@@ -1,5 +1,6 @@
 # ChangeLog
-
+## [0.2.1]
+- Fix offset mismatch in slide effect
 ## [0.2.0]
 - Add support for vertical direction
 - Add on dot clicked callback
