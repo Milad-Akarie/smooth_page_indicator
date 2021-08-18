@@ -56,7 +56,7 @@ class SmoothPageIndicator extends AnimatedWidget {
   double get _offset {
     try {
       var offset = controller.page ?? controller.initialPage.toDouble();
-      offset = offset % (count);
+      offset = offset % count;
       offset = offset > count - 1 ? 0 : offset;
       return offset;
     } catch (_) {
