@@ -4,7 +4,7 @@ import 'package:smooth_page_indicator/src/painters/slide_painter.dart';
 
 import 'indicator_effect.dart';
 
-class SlideEffect extends IndicatorEffect {
+class SlideEffect extends BasicIndicatorEffect {
   const SlideEffect({
     Color activeDotColor = Colors.indigo,
     double offset = 16.0,

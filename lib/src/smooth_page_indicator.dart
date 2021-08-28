@@ -12,7 +12,7 @@ class SmoothPageIndicator extends AnimatedWidget {
   // Page view controller
   final PageController controller;
 
-  /// Holds effect configuration to be used in the [IndicatorPainter]
+  /// Holds effect configuration to be used in the [BasicIndicatorPainter]
   final IndicatorEffect effect;
 
   /// layout direction vertical || horizontal
@@ -55,7 +55,8 @@ class SmoothPageIndicator extends AnimatedWidget {
 
   double get _offset {
     try {
-      return controller.page ?? controller.initialPage.toDouble();
+      var offset = controller.page ?? controller.initialPage.toDouble();
+      return offset % count;
     } catch (_) {
       return controller.initialPage.toDouble();
     }
@@ -66,7 +67,7 @@ class SmoothIndicator extends StatelessWidget {
   // to listen for page offset updates
   final double offset;
 
-  /// Holds effect configuration to be used in the [IndicatorPainter]
+  /// Holds effect configuration to be used in the [BasicIndicatorPainter]
   final IndicatorEffect effect;
 
   /// layout direction vertical || horizontal
@@ -101,8 +102,7 @@ class SmoothIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // if textDirection is not provided use the nearest directionality up the widgets tree;
-    final isRTL =
-        (textDirection ?? Directionality.of(context)) == TextDirection.rtl;
+    final isRTL = (textDirection ?? Directionality.of(context)) == TextDirection.rtl;
 
     return RotatedBox(
       quarterTurns: axisDirection == Axis.vertical
@@ -138,7 +138,7 @@ class SmoothIndicator extends StatelessWidget {
 class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
   final int activeIndex;
 
-  /// Holds effect configuration to be used in the [IndicatorPainter]
+  /// Holds effect configuration to be used in the [BasicIndicatorPainter]
   final IndicatorEffect effect;
 
   /// layout direction vertical || horizontal
@@ -172,12 +172,10 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
         );
 
   @override
-  _AnimatedSmoothIndicatorState createState() =>
-      _AnimatedSmoothIndicatorState();
+  _AnimatedSmoothIndicatorState createState() => _AnimatedSmoothIndicatorState();
 }
 
-class _AnimatedSmoothIndicatorState
-    extends AnimatedWidgetBaseState<AnimatedSmoothIndicator> {
+class _AnimatedSmoothIndicatorState extends AnimatedWidgetBaseState<AnimatedSmoothIndicator> {
   Tween<double>? _offset;
 
   @override

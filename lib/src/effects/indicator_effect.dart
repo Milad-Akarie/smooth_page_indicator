@@ -2,6 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
 
 abstract class IndicatorEffect {
+  const IndicatorEffect();
+
+  /// Builds a new painter every time the page offset changes
+  IndicatorPainter buildPainter(int count, double offset);
+
+  /// Calculates the size of canvas based on
+  /// dots count, size and spacing
+  ///
+  /// Other effects can override this function
+  /// to calculate their own size
+  Size calculateSize(int count);
+
+  /// Returns the index of the section that contains [dx].
+  ///
+  /// Sections or hit-targets are calculated differently
+  /// in some effects
+  int hitTestDots(double dx, int count, double current);
+}
+
+abstract class BasicIndicatorEffect extends IndicatorEffect {
   /// Singe dot width
   final double dotWidth;
 
@@ -26,7 +46,7 @@ abstract class IndicatorEffect {
   /// This is ignored if [paintStyle] is PaintStyle.fill
   final double strokeWidth;
 
-  const IndicatorEffect({
+  const BasicIndicatorEffect({
     required this.strokeWidth,
     required this.dotWidth,
     required this.dotHeight,
@@ -35,27 +55,14 @@ abstract class IndicatorEffect {
     required this.dotColor,
     required this.paintStyle,
     required this.activeDotColor,
-  }) : assert(dotWidth >= 0 &&
-            dotHeight >= 0 &&
-            spacing >= 0 &&
-            strokeWidth >= 0);
+  }) : assert(dotWidth >= 0 && dotHeight >= 0 && spacing >= 0 && strokeWidth >= 0);
 
-  /// Builds a new painter every time the page offset changes
-  IndicatorPainter buildPainter(int count, double offset);
-
-  /// Calculates the size of canvas based on
-  /// dots count, size and spacing
-  ///
-  /// Other effects can override this function
-  /// to calculate their own size
+  @override
   Size calculateSize(int count) {
     return Size(dotWidth * count + (spacing * (count - 1)), dotHeight);
   }
 
-  /// Returns the index of the section that contains [dx].
-  ///
-  /// Sections or hit-targets are calculated differently
-  /// in some effects
+  @override
   int hitTestDots(double dx, int count, double current) {
     var offset = -spacing / 2;
     for (var index = 0; index < count; index++) {

@@ -1,9 +1,11 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/effects/swap_effect.dart';
 
 import 'indicator_painter.dart';
 
-class SwapPainter extends IndicatorPainter {
+class SwapPainter extends BasicIndicatorPainter {
   final SwapEffect effect;
 
   SwapPainter({
@@ -17,24 +19,58 @@ class SwapPainter extends IndicatorPainter {
     final current = offset.floor();
     final dotOffset = offset - offset.floor();
     final activePaint = Paint()..color = effect.activeDotColor;
-    for (var i = count - 1; i >= 0; i--) {
-      var posOffset = i.toDouble();
-      var paint = dotPaint;
+    var dotScale = effect.dotWidth * .2;
+    final yPos = size.height / 2;
+    final xAnchor = effect.spacing / 2;
 
-      if (i == current) {
-        paint = activePaint;
-        posOffset = offset;
-      } else if (i - 1 == current) {
-        posOffset = i - dotOffset;
-      }
-
-      final xPos =
-          effect.spacing / 2 + (posOffset * (effect.dotWidth + effect.spacing));
-      final yPos = size.height / 2;
-      final rRect = RRect.fromLTRBR(xPos, yPos - effect.dotHeight / 2,
-          xPos + effect.dotWidth, yPos + effect.dotHeight / 2, dotRadius);
+    void drawDot(double xPos, double yPos, Paint paint, [double scale = 0]) {
+      final rRect = RRect.fromLTRBR(
+        xPos,
+        yPos - effect.dotHeight / 2,
+        xPos + effect.dotWidth,
+        yPos + effect.dotHeight / 2,
+        dotRadius,
+      ).inflate(scale);
 
       canvas.drawRRect(rRect, paint);
+    }
+
+    for (var i = count - 1; i >= 0; i--) {
+      // if current or next
+      if (i == current || (i - 1 == current)) {
+        if (effect.type == SwapType.yRotation) {
+          final piFactor = (dotOffset * math.pi);
+          if (i == current) {
+            var x = (1 - ((math.cos(piFactor) + 1) / 2)) * distance;
+            var y = -math.sin(piFactor) * distance / 2;
+            drawDot(xAnchor + distance * i + x, yPos + y, activePaint);
+          } else {
+            var x = -(1 - ((math.cos(piFactor) + 1) / 2)) * distance;
+            var y = (math.sin(piFactor) * distance / 2);
+            drawDot(xAnchor + distance * i + x, yPos + y, dotPaint);
+          }
+        } else {
+          var posOffset = i.toDouble();
+          var scale = 0.0;
+          if (effect.type == SwapType.zRotation) {
+            scale = dotScale * dotOffset;
+            if (dotOffset > .5) {
+              scale = dotScale - (dotScale * dotOffset);
+            }
+          }
+          if (i == current) {
+            posOffset = offset;
+            drawDot(xAnchor + posOffset * distance, yPos, activePaint, scale);
+          } else {
+            posOffset = i - dotOffset;
+            drawDot(xAnchor + posOffset * distance, yPos, dotPaint, -scale);
+          }
+        }
+      } else {
+        // draw still dots
+        final xPos = xAnchor + i * distance;
+        drawDot(xPos, yPos, dotPaint);
+      }
     }
   }
 }

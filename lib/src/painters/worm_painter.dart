@@ -3,7 +3,7 @@ import 'package:smooth_page_indicator/src/effects/worm_effect.dart';
 
 import 'indicator_painter.dart';
 
-class WormPainter extends IndicatorPainter {
+class WormPainter extends BasicIndicatorPainter {
   final WormEffect effect;
 
   WormPainter({
@@ -14,32 +14,49 @@ class WormPainter extends IndicatorPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-//    super.paint(canvas, size);
     // paint still dots
     paintStillDots(canvas, size);
-    final activeDotPaint = Paint()..color = effect.activeDotColor;
-    final dotOffset = offset - offset.toInt();
-    final worm = _calcBounds(size.height, offset.floor(), dotOffset * 2);
-    canvas.drawRRect(worm, activeDotPaint);
-  }
 
-  RRect _calcBounds(double canvasHeight, num i, double dotOffset) {
-    final xPos = (i * distance);
-    final yPos = canvasHeight / 2;
-    var left = xPos;
-    var right = xPos +
-        effect.dotWidth +
-        (dotOffset * (effect.dotWidth + effect.spacing));
-    if (dotOffset > 1) {
-      right = xPos + effect.dotWidth + (1 * (effect.dotWidth + effect.spacing));
-      left = xPos + ((effect.spacing + effect.dotWidth) * (dotOffset - 1));
+    final activeDotPaint = Paint()..color = effect.activeDotColor;
+    final dotOffset = (offset - offset.toInt());
+
+    // handle dot travel from end to start (for infinite pager support)
+    if (offset > count - 1) {
+      final startDot = calcPortalTravel(size, effect.dotWidth / 2, dotOffset);
+      canvas.drawRRect(startDot, activeDotPaint);
+
+      final endDot = calcPortalTravel(
+        size,
+        ((count - 1) * distance) + (effect.dotWidth / 2),
+        1 - dotOffset,
+      );
+      canvas.drawRRect(endDot, activeDotPaint);
+      return;
     }
-    return RRect.fromLTRBR(
-      left,
-      yPos - effect.dotHeight / 2,
-      right,
-      yPos + effect.dotHeight / 2,
+
+    final wormOffset = dotOffset * 2;
+    final xPos = (offset.floor() * distance);
+    final yPos = size.height / 2;
+    var head = xPos;
+    var tail = xPos + effect.dotWidth + (wormOffset * distance);
+    var halfHeight = effect.dotHeight / 2;
+    var thinWorm = effect.type == WormType.thin;
+    var dotHeight = thinWorm ? halfHeight + (halfHeight * (1 - wormOffset)) : effect.dotHeight;
+
+    if (wormOffset > 1) {
+      tail = xPos + effect.dotWidth + (1 * distance);
+      head = xPos + distance * (wormOffset - 1);
+      if (thinWorm) {
+        dotHeight = halfHeight + (halfHeight * (wormOffset - 1));
+      }
+    }
+    final worm = RRect.fromLTRBR(
+      head,
+      yPos - dotHeight / 2,
+      tail,
+      yPos + dotHeight / 2,
       dotRadius,
     );
+    canvas.drawRRect(worm, activeDotPaint);
   }
 }

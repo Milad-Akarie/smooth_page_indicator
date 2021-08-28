@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:smooth_page_indicator/src/effects/color_transition_effect.dart';
 
 import 'indicator_painter.dart';
 
-class TransitionPainter extends IndicatorPainter {
+class TransitionPainter extends BasicIndicatorPainter {
   final ColorTransitionEffect effect;
 
   TransitionPainter({
@@ -26,10 +28,14 @@ class TransitionPainter extends IndicatorPainter {
       if (i == current) {
         // ! Both a and b are non nullable
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset)!;
-      } else if (i - 1 == current) {
+        dotPaint.strokeWidth = max(effect.activeStrokeWidth * (1 - dotOffset), effect.strokeWidth);
+      } else if (i - 1 == current || (i == 0 && offset > count - 1)) {
         // ! Both a and b are non nullable
-        color = Color.lerp(
-            effect.activeDotColor, effect.dotColor, 1.0 - dotOffset)!;
+        dotPaint.strokeWidth = max(effect.activeStrokeWidth * dotOffset, effect.strokeWidth);
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, 1.0 - dotOffset)!;
+      } else {
+        dotPaint.strokeWidth = effect.strokeWidth;
+        color = effect.dotColor;
       }
 
       final xPos = (i * distance);
@@ -41,7 +47,6 @@ class TransitionPainter extends IndicatorPainter {
         yPos + effect.dotHeight / 2,
         dotRadius,
       );
-
       canvas.drawRRect(rRect, dotPaint..color = color);
     }
   }

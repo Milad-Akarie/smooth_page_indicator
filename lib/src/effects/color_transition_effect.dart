@@ -5,7 +5,7 @@ import '../painters/indicator_painter.dart';
 import 'indicator_effect.dart';
 
 /// Holds [TransitionPainter]
-class ColorTransitionEffect extends IndicatorEffect {
+class ColorTransitionEffect extends BasicIndicatorEffect {
   // The active dot strokeWidth
   final double activeStrokeWidth;
 
@@ -32,6 +32,10 @@ class ColorTransitionEffect extends IndicatorEffect {
 
   @override
   IndicatorPainter buildPainter(int count, double offset) {
-    return TransitionPainter(count: count, offset: offset, effect: this);
+    return TransitionPainter(
+      count: count,
+      offset: offset,
+      effect: this,
+    );
   }
 }
