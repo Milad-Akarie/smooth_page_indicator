@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
+import 'package:smooth_page_indicator/src/painters/customizable_painter.dart';
 import 'package:smooth_page_indicator/src/painters/scale_painter.dart';
 
 import 'indicator_effect.dart';
 
-class ScaleEffect extends IndicatorEffect {
+class ScaleEffect extends BasicIndicatorEffect {
   // Inactive dots paint style (fill|stroke) defaults to fill.
   final PaintingStyle activePaintStyle;
 
@@ -20,7 +21,7 @@ class ScaleEffect extends IndicatorEffect {
     this.activePaintStyle = PaintingStyle.fill,
     this.scale = 1.4,
     this.activeStrokeWidth = 1.0,
-    double offset,
+    double offset = 16.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 10.0,
@@ -28,10 +29,7 @@ class ScaleEffect extends IndicatorEffect {
     Color dotColor = Colors.grey,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
-  })  : assert(activePaintStyle != null),
-        assert(scale != null),
-        assert(activeStrokeWidth != null),
-        super(
+  }) : super(
           dotWidth: dotWidth,
           dotHeight: dotHeight,
           spacing: spacing,
@@ -46,8 +44,7 @@ class ScaleEffect extends IndicatorEffect {
   Size calculateSize(int count) {
     // Add the scaled dot width to our size calculation
     final scaledWidth = (dotWidth + (dotWidth * scale)) - dotWidth;
-    return Size((dotWidth * count) + (spacing * (count - 1)) + scaledWidth,
-        (dotHeight + scaledWidth));
+    return Size((dotWidth * count) + (spacing * (count - 1)) + scaledWidth, (dotHeight + scaledWidth));
   }
 
   @override

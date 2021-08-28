@@ -7,9 +7,9 @@ import 'package:smooth_page_indicator/src/painters/scrolling_dots_painter_with_f
 
 import 'indicator_effect.dart';
 
-class ScrollingDotsEffect extends IndicatorEffect {
+class ScrollingDotsEffect extends BasicIndicatorEffect {
   /// The active dot strokeWidth
-  /// this's ignored if [fixedCenter] is false
+  /// this is ignored if [fixedCenter] is false
   final double activeStrokeWidth;
 
   /// [activeDotScale] is multiplied by [dotWidth] to resolve
@@ -29,7 +29,7 @@ class ScrollingDotsEffect extends IndicatorEffect {
     this.activeDotScale = 1.3,
     this.maxVisibleDots = 5,
     this.fixedCenter = false,
-    double offset,
+    double offset = 16.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
@@ -38,10 +38,7 @@ class ScrollingDotsEffect extends IndicatorEffect {
     Color activeDotColor = Colors.indigo,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
-  })  : assert(activeStrokeWidth != null),
-        assert(fixedCenter != null),
-        assert(activeDotScale != null),
-        assert(activeDotScale >= 0.0),
+  })  : assert(activeDotScale >= 0.0),
         assert(maxVisibleDots >= 5 && maxVisibleDots % 2 != 0),
         super(
           dotWidth: dotWidth,
@@ -68,16 +65,12 @@ class ScrollingDotsEffect extends IndicatorEffect {
   int hitTestDots(double dx, int count, double current) {
     final switchPoint = (maxVisibleDots / 2).floor();
     if (fixedCenter) {
-      return super.hitTestDots(dx, count, current) -
-          switchPoint +
-          current.floor();
+      return super.hitTestDots(dx, count, current) - switchPoint + current.floor();
     } else {
-      final firstVisibleDot =
-          (current < switchPoint || count - 1 < maxVisibleDots)
-              ? 0
-              : min(current - switchPoint, count - maxVisibleDots).floor();
-      final lastVisibleDot =
-          min(firstVisibleDot + maxVisibleDots, count - 1).floor();
+      final firstVisibleDot = (current < switchPoint || count - 1 < maxVisibleDots)
+          ? 0
+          : min(current - switchPoint, count - maxVisibleDots).floor();
+      final lastVisibleDot = min(firstVisibleDot + maxVisibleDots, count - 1).floor();
       var offset = 0.0;
       for (var index = firstVisibleDot; index <= lastVisibleDot; index++) {
         if (dx <= (offset += dotWidth + spacing)) {
@@ -89,12 +82,23 @@ class ScrollingDotsEffect extends IndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
+  BasicIndicatorPainter buildPainter(int count, double offset) {
     if (fixedCenter) {
+      assert(
+        offset.ceil() < count,
+        'ScrollingDotsWithFixedCenterPainter does not support infinite looping.',
+      );
       return ScrollingDotsWithFixedCenterPainter(
-          count: count, offset: offset, effect: this);
+        count: count,
+        offset: offset,
+        effect: this,
+      );
     } else {
-      return ScrollingDotsPainter(count: count, offset: offset, effect: this);
+      return ScrollingDotsPainter(
+        count: count,
+        offset: offset,
+        effect: this,
+      );
     }
   }
 }

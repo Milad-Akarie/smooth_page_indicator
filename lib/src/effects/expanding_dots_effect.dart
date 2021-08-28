@@ -4,14 +4,14 @@ import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
 
 import 'indicator_effect.dart';
 
-class ExpandingDotsEffect extends IndicatorEffect {
+class ExpandingDotsEffect extends BasicIndicatorEffect {
   /// [expansionFactor] is multiplied by [dotWidth] to resolve
   /// the width of the expanded dot.
   final double expansionFactor;
 
   const ExpandingDotsEffect({
     this.expansionFactor = 3,
-    double offset,
+    double offset = 16.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
@@ -20,8 +20,7 @@ class ExpandingDotsEffect extends IndicatorEffect {
     Color dotColor = Colors.grey,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
-  })  : assert(expansionFactor != null),
-        assert(expansionFactor > 1),
+  })  : assert(expansionFactor > 1),
         super(
             dotWidth: dotWidth,
             dotHeight: dotHeight,
@@ -35,9 +34,7 @@ class ExpandingDotsEffect extends IndicatorEffect {
   @override
   Size calculateSize(int count) {
     // Add the expanded dot width to our size calculation
-    return Size(
-        ((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth),
-        dotHeight);
+    return Size(((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth), dotHeight);
   }
 
   @override
@@ -49,9 +46,7 @@ class ExpandingDotsEffect extends IndicatorEffect {
   int hitTestDots(double dx, int count, double current) {
     var anchor = -spacing / 2;
     for (var index = 0; index < count; index++) {
-      var widthBound =
-          (index == current ? (dotWidth * expansionFactor) : dotWidth) +
-              spacing;
+      var widthBound = (index == current ? (dotWidth * expansionFactor) : dotWidth) + spacing;
       if (dx <= (anchor += widthBound)) {
         return index;
       }

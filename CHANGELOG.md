@@ -1,6 +1,19 @@
 # ChangeLog
-## [0.2.1]
-- Fix offset mismatch in slide effect
+
+## [1.0.0] [Breaking change in JumpingDotEffect]
+- Fix ignored active dot stroke in ColorTransitionEffect #40
+- Fix crash when last item is removed #21
+- Add loop support
+- Add variants to SwapEffect (zRotation, YRotation)
+- Add variants to WormEffect (thin worm)
+- Rename [elevation] property from JumpingDotEffect [Breaking]
+- Add customization params to JumpingDotEffect (jumpScale, verticalOffset)
+- Add CustomizableEffect
+## [0.3.0-nullsafety.0]
+- Move to null safety
+- Add runnable example
+- change default offset value to 16.0 
+
 ## [0.2.0]
 - Add support for vertical direction
 - Add on dot clicked callback

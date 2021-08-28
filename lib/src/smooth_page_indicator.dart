@@ -12,7 +12,7 @@ class SmoothPageIndicator extends AnimatedWidget {
   // Page view controller
   final PageController controller;
 
-  /// Holds effect configuration to be used in the [IndicatorPainter]
+  /// Holds effect configuration to be used in the [BasicIndicatorPainter]
   final IndicatorEffect effect;
 
   /// layout direction vertical || horizontal
@@ -26,15 +26,15 @@ class SmoothPageIndicator extends AnimatedWidget {
   final int count;
 
   /// If [textDirection] is [TextDirection.rtl], page direction will be flipped
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
 
   /// on dot clicked callback
-  final OnDotClicked onDotClicked;
+  final OnDotClicked? onDotClicked;
 
   SmoothPageIndicator({
-    Key key,
-    @required this.controller,
-    @required this.count,
+    Key? key,
+    required this.controller,
+    required this.count,
     this.axisDirection = Axis.horizontal,
     this.textDirection,
     this.onDotClicked,
@@ -55,7 +55,8 @@ class SmoothPageIndicator extends AnimatedWidget {
 
   double get _offset {
     try {
-      return controller.page ?? controller.initialPage.toDouble();
+      var offset = controller.page ?? controller.initialPage.toDouble();
+      return offset % count;
     } catch (_) {
       return controller.initialPage.toDouble();
     }
@@ -66,7 +67,7 @@ class SmoothIndicator extends StatelessWidget {
   // to listen for page offset updates
   final double offset;
 
-  /// Holds effect configuration to be used in the [IndicatorPainter]
+  /// Holds effect configuration to be used in the [BasicIndicatorPainter]
   final IndicatorEffect effect;
 
   /// layout direction vertical || horizontal
@@ -76,25 +77,23 @@ class SmoothIndicator extends StatelessWidget {
   final int count;
 
   /// If [textDirection] is [TextDirection.rtl], page direction will be flipped
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
 
   /// on dot clicked callback
-  final OnDotClicked onDotClicked;
+  final OnDotClicked? onDotClicked;
 
   /// canvas size
   final Size _size;
 
   SmoothIndicator({
-    @required this.offset,
-    @required this.count,
+    Key? key,
+    required this.offset,
+    required this.count,
     this.axisDirection = Axis.horizontal,
+    this.effect = const WormEffect(),
     this.textDirection,
     this.onDotClicked,
-    this.effect = const WormEffect(),
-    Key key,
-  })  : assert(offset != null),
-        assert(effect != null),
-        assert(count != null),
+  })  :
         // different effects have different sizes
         // so we calculate size based on the provided effect
         _size = effect.calculateSize(count),
@@ -103,11 +102,14 @@ class SmoothIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // if textDirection is not provided use the nearest directionality up the widgets tree;
-    final isRTL =
-        (textDirection ?? Directionality.of(context)) == TextDirection.rtl;
+    final isRTL = (textDirection ?? Directionality.of(context)) == TextDirection.rtl;
 
     return RotatedBox(
-      quarterTurns: axisDirection == Axis.vertical ? 1 : isRTL ? 2 : 0,
+      quarterTurns: axisDirection == Axis.vertical
+          ? 1
+          : isRTL
+              ? 2
+              : 0,
       child: GestureDetector(
         onTapUp: _onTap,
         child: CustomPaint(
@@ -127,7 +129,7 @@ class SmoothIndicator extends StatelessWidget {
         offset,
       );
       if (index != -1 && index != offset.toInt()) {
-        onDotClicked(index);
+        onDotClicked?.call(index);
       }
     }
   }
@@ -136,7 +138,7 @@ class SmoothIndicator extends StatelessWidget {
 class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
   final int activeIndex;
 
-  /// Holds effect configuration to be used in the [IndicatorPainter]
+  /// Holds effect configuration to be used in the [BasicIndicatorPainter]
   final IndicatorEffect effect;
 
   /// layout direction vertical || horizontal
@@ -146,28 +148,23 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
   final int count;
 
   /// If [textDirection] is [TextDirection.rtl], page direction will be flipped
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
 
   /// On dot clicked callback
-  final Function(int index) onDotClicked;
+  final Function(int index)? onDotClicked;
 
   AnimatedSmoothIndicator({
-    @required this.activeIndex,
-    @required this.count,
+    Key? key,
+    required this.activeIndex,
+    required this.count,
     this.axisDirection = Axis.horizontal,
     this.textDirection,
     this.onDotClicked,
     this.effect = const WormEffect(),
     Curve curve = Curves.easeInOut,
     Duration duration = const Duration(milliseconds: 300),
-    VoidCallback onEnd,
-    Key key,
-  })  : assert(effect != null),
-        assert(activeIndex != null),
-        assert(count != null),
-        assert(duration != null),
-        assert(curve != null),
-        super(
+    VoidCallback? onEnd,
+  }) : super(
           key: key,
           duration: duration,
           curve: curve,
@@ -175,13 +172,11 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
         );
 
   @override
-  _AnimatedSmoothIndicatorState createState() =>
-      _AnimatedSmoothIndicatorState();
+  _AnimatedSmoothIndicatorState createState() => _AnimatedSmoothIndicatorState();
 }
 
-class _AnimatedSmoothIndicatorState
-    extends AnimatedWidgetBaseState<AnimatedSmoothIndicator> {
-  Tween<double> _offset;
+class _AnimatedSmoothIndicatorState extends AnimatedWidgetBaseState<AnimatedSmoothIndicator> {
+  Tween<double>? _offset;
 
   @override
   void forEachTween(visitor) {
@@ -194,8 +189,13 @@ class _AnimatedSmoothIndicatorState
 
   @override
   Widget build(BuildContext context) {
+    final offset = _offset;
+    if (offset == null) {
+      throw 'Offset has not been initialized';
+    }
+
     return SmoothIndicator(
-      offset: _offset?.evaluate(animation),
+      offset: offset.evaluate(animation),
       count: widget.count,
       effect: widget.effect,
       textDirection: widget.textDirection,

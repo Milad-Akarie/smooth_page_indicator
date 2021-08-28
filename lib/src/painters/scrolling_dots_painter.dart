@@ -6,25 +6,23 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'indicator_painter.dart';
 
-class ScrollingDotsPainter extends IndicatorPainter {
+class ScrollingDotsPainter extends BasicIndicatorPainter {
   final ScrollingDotsEffect effect;
 
   ScrollingDotsPainter({
-    @required this.effect,
-    @required int count,
-    @required double offset,
+    required this.effect,
+    required int count,
+    required double offset,
   }) : super(offset, count, effect);
 
   @override
   void paint(Canvas canvas, Size size) {
     final current = super.offset.floor();
     final switchPoint = (effect.maxVisibleDots / 2).floor();
-    final firstVisibleDot =
-        (current < switchPoint || count - 1 < effect.maxVisibleDots)
-            ? 0
-            : min(current - switchPoint, count - effect.maxVisibleDots);
-    final lastVisibleDot =
-        min(firstVisibleDot + effect.maxVisibleDots, count - 1);
+    final firstVisibleDot = (current < switchPoint || count - 1 < effect.maxVisibleDots)
+        ? 0
+        : min(current - switchPoint, count - effect.maxVisibleDots);
+    final lastVisibleDot = min(firstVisibleDot + effect.maxVisibleDots, count - 1);
     final inPreScrollRange = current < switchPoint;
     final inAfterScrollRange = current >= (count - 1) - switchPoint;
     final willStartScrolling = (current + 1) == switchPoint + 1;
@@ -35,9 +33,8 @@ class ScrollingDotsPainter extends IndicatorPainter {
       ..strokeWidth = effect.strokeWidth
       ..style = effect.paintStyle;
 
-    final drawingAnchor = (inPreScrollRange || inAfterScrollRange)
-        ? -(firstVisibleDot * distance)
-        : -((offset - switchPoint) * distance);
+    final drawingAnchor =
+        (inPreScrollRange || inAfterScrollRange) ? -(firstVisibleDot * distance) : -((offset - switchPoint) * distance);
 
     final smallDotScale = 0.66;
     final activeScale = effect.activeDotScale - 1.0;
@@ -47,10 +44,23 @@ class ScrollingDotsPainter extends IndicatorPainter {
       var scale = 1.0;
 
       if (index == current) {
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
-        scale = effect.activeDotScale - (activeScale * dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset)!;
+        if (offset > count - 1 && count > effect.maxVisibleDots) {
+          scale = effect.activeDotScale - (smallDotScale * dotOffset);
+        } else {
+          scale = effect.activeDotScale - (activeScale * dotOffset);
+        }
+      } else if ((index == firstVisibleDot && offset > count - 1)) {
+        color = Color.lerp(effect.dotColor, effect.activeDotColor, dotOffset)!;
+        if (count <= effect.maxVisibleDots) {
+          scale = 1 + (activeScale * dotOffset);
+        } else {
+          scale = smallDotScale + (((1 - smallDotScale) + activeScale) * dotOffset);
+        }
       } else if (index - 1 == current) {
-        color = Color.lerp(effect.dotColor, effect.activeDotColor, dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(effect.dotColor, effect.activeDotColor, dotOffset)!;
         scale = 1.0 + (activeScale * dotOffset);
       } else if (count - 1 < effect.maxVisibleDots) {
         scale = 1.0;
@@ -62,8 +72,7 @@ class ScrollingDotsPainter extends IndicatorPainter {
         } else if (!inPreScrollRange) {
           scale = smallDotScale * (1.0 - dotOffset);
         }
-      } else if (index == firstVisibleDot + 1 &&
-          !(inPreScrollRange || inAfterScrollRange)) {
+      } else if (index == firstVisibleDot + 1 && !(inPreScrollRange || inAfterScrollRange)) {
         scale = 1.0 - (dotOffset * (1.0 - smallDotScale));
       } else if (index == lastVisibleDot - 1.0) {
         if (inPreScrollRange) {

@@ -4,9 +4,10 @@ import 'package:smooth_page_indicator/src/painters/worm_painter.dart';
 
 import 'indicator_effect.dart';
 
-class WormEffect extends IndicatorEffect {
+class WormEffect extends BasicIndicatorEffect {
+  final WormType type;
   const WormEffect({
-    double offset,
+    double offset = 16.0,
     double dotWidth = 16.0,
     double dotHeight = 16.0,
     double spacing = 8.0,
@@ -15,6 +16,7 @@ class WormEffect extends IndicatorEffect {
     Color activeDotColor = Colors.indigo,
     double strokeWidth = 1.0,
     PaintingStyle paintStyle = PaintingStyle.fill,
+    this.type = WormType.normal,
   }) : super(
           dotWidth: dotWidth,
           dotHeight: dotHeight,
@@ -31,3 +33,5 @@ class WormEffect extends IndicatorEffect {
     return WormPainter(count: count, offset: offset, effect: this);
   }
 }
+
+enum WormType { normal, thin }

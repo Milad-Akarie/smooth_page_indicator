@@ -3,13 +3,13 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'indicator_painter.dart';
 
-class ScrollingDotsWithFixedCenterPainter extends IndicatorPainter {
+class ScrollingDotsWithFixedCenterPainter extends BasicIndicatorPainter {
   final ScrollingDotsEffect effect;
 
   ScrollingDotsWithFixedCenterPainter({
-    @required this.effect,
-    @required int count,
-    @required double offset,
+    required this.effect,
+    required int count,
+    required double offset,
   }) : super(offset, count, effect);
 
   @override
@@ -23,10 +23,11 @@ class ScrollingDotsWithFixedCenterPainter extends IndicatorPainter {
     for (var index = 0; index < count; index++) {
       var color = effect.dotColor;
       if (index == current) {
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset)!;
       } else if (index - 1 == current) {
-        color =
-            Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset);
+        // ! Both a and b are non nullable
+        color = Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset)!;
       }
 
       var scale = 1.0;
@@ -35,8 +36,7 @@ class ScrollingDotsWithFixedCenterPainter extends IndicatorPainter {
       final switchPoint = (effect.maxVisibleDots - 1) / 2;
 
       if (count > effect.maxVisibleDots) {
-        if (index >= current - switchPoint &&
-            index <= current + (switchPoint + 1)) {
+        if (index >= current - switchPoint && index <= current + (switchPoint + 1)) {
           if (index == (current + switchPoint)) {
             scale = smallDotScale + ((1 - smallDotScale) * dotOffset);
           } else if (index == current - (switchPoint - 1)) {
@@ -61,8 +61,7 @@ class ScrollingDotsWithFixedCenterPainter extends IndicatorPainter {
       canvas.drawRRect(rRect, dotPaint..color = color);
     }
 
-    final rRect =
-        _calcBounds(size.height, size.width / 2, 0, effect.activeDotScale);
+    final rRect = _calcBounds(size.height, size.width / 2, 0, effect.activeDotScale);
     canvas.drawRRect(
         rRect,
         Paint()
@@ -71,8 +70,7 @@ class ScrollingDotsWithFixedCenterPainter extends IndicatorPainter {
           ..style = PaintingStyle.stroke);
   }
 
-  RRect _calcBounds(double canvasHeight, double startingPoint, num i,
-      [double scale = 1.0]) {
+  RRect _calcBounds(double canvasHeight, double startingPoint, num i, [double scale = 1.0]) {
     final scaledWidth = effect.dotWidth * scale;
     final scaledHeight = effect.dotHeight * scale;
 
