@@ -41,7 +41,9 @@ class WormPainter extends BasicIndicatorPainter {
     var tail = xPos + effect.dotWidth + (wormOffset * distance);
     var halfHeight = effect.dotHeight / 2;
     var thinWorm = effect.type == WormType.thin;
-    var dotHeight = thinWorm ? halfHeight + (halfHeight * (1 - wormOffset)) : effect.dotHeight;
+    var dotHeight = thinWorm
+        ? halfHeight + (halfHeight * (1 - wormOffset))
+        : effect.dotHeight;
 
     if (wormOffset > 1) {
       tail = xPos + effect.dotWidth + (1 * distance);

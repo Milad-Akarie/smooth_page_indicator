@@ -27,7 +27,8 @@ class ScrollingDotsWithFixedCenterPainter extends BasicIndicatorPainter {
         color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset)!;
       } else if (index - 1 == current) {
         // ! Both a and b are non nullable
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset)!;
+        color =
+            Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset)!;
       }
 
       var scale = 1.0;
@@ -36,7 +37,8 @@ class ScrollingDotsWithFixedCenterPainter extends BasicIndicatorPainter {
       final switchPoint = (effect.maxVisibleDots - 1) / 2;
 
       if (count > effect.maxVisibleDots) {
-        if (index >= current - switchPoint && index <= current + (switchPoint + 1)) {
+        if (index >= current - switchPoint &&
+            index <= current + (switchPoint + 1)) {
           if (index == (current + switchPoint)) {
             scale = smallDotScale + ((1 - smallDotScale) * dotOffset);
           } else if (index == current - (switchPoint - 1)) {
@@ -61,7 +63,8 @@ class ScrollingDotsWithFixedCenterPainter extends BasicIndicatorPainter {
       canvas.drawRRect(rRect, dotPaint..color = color);
     }
 
-    final rRect = _calcBounds(size.height, size.width / 2, 0, effect.activeDotScale);
+    final rRect =
+        _calcBounds(size.height, size.width / 2, 0, effect.activeDotScale);
     canvas.drawRRect(
         rRect,
         Paint()
@@ -70,7 +73,8 @@ class ScrollingDotsWithFixedCenterPainter extends BasicIndicatorPainter {
           ..style = PaintingStyle.stroke);
   }
 
-  RRect _calcBounds(double canvasHeight, double startingPoint, num i, [double scale = 1.0]) {
+  RRect _calcBounds(double canvasHeight, double startingPoint, num i,
+      [double scale = 1.0]) {
     final scaledWidth = effect.dotWidth * scale;
     final scaledHeight = effect.dotHeight * scale;
 
