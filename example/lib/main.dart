@@ -98,24 +98,24 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 16, bottom: 12),
-              //   child: Text(
-              //     'Swap',
-              //     style: TextStyle(color: Colors.black54),
-              //   ),
-              // ),
-              // Container(
-              //   child: SmoothPageIndicator(
-              //     controller: controller,
-              //     count: pages.length,
-              //     effect: SwapEffect(
-              //       dotHeight: 16,
-              //       dotWidth: 16,
-              //       type: SwapType.yRotation,
-              //     ),
-              //   ),
-              // ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16, bottom: 8),
+                child: Text(
+                  'Swap',
+                  style: TextStyle(color: Colors.black54),
+                ),
+              ),
+              Container(
+                child: SmoothPageIndicator(
+                  controller: controller,
+                  count: pages.length,
+                  effect: SwapEffect(
+                    dotHeight: 16,
+                    dotWidth: 16,
+                    type: SwapType.yRotation,
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 16, bottom: 12),
                 child: Text(
