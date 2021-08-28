@@ -1,5 +1,8 @@
 # ChangeLog
-
+## [1.0.0+2]
+- fix readme file (attempt 2)
+## [1.0.0+1]
+- fix readme file
 ## [1.0.0] [Breaking change in JumpingDotEffect]
 - Fix ignored active dot stroke in ColorTransitionEffect #40
 - Fix crash when last item is removed #21

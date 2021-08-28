@@ -102,7 +102,8 @@ class SmoothIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // if textDirection is not provided use the nearest directionality up the widgets tree;
-    final isRTL = (textDirection ?? Directionality.of(context)) == TextDirection.rtl;
+    final isRTL =
+        (textDirection ?? Directionality.of(context)) == TextDirection.rtl;
 
     return RotatedBox(
       quarterTurns: axisDirection == Axis.vertical
@@ -172,10 +173,12 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
         );
 
   @override
-  _AnimatedSmoothIndicatorState createState() => _AnimatedSmoothIndicatorState();
+  _AnimatedSmoothIndicatorState createState() =>
+      _AnimatedSmoothIndicatorState();
 }
 
-class _AnimatedSmoothIndicatorState extends AnimatedWidgetBaseState<AnimatedSmoothIndicator> {
+class _AnimatedSmoothIndicatorState
+    extends AnimatedWidgetBaseState<AnimatedSmoothIndicator> {
   Tween<double>? _offset;
 
   @override

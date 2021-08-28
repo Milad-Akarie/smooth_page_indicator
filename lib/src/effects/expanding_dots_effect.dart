@@ -34,7 +34,9 @@ class ExpandingDotsEffect extends BasicIndicatorEffect {
   @override
   Size calculateSize(int count) {
     // Add the expanded dot width to our size calculation
-    return Size(((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth), dotHeight);
+    return Size(
+        ((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth),
+        dotHeight);
   }
 
   @override
@@ -46,7 +48,9 @@ class ExpandingDotsEffect extends BasicIndicatorEffect {
   int hitTestDots(double dx, int count, double current) {
     var anchor = -spacing / 2;
     for (var index = 0; index < count; index++) {
-      var widthBound = (index == current ? (dotWidth * expansionFactor) : dotWidth) + spacing;
+      var widthBound =
+          (index == current ? (dotWidth * expansionFactor) : dotWidth) +
+              spacing;
       if (dx <= (anchor += widthBound)) {
         return index;
       }
