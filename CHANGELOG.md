@@ -1,4 +1,6 @@
 # ChangeLog
+## [1.0.1]
+- Fix scaleEffect in correct margins
 ## [1.0.0+2]
 - fix readme file (attempt 2)
 ## [1.0.0+1]

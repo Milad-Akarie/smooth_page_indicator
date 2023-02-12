@@ -39,7 +39,7 @@ class ScrollingDotsPainter extends BasicIndicatorPainter {
         ? -(firstVisibleDot * distance)
         : -((offset - switchPoint) * distance);
 
-    final smallDotScale = 0.66;
+    const smallDotScale = 0.66;
     final activeScale = effect.activeDotScale - 1.0;
     for (var index = firstVisibleDot; index <= lastVisibleDot; index++) {
       var color = effect.dotColor;

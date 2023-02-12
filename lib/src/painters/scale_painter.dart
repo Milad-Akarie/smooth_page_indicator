@@ -42,12 +42,13 @@ class ScalePainter extends BasicIndicatorPainter {
   }
 
   RRect _calcBounds(double canvasHeight, num offset, [double scale = 1.0]) {
+    var startingPoint = effect.dotWidth * effect.scale / 2;
     var width = effect.dotWidth * scale;
     var height = effect.dotHeight * scale;
-    var startingPoint = effect.dotWidth + effect.spacing / 2;
-    var xPos = startingPoint / 2 -
+    var xPos = startingPoint -
         width / 2 +
         (offset * (effect.dotWidth + effect.spacing));
+
     var yPos = canvasHeight / 2;
     return RRect.fromLTRBR(xPos, yPos - height / 2, xPos + width,
         yPos + height / 2, dotRadius * scale);

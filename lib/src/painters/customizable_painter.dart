@@ -104,7 +104,7 @@ class CustomizablePainter extends IndicatorPainter {
         Paint()..color = decoration.color,
       );
 
-      final borerPaint = Paint()
+      final borderPaint = Paint()
         ..strokeWidth = decoration.dotBorder.width
         ..style = PaintingStyle.stroke
         ..color = decoration.dotBorder.color;
@@ -113,7 +113,7 @@ class CustomizablePainter extends IndicatorPainter {
 
       canvas.drawPath(
         borderPath.transform(matrix4.storage),
-        borerPaint,
+        borderPaint,
       );
     }
   }

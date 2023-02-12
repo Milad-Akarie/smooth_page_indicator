@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -95,24 +94,6 @@ class _HomePageState extends State<HomePage> {
                     dotWidth: 16,
                     jumpScale: .7,
                     verticalOffset: 15,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16, bottom: 8),
-                child: Text(
-                  'Swap',
-                  style: TextStyle(color: Colors.black54),
-                ),
-              ),
-              Container(
-                child: SmoothPageIndicator(
-                  controller: controller,
-                  count: pages.length,
-                  effect: SwapEffect(
-                    dotHeight: 16,
-                    dotWidth: 16,
-                    type: SwapType.yRotation,
                   ),
                 ),
               ),

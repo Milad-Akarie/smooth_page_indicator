@@ -1,1 +1,1 @@
-include: package:pedantic/analysis_options.yaml
+include: package:flutter_lints/flutter.yaml

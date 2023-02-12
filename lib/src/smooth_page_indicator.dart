@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'effects/indicator_effect.dart';
 import 'effects/worm_effect.dart';
@@ -31,7 +29,7 @@ class SmoothPageIndicator extends AnimatedWidget {
   /// on dot clicked callback
   final OnDotClicked? onDotClicked;
 
-  SmoothPageIndicator({
+  const SmoothPageIndicator({
     Key? key,
     required this.controller,
     required this.count,
@@ -154,7 +152,7 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
   /// On dot clicked callback
   final Function(int index)? onDotClicked;
 
-  AnimatedSmoothIndicator({
+  const AnimatedSmoothIndicator({
     Key? key,
     required this.activeIndex,
     required this.count,
@@ -173,11 +171,10 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
         );
 
   @override
-  _AnimatedSmoothIndicatorState createState() =>
-      _AnimatedSmoothIndicatorState();
+  AnimatedSmoothIndicatorState createState() => AnimatedSmoothIndicatorState();
 }
 
-class _AnimatedSmoothIndicatorState
+class AnimatedSmoothIndicatorState
     extends AnimatedWidgetBaseState<AnimatedSmoothIndicator> {
   Tween<double>? _offset;
 

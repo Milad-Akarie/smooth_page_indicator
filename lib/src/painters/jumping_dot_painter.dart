@@ -45,7 +45,6 @@ class JumpingDotPainter extends BasicIndicatorPainter {
       scale = 1.0 + (dotOffset * 2) * targetScale;
     } else {
       scale = effect.jumpScale + ((1 - (dotOffset * 2)) * targetScale);
-      print(((1 - (dotOffset * 2))));
     }
     final piFactor = (dotOffset * math.pi);
     var yPos = size.height / 2;

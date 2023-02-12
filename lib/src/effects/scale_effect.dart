@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
-import 'package:smooth_page_indicator/src/painters/customizable_painter.dart';
 import 'package:smooth_page_indicator/src/painters/scale_painter.dart';
 
 import 'indicator_effect.dart';
@@ -43,9 +42,12 @@ class ScaleEffect extends BasicIndicatorEffect {
   @override
   Size calculateSize(int count) {
     // Add the scaled dot width to our size calculation
-    final scaledWidth = (dotWidth + (dotWidth * scale)) - dotWidth;
-    return Size((dotWidth * count) + (spacing * (count - 1)) + scaledWidth,
-        (dotHeight + scaledWidth));
+    final activeDotWidth = dotWidth * scale;
+    final nonActiveCount = count - 1;
+    return Size(
+      (dotWidth * nonActiveCount) + (spacing * nonActiveCount) + activeDotWidth,
+      activeDotWidth,
+    );
   }
 
   @override

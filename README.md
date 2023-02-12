@@ -1,28 +1,31 @@
 ## smooth_page_indicator
 
 ##### Customizable animated page indicator with a set of built-in effects.
+
   <p >
 <a href="https://img.shields.io/badge/License-MIT-green"><img 
 align="center" src="https://img.shields.io/badge/License-MIT-green" alt="MIT License"></a>  
-<a href="https://github.com/Milad-Akarie/injectable/stargazers"><img align="center" src="https://img.shields.io/github/stars/Milad-Akarie/smooth_page_indicator?style=flat&logo=github&colorB=green&label=stars" alt="stars"></a>  
-<a href="https://pub.dev/packages/injectable/versions/1.0.0"><img 
-align="center" src="https://img.shields.io/badge/pub-1.0.0-orange" alt="pub version"></a>  
+<a href="https://github.com/Milad-Akarie/smooth_page_indicator/stargazers"><img align="center" src="https://img.shields.io/github/stars/Milad-Akarie/smooth_page_indicator?style=flat&logo=github&colorB=green&label=stars" alt="stars"></a>  
+<a href="https://pub.dev/packages/smooth_page_indicator/versions/1.0.0"><img 
+align="center" src="https://img.shields.io/pub/v/smooth_page_indicator.svg" alt="pub version"></a>  
 <a href="https://www.buymeacoffee.com/miladakarie" target="_blank"><img align="center" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="30px" width= "108px"></a>
 </p>  
-  
----  
+
+ 
 
 ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_1.gif?raw=true)
 
 ##### infinite Loop support [**new**]
+
 ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_loop.gif?raw=true)
+
 ##### Scrolling dots effect
 
 ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_4.gif?raw=true)
 
 ### Effects
 
-| Effect                                    |                                                Preview                                                  |  
+| Effect                                    |                                                Preview                                                    |  
 | :---------------------------------------- | :-------------------------------------------------------------------------------------------------------: |  
 | Worm                      |       ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/worm.gif?raw=true) |
 | Worm  style = WormStyle.thin [v1.0.0]  |       ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/worm-thin.gif?raw=true) |
@@ -58,7 +61,9 @@ SmoothPageIndicator(
 
 ### Usage without a PageController [v0.2.0+]
 ---  
-Unlike `SmoothPageIndicator `, `AnimatedSmoothIndicator` is self animated and all it needs is the active index.
+Unlike `SmoothPageIndicator `, `AnimatedSmoothIndicator` is self animated and all it needs is the
+active index.
+
 ```dart  
 AnimatedSmoothIndicator(  
    activeIndex: yourActiveIndex,  
@@ -69,6 +74,7 @@ AnimatedSmoothIndicator(
 ```  
 
 ### Customization
+
   
 ---  
 
@@ -96,7 +102,9 @@ SmoothPageIndicator(
 ### RTL Support
 ---  
 
-Smooth page indicator will inherit directionality from its ancestors unless you specify a directionality by passing it directly to the widget or wrapping the Indicator with a Directionality widget from the flutter package.
+Smooth page indicator will inherit directionality from its ancestors unless you specify a
+directionality by passing it directly to the widget or wrapping the Indicator with a Directionality
+widget from the flutter package.
 
 ```dart  
 SmoothPageIndicator(  
@@ -114,4 +122,5 @@ SmoothPageIndicator(
 
 ### Support the Library
 
-You can support the library by liking it on pub, staring in on Github and reporting any bugs you encounter.
+You can support the library by liking it on pub, staring in on Github and reporting any bugs you
+encounter.
