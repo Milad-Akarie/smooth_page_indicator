@@ -34,6 +34,11 @@ class ExpandingDotsPainter extends BasicIndicatorPainter {
         // ! Both a and b are non nullable
         color = Color.lerp(
             effect.activeDotColor, effect.dotColor, 1.0 - dotOffset)!;
+      } else if (i == count - 1 && offset < 0) {
+        width = effect.dotWidth + (effect.dotWidth - expansion);
+        // ! Both a and b are non nullable
+        color = Color.lerp(
+            effect.dotColor, effect.activeDotColor, 1.0 - dotOffset)!;
       }
       final yPos = size.height / 2;
       final rRect = RRect.fromLTRBR(
