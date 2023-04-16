@@ -3,9 +3,16 @@ import 'package:smooth_page_indicator/src/effects/scale_effect.dart';
 
 import 'indicator_painter.dart';
 
+/// Paints a scale-dot transition effect between active
+/// and non-active dots
+///
+/// Live demo at
+/// https://github.com/Milad-Akarie/smooth_page_indicator/blob/f7ee92e7413a31de77bfb487755d64a385d52a52/demo/scale.gif
 class ScalePainter extends BasicIndicatorPainter {
+  /// The painting configuration
   final ScaleEffect effect;
 
+  /// Default constructor
   ScalePainter({
     required double offset,
     required this.effect,
@@ -36,21 +43,23 @@ class ScalePainter extends BasicIndicatorPainter {
         // ! Both a and b are non nullable
         color = Color.lerp(effect.dotColor, effect.activeDotColor, dotOffset)!;
       }
-      canvas.drawRRect(
-          _calcBounds(size.height, index, scale), activePaint..color = color);
+      canvas.drawRRect(_calcBounds(size.height, index, scale), activePaint..color = color);
     }
   }
 
   RRect _calcBounds(double canvasHeight, num offset, [double scale = 1.0]) {
-    var startingPoint = effect.dotWidth * effect.scale / 2;
-    var width = effect.dotWidth * scale;
-    var height = effect.dotHeight * scale;
-    var xPos = startingPoint -
-        width / 2 +
-        (offset * (effect.dotWidth + effect.spacing));
+    final startingPoint = effect.dotWidth * effect.scale / 2;
+    final width = effect.dotWidth * scale;
+    final height = effect.dotHeight * scale;
+    final xPos = startingPoint - width / 2 + (offset * (effect.dotWidth + effect.spacing));
+    final yPos = canvasHeight / 2;
 
-    var yPos = canvasHeight / 2;
-    return RRect.fromLTRBR(xPos, yPos - height / 2, xPos + width,
-        yPos + height / 2, dotRadius * scale);
+    return RRect.fromLTRBR(
+      xPos,
+      yPos - height / 2,
+      xPos + width,
+      yPos + height / 2,
+      dotRadius * scale,
+    );
   }
 }

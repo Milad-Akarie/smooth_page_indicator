@@ -4,11 +4,13 @@ import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
 
 import 'indicator_effect.dart';
 
+/// Holds painting configuration to be used by [ExpandingDotsPainter]
 class ExpandingDotsEffect extends BasicIndicatorEffect {
-  /// [expansionFactor] is multiplied by [dotWidth] to resolve
+  /// This is multiplied by [dotWidth] to calculate
   /// the width of the expanded dot.
   final double expansionFactor;
 
+  /// Default constructor
   const ExpandingDotsEffect({
     this.expansionFactor = 3,
     double offset = 16.0,
@@ -33,7 +35,7 @@ class ExpandingDotsEffect extends BasicIndicatorEffect {
 
   @override
   Size calculateSize(int count) {
-    // Add the expanded dot width to our size calculation
+    /// Add the expanded dot width to our size calculation
     return Size(
         ((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth),
         dotHeight);

@@ -4,19 +4,25 @@ import 'effects/indicator_effect.dart';
 import 'effects/worm_effect.dart';
 import 'painters/indicator_painter.dart';
 
+/// Signature for a callback function used to report
+/// dot tap-events
 typedef OnDotClicked = void Function(int index);
 
+/// A widget that draws a representation of pages count
+/// Inside of a  [PageView]
+///
+/// Uses the [PageController.offset] to animate the active dot
 class SmoothPageIndicator extends AnimatedWidget {
-  // Page view controller
+  /// The page view controller
   final PageController controller;
 
   /// Holds effect configuration to be used in the [BasicIndicatorPainter]
   final IndicatorEffect effect;
 
-  /// layout direction vertical || horizontal
+  /// Layout direction vertical || horizontal
   ///
-  /// This will only rotate the canvas in which the dots
-  /// are drawn,
+  /// This will only rotate the canvas in which the dots are drawn.
+  ///
   /// It will not affect [effect.dotWidth] and [effect.dotHeight]
   final Axis axisDirection;
 
@@ -26,9 +32,10 @@ class SmoothPageIndicator extends AnimatedWidget {
   /// If [textDirection] is [TextDirection.rtl], page direction will be flipped
   final TextDirection? textDirection;
 
-  /// on dot clicked callback
+  /// Reports dot taps
   final OnDotClicked? onDotClicked;
 
+  /// Default constructor
   const SmoothPageIndicator({
     Key? key,
     required this.controller,
@@ -61,8 +68,11 @@ class SmoothPageIndicator extends AnimatedWidget {
   }
 }
 
+/// Draws dot-ish representation of pages by
+/// the number of [count] and animates the active
+/// page using [offset]
 class SmoothIndicator extends StatelessWidget {
-  // to listen for page offset updates
+  /// The active page offset
   final double offset;
 
   /// Holds effect configuration to be used in the [BasicIndicatorPainter]
@@ -77,12 +87,13 @@ class SmoothIndicator extends StatelessWidget {
   /// If [textDirection] is [TextDirection.rtl], page direction will be flipped
   final TextDirection? textDirection;
 
-  /// on dot clicked callback
+  /// Reports dot-taps
   final OnDotClicked? onDotClicked;
 
-  /// canvas size
+  /// The size of canvas
   final Size _size;
 
+  /// Default constructor
   SmoothIndicator({
     Key? key,
     required this.offset,
@@ -92,16 +103,16 @@ class SmoothIndicator extends StatelessWidget {
     this.textDirection,
     this.onDotClicked,
   })  :
-        // different effects have different sizes
-        // so we calculate size based on the provided effect
+
+        /// different effects have different sizes
+        /// so we calculate size based on the provided effect
         _size = effect.calculateSize(count),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // if textDirection is not provided use the nearest directionality up the widgets tree;
-    final isRTL =
-        (textDirection ?? Directionality.of(context)) == TextDirection.rtl;
+    /// if textDirection is not provided use the nearest directionality up the widgets tree;
+    final isRTL = (textDirection ?? Directionality.of(context)) == TextDirection.rtl;
 
     return RotatedBox(
       quarterTurns: axisDirection == Axis.vertical
@@ -122,11 +133,7 @@ class SmoothIndicator extends StatelessWidget {
 
   void _onTap(details) {
     if (onDotClicked != null) {
-      var index = effect.hitTestDots(
-        details.localPosition.dx,
-        count,
-        offset,
-      );
+      var index = effect.hitTestDots(details.localPosition.dx, count, offset);
       if (index != -1 && index != offset.toInt()) {
         onDotClicked?.call(index);
       }
@@ -134,7 +141,12 @@ class SmoothIndicator extends StatelessWidget {
   }
 }
 
+/// Unlike [SmoothPageIndicator] this indicator is self-animated
+/// and it only needs to know active index
+///
+/// Useful for paging widgets that does not use [PageController]
 class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
+  /// The index of active page
   final int activeIndex;
 
   /// Holds effect configuration to be used in the [BasicIndicatorPainter]
@@ -149,9 +161,10 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
   /// If [textDirection] is [TextDirection.rtl], page direction will be flipped
   final TextDirection? textDirection;
 
-  /// On dot clicked callback
+  /// Reports dot-taps
   final Function(int index)? onDotClicked;
 
+  /// Default constructor
   const AnimatedSmoothIndicator({
     Key? key,
     required this.activeIndex,
@@ -171,11 +184,10 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
         );
 
   @override
-  AnimatedSmoothIndicatorState createState() => AnimatedSmoothIndicatorState();
+  AnimatedWidgetBaseState<AnimatedSmoothIndicator> createState() => _AnimatedSmoothIndicatorState();
 }
 
-class AnimatedSmoothIndicatorState
-    extends AnimatedWidgetBaseState<AnimatedSmoothIndicator> {
+class _AnimatedSmoothIndicatorState extends AnimatedWidgetBaseState<AnimatedSmoothIndicator> {
   Tween<double>? _offset;
 
   @override

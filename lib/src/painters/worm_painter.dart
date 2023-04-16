@@ -3,9 +3,16 @@ import 'package:smooth_page_indicator/src/effects/worm_effect.dart';
 
 import 'indicator_painter.dart';
 
+/// Paints a warm-like transition effect between active
+/// and non-active dots
+///
+/// Live demo at
+/// https://github.com/Milad-Akarie/smooth_page_indicator/blob/f7ee92e7413a31de77bfb487755d64a385d52a52/demo/worm.gif
 class WormPainter extends BasicIndicatorPainter {
+  /// The painting configuration
   final WormEffect effect;
 
+  /// Default constructor
   WormPainter({
     required this.effect,
     required int count,
@@ -41,9 +48,7 @@ class WormPainter extends BasicIndicatorPainter {
     var tail = xPos + effect.dotWidth + (wormOffset * distance);
     var halfHeight = effect.dotHeight / 2;
     var thinWorm = effect.type == WormType.thin;
-    var dotHeight = thinWorm
-        ? halfHeight + (halfHeight * (1 - wormOffset))
-        : effect.dotHeight;
+    var dotHeight = thinWorm ? halfHeight + (halfHeight * (1 - wormOffset)) : effect.dotHeight;
 
     if (wormOffset > 1) {
       tail = xPos + effect.dotWidth + (1 * distance);
