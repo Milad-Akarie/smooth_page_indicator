@@ -6,9 +6,20 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'indicator_painter.dart';
 
+/// Paints a scale-dot transition effect between active
+/// and non-active dots
+///
+/// Good for big pages count because it can show
+/// only [ScrollingDotsEffect.maxVisibleDots] at once
+/// and scrolls as needed
+///
+/// Live demo at
+/// https://github.com/Milad-Akarie/smooth_page_indicator/blob/f7ee92e7413a31de77bfb487755d64a385d52a52/demo/scrolling-dots-2.gif
 class ScrollingDotsPainter extends BasicIndicatorPainter {
+  /// The painting configuration
   final ScrollingDotsEffect effect;
 
+  /// Default constructor
   ScrollingDotsPainter({
     required this.effect,
     required int count,
@@ -19,12 +30,10 @@ class ScrollingDotsPainter extends BasicIndicatorPainter {
   void paint(Canvas canvas, Size size) {
     final current = super.offset.floor();
     final switchPoint = (effect.maxVisibleDots / 2).floor();
-    final firstVisibleDot =
-        (current < switchPoint || count - 1 < effect.maxVisibleDots)
-            ? 0
-            : min(current - switchPoint, count - effect.maxVisibleDots);
-    final lastVisibleDot =
-        min(firstVisibleDot + effect.maxVisibleDots, count - 1);
+    final firstVisibleDot = (current < switchPoint || count - 1 < effect.maxVisibleDots)
+        ? 0
+        : min(current - switchPoint, count - effect.maxVisibleDots);
+    final lastVisibleDot = min(firstVisibleDot + effect.maxVisibleDots, count - 1);
     final inPreScrollRange = current < switchPoint;
     final inAfterScrollRange = current >= (count - 1) - switchPoint;
     final willStartScrolling = (current + 1) == switchPoint + 1;
@@ -35,9 +44,8 @@ class ScrollingDotsPainter extends BasicIndicatorPainter {
       ..strokeWidth = effect.strokeWidth
       ..style = effect.paintStyle;
 
-    final drawingAnchor = (inPreScrollRange || inAfterScrollRange)
-        ? -(firstVisibleDot * distance)
-        : -((offset - switchPoint) * distance);
+    final drawingAnchor =
+        (inPreScrollRange || inAfterScrollRange) ? -(firstVisibleDot * distance) : -((offset - switchPoint) * distance);
 
     const smallDotScale = 0.66;
     final activeScale = effect.activeDotScale - 1.0;
@@ -59,8 +67,7 @@ class ScrollingDotsPainter extends BasicIndicatorPainter {
         if (count <= effect.maxVisibleDots) {
           scale = 1 + (activeScale * dotOffset);
         } else {
-          scale =
-              smallDotScale + (((1 - smallDotScale) + activeScale) * dotOffset);
+          scale = smallDotScale + (((1 - smallDotScale) + activeScale) * dotOffset);
         }
       } else if (index - 1 == current) {
         // ! Both a and b are non nullable
@@ -76,8 +83,7 @@ class ScrollingDotsPainter extends BasicIndicatorPainter {
         } else if (!inPreScrollRange) {
           scale = smallDotScale * (1.0 - dotOffset);
         }
-      } else if (index == firstVisibleDot + 1 &&
-          !(inPreScrollRange || inAfterScrollRange)) {
+      } else if (index == firstVisibleDot + 1 && !(inPreScrollRange || inAfterScrollRange)) {
         scale = 1.0 - (dotOffset * (1.0 - smallDotScale));
       } else if (index == lastVisibleDot - 1.0) {
         if (inPreScrollRange) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+// ignore_for_file: public_member_api_docs
 void main() {
   runApp(MyApp());
 }

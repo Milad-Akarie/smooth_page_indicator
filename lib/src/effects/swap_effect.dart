@@ -4,8 +4,14 @@ import 'package:smooth_page_indicator/src/painters/swap_painter.dart';
 
 import 'indicator_effect.dart';
 
+/// Holds painting configuration to be used by [SwapPainter]
 class SwapEffect extends BasicIndicatorEffect {
+  /// The effect variant
+  ///
+  /// defaults to [SwapType.normal]
   final SwapType type;
+
+  /// Default constructor
   const SwapEffect({
     Color activeDotColor = Colors.indigo,
     double offset = 16.0,
@@ -49,4 +55,12 @@ class SwapEffect extends BasicIndicatorEffect {
   }
 }
 
-enum SwapType { normal, yRotation, zRotation }
+/// The swap effect variants
+enum SwapType {
+  /// Swaps dots in the x axi (flat)
+  normal,
+  /// Swaps dots in the y axi with a rotation effect
+  yRotation,
+ /// Swaps dots in the x axi and scales active-dot (3d-ish)
+  zRotation
+}
