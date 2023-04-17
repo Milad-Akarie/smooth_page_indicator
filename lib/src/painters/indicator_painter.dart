@@ -57,20 +57,16 @@ abstract class BasicIndicatorPainter extends IndicatorPainter {
     return rect;
   }
 
-
-
   /// Masks spaces between dots
   ///
   /// used by under-layer effects like WormType.underground
   void maskStillDots(Size size, Canvas canvas) {
-    var path = Path()
-      ..addRect((const Offset(0, 0) & size));
+    var path = Path()..addRect((const Offset(0, 0) & size));
     for (var i = 0; i < count; i++) {
-      path = Path.combine(PathOperation.difference, path, Path()
-        ..addRRect(buildStillDot(i, size)));
+      path = Path.combine(PathOperation.difference, path,
+          Path()..addRRect(buildStillDot(i, size)));
     }
-    canvas.drawPath(path, Paint()
-      ..blendMode = BlendMode.clear);
+    canvas.drawPath(path, Paint()..blendMode = BlendMode.clear);
   }
 
   /// Calculates the shape of a dot while portal-traveling

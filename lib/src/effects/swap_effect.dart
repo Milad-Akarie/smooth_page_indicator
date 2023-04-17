@@ -59,8 +59,10 @@ class SwapEffect extends BasicIndicatorEffect {
 enum SwapType {
   /// Swaps dots in the x axi (flat)
   normal,
+
   /// Swaps dots in the y axi with a rotation effect
   yRotation,
- /// Swaps dots in the x axi and scales active-dot (3d-ish)
+
+  /// Swaps dots in the x axi and scales active-dot (3d-ish)
   zRotation
 }

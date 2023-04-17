@@ -43,6 +43,7 @@ class SlideEffect extends BasicIndicatorEffect {
 enum SlideType {
   /// Paints regular dot sliding animation
   normal,
+
   /// Paints masked (under-layered) dot sliding animation
   slideUnder
 }

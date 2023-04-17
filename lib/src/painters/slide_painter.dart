@@ -51,15 +51,13 @@ class SlidePainter extends BasicIndicatorPainter {
       dotRadius,
     );
 
-    if(effect.type == SlideType.slideUnder){
+    if (effect.type == SlideType.slideUnder) {
       canvas.saveLayer(Rect.largest, Paint());
       canvas.drawRRect(rRect, activeDotPainter);
       maskStillDots(size, canvas);
       canvas.restore();
-    }else {
+    } else {
       canvas.drawRRect(rRect, activeDotPainter);
     }
   }
-
-
 }

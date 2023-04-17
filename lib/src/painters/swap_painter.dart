@@ -11,7 +11,6 @@ import 'indicator_painter.dart';
 /// Live demo at
 /// https://github.com/Milad-Akarie/smooth_page_indicator/blob/f7ee92e7413a31de77bfb487755d64a385d52a52/demo/swap.gif
 class SwapPainter extends BasicIndicatorPainter {
-
   /// The painting configuration
   final SwapEffect effect;
 

@@ -41,9 +41,11 @@ class CustomizablePainter extends IndicatorPainter {
 
     var yTranslation = 0.0;
     if (activeDotDecoration.verticalOffset >= dotDecoration.verticalOffset) {
-      yTranslation = activeDotDecoration.verticalOffset - dotDecoration.verticalOffset;
+      yTranslation =
+          activeDotDecoration.verticalOffset - dotDecoration.verticalOffset;
     } else {
-      yTranslation = dotDecoration.verticalOffset - activeDotDecoration.verticalOffset;
+      yTranslation =
+          dotDecoration.verticalOffset - activeDotDecoration.verticalOffset;
     }
     canvas.translate(0, -maxVerticalOffset + yTranslation / 2);
 
@@ -51,16 +53,20 @@ class CustomizablePainter extends IndicatorPainter {
 
     for (var i = 0; i < count; i++) {
       if (effect.inActiveColorOverride != null) {
-        dotDecoration = dotDecoration.copyWith(color: effect.inActiveColorOverride!.call(i));
+        dotDecoration = dotDecoration.copyWith(
+            color: effect.inActiveColorOverride!.call(i));
       }
       if (effect.activeColorOverride != null) {
-        activeDotDecoration = activeDotDecoration.copyWith(color: effect.activeColorOverride!.call(i));
+        activeDotDecoration = activeDotDecoration.copyWith(
+            color: effect.activeColorOverride!.call(i));
       }
       var decoration = dotDecoration;
       if (i == current) {
-        decoration = DotDecoration.lerp(activeDotDecoration, dotDecoration, dotOffset);
+        decoration =
+            DotDecoration.lerp(activeDotDecoration, dotDecoration, dotOffset);
       } else if (i - 1 == current || (i == 0 && offset > count - 1)) {
-        decoration = DotDecoration.lerp(dotDecoration, activeDotDecoration, dotOffset);
+        decoration =
+            DotDecoration.lerp(dotDecoration, activeDotDecoration, dotOffset);
       }
 
       final xPos = drawingOffset + decoration.dotBorder.neededSpace / 2;
@@ -83,10 +89,14 @@ class CustomizablePainter extends IndicatorPainter {
 
       final scaledRRect = RRect.fromRectAndCorners(
         scaledRect,
-        topLeft: Radius.elliptical(rRect.tlRadiusX * scaleRatioX, rRect.tlRadiusY * scaleRatioY),
-        topRight: Radius.elliptical(rRect.trRadiusX * scaleRatioX, rRect.trRadiusY * scaleRatioY),
-        bottomRight: Radius.elliptical(rRect.brRadiusX * scaleRatioX, rRect.brRadiusY * scaleRatioY),
-        bottomLeft: Radius.elliptical(rRect.blRadiusX * scaleRatioX, rRect.blRadiusY * scaleRatioY),
+        topLeft: Radius.elliptical(
+            rRect.tlRadiusX * scaleRatioX, rRect.tlRadiusY * scaleRatioY),
+        topRight: Radius.elliptical(
+            rRect.trRadiusX * scaleRatioX, rRect.trRadiusY * scaleRatioY),
+        bottomRight: Radius.elliptical(
+            rRect.brRadiusX * scaleRatioX, rRect.brRadiusY * scaleRatioY),
+        bottomLeft: Radius.elliptical(
+            rRect.blRadiusX * scaleRatioX, rRect.blRadiusY * scaleRatioY),
       );
 
       drawingOffset = scaledRRect.right + effect.spacing;

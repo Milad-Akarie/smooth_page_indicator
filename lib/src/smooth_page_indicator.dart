@@ -80,11 +80,14 @@ mixin _SizeAndRotationCalculatorMixin {
   }
 
   TextDirection? _getDirectionality() {
-    return context.findAncestorWidgetOfExactType<Directionality>()?.textDirection;
+    return context
+        .findAncestorWidgetOfExactType<Directionality>()
+        ?.textDirection;
   }
 }
 
-class _SmoothPageIndicatorState extends State<SmoothPageIndicator> with _SizeAndRotationCalculatorMixin {
+class _SmoothPageIndicatorState extends State<SmoothPageIndicator>
+    with _SizeAndRotationCalculatorMixin {
   @override
   void initState() {
     super.initState();
@@ -114,7 +117,8 @@ class _SmoothPageIndicatorState extends State<SmoothPageIndicator> with _SizeAnd
 
   double get _offset {
     try {
-      var offset = widget.controller.page ?? widget.controller.initialPage.toDouble();
+      var offset =
+          widget.controller.page ?? widget.controller.initialPage.toDouble();
       return offset % widget.count;
     } catch (_) {
       return widget.controller.initialPage.toDouble();
@@ -236,10 +240,12 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
         );
 
   @override
-  AnimatedWidgetBaseState<AnimatedSmoothIndicator> createState() => _AnimatedSmoothIndicatorState();
+  AnimatedWidgetBaseState<AnimatedSmoothIndicator> createState() =>
+      _AnimatedSmoothIndicatorState();
 }
 
-class _AnimatedSmoothIndicatorState extends AnimatedWidgetBaseState<AnimatedSmoothIndicator>
+class _AnimatedSmoothIndicatorState
+    extends AnimatedWidgetBaseState<AnimatedSmoothIndicator>
     with _SizeAndRotationCalculatorMixin {
   Tween<double>? _offset;
 

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -24,7 +23,6 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-
 class _HomePageState extends State<HomePage> {
   final controller = PageController(viewportFraction: 0.8, keepPage: true);
 
@@ -47,8 +45,6 @@ class _HomePageState extends State<HomePage> {
                 )),
               ),
             ));
-
-
 
     return Scaffold(
       body: SafeArea(
@@ -76,7 +72,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SmoothPageIndicator(
                 controller: controller,
-                count: pages.length ,
+                count: pages.length,
                 effect: const WormEffect(
                   dotHeight: 16,
                   dotWidth: 16,

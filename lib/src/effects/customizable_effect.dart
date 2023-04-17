@@ -39,15 +39,21 @@ class CustomizableEffect extends IndicatorEffect {
 
   @override
   Size calculateSize(int count) {
-    final activeDotWidth = activeDotDecoration.width + activeDotDecoration.dotBorder.neededSpace;
+    final activeDotWidth =
+        activeDotDecoration.width + activeDotDecoration.dotBorder.neededSpace;
     final dotWidth = dotDecoration.width + dotDecoration.dotBorder.neededSpace;
 
-    final maxWidth = dotWidth * (count - 1) + (spacing * count) + activeDotWidth;
+    final maxWidth =
+        dotWidth * (count - 1) + (spacing * count) + activeDotWidth;
 
-    final offsetSpace = (dotDecoration.verticalOffset - activeDotDecoration.verticalOffset).abs();
+    final offsetSpace =
+        (dotDecoration.verticalOffset - activeDotDecoration.verticalOffset)
+            .abs();
     final maxHeight = max(
       dotDecoration.height + offsetSpace + dotDecoration.dotBorder.neededSpace,
-      activeDotDecoration.height + offsetSpace + activeDotDecoration.dotBorder.neededSpace,
+      activeDotDecoration.height +
+          offsetSpace +
+          activeDotDecoration.dotBorder.neededSpace,
     );
     return Size(maxWidth, maxHeight);
   }
@@ -63,7 +69,8 @@ class CustomizableEffect extends IndicatorEffect {
     for (var index = 0; index < count; index++) {
       var dotWidth = dotDecoration.width + dotDecoration.dotBorder.neededSpace;
       if (index == current) {
-        dotWidth = activeDotDecoration.width + activeDotDecoration.dotBorder.neededSpace;
+        dotWidth = activeDotDecoration.width +
+            activeDotDecoration.dotBorder.neededSpace;
       }
 
       var widthBound = dotWidth + spacing;
@@ -116,8 +123,10 @@ class DotDecoration {
         height: ui.lerpDouble(a.height, b.height, t) ?? 0.0,
         color: Color.lerp(a.color, b.color, t)!,
         dotBorder: DotBorder.lerp(a.dotBorder, b.dotBorder, t),
-        verticalOffset: ui.lerpDouble(a.verticalOffset, b.verticalOffset, t) ?? 0.0,
-        rotationAngle: ui.lerpDouble(a.rotationAngle, b.rotationAngle, t) ?? 0.0);
+        verticalOffset:
+            ui.lerpDouble(a.verticalOffset, b.verticalOffset, t) ?? 0.0,
+        rotationAngle:
+            ui.lerpDouble(a.rotationAngle, b.rotationAngle, t) ?? 0.0);
   }
 
   /// Builds a new instance with the given
@@ -175,7 +184,8 @@ class DotBorder {
   });
 
   /// Calculates the needed gap based on [type]
-  double get neededSpace => type == DotBorderType.none ? 0.0 : (width / 2 + (padding * 2));
+  double get neededSpace =>
+      type == DotBorderType.none ? 0.0 : (width / 2 + (padding * 2));
 
   /// Builds an instance with type [DotBorderType.none]
   static const none = DotBorder._none();

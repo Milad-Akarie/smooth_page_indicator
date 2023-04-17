@@ -60,7 +60,10 @@ abstract class BasicIndicatorEffect extends IndicatorEffect {
     required this.dotColor,
     required this.paintStyle,
     required this.activeDotColor,
-  }) : assert(dotWidth >= 0 && dotHeight >= 0 && spacing >= 0 && strokeWidth >= 0);
+  }) : assert(dotWidth >= 0 &&
+            dotHeight >= 0 &&
+            spacing >= 0 &&
+            strokeWidth >= 0);
 
   @override
   Size calculateSize(int count) {

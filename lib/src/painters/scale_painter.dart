@@ -43,7 +43,8 @@ class ScalePainter extends BasicIndicatorPainter {
         // ! Both a and b are non nullable
         color = Color.lerp(effect.dotColor, effect.activeDotColor, dotOffset)!;
       }
-      canvas.drawRRect(_calcBounds(size.height, index, scale), activePaint..color = color);
+      canvas.drawRRect(
+          _calcBounds(size.height, index, scale), activePaint..color = color);
     }
   }
 
@@ -51,7 +52,9 @@ class ScalePainter extends BasicIndicatorPainter {
     final startingPoint = effect.dotWidth * effect.scale / 2;
     final width = effect.dotWidth * scale;
     final height = effect.dotHeight * scale;
-    final xPos = startingPoint - width / 2 + (offset * (effect.dotWidth + effect.spacing));
+    final xPos = startingPoint -
+        width / 2 +
+        (offset * (effect.dotWidth + effect.spacing));
     final yPos = canvasHeight / 2;
 
     return RRect.fromLTRBR(
