@@ -1,11 +1,26 @@
 # ChangeLog
+
+## [1.1.0]
+
+- Optimize size and rotation so they're not calculated on every frame
+- Add WormEffect variants (WormType.underground,WormType.thinUnderground)
+- Add SlideEffect variant (SlideType.slideUnder
+- Add missing public api docs
+
 ## [1.0.1]
+
 - Fix scaleEffect in correct margins
+
 ## [1.0.0+2]
+
 - fix readme file (attempt 2)
+
 ## [1.0.0+1]
+
 - fix readme file
+
 ## [1.0.0] [Breaking change in JumpingDotEffect]
+
 - Fix ignored active dot stroke in ColorTransitionEffect #40
 - Fix crash when last item is removed #21
 - Add loop support
@@ -14,17 +29,21 @@
 - Rename [elevation] property from JumpingDotEffect [Breaking]
 - Add customization params to JumpingDotEffect (jumpScale, verticalOffset)
 - Add CustomizableEffect
+
 ## [0.3.0-nullsafety.0]
+
 - Move to null safety
 - Add runnable example
-- change default offset value to 16.0 
+- change default offset value to 16.0
 
 ## [0.2.0]
+
 - Add support for vertical direction
 - Add on dot clicked callback
 - Add AnimatedSmoothIndicator which works without a PageController
 
 ## [0.1.5]
+
 - Add off-canvas scrolling effect ScrollingDotsEffect
 - Add Active color with transition to ScaleEffect
 
@@ -47,7 +66,8 @@
 ### Breaking change!
 
 - Replace isRTL with textDirection
-- Directionality is now handled the flutter way instead of manually passing a bool value to isRTL property
+- Directionality is now handled the flutter way instead of manually passing a bool value to isRTL
+  property
 
 ## [0.1.1]
 

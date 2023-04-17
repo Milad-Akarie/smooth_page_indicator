@@ -38,17 +38,39 @@ abstract class BasicIndicatorPainter extends IndicatorPainter {
   /// animate the active dot
   void paintStillDots(Canvas canvas, Size size) {
     for (var i = 0; i < count; i++) {
-      final xPos = (i * distance);
-      final yPos = size.height / 2;
-      final bounds = Rect.fromLTRB(
-        xPos,
-        yPos - _effect.dotHeight / 2,
-        xPos + _effect.dotWidth,
-        yPos + _effect.dotHeight / 2,
-      );
-      var rect = RRect.fromRectAndRadius(bounds, dotRadius);
+      final rect = buildStillDot(i, size);
       canvas.drawRRect(rect, dotPaint);
     }
+  }
+
+  /// Builds a single still dot
+  RRect buildStillDot(int i, Size size) {
+    final xPos = (i * distance);
+    final yPos = size.height / 2;
+    final bounds = Rect.fromLTRB(
+      xPos,
+      yPos - _effect.dotHeight / 2,
+      xPos + _effect.dotWidth,
+      yPos + _effect.dotHeight / 2,
+    );
+    var rect = RRect.fromRectAndRadius(bounds, dotRadius);
+    return rect;
+  }
+
+
+
+  /// Masks spaces between dots
+  ///
+  /// used by under-layer effects like WormType.underground
+  void maskStillDots(Size size, Canvas canvas) {
+    var path = Path()
+      ..addRect((const Offset(0, 0) & size));
+    for (var i = 0; i < count; i++) {
+      path = Path.combine(PathOperation.difference, path, Path()
+        ..addRRect(buildStillDot(i, size)));
+    }
+    canvas.drawPath(path, Paint()
+      ..blendMode = BlendMode.clear);
   }
 
   /// Calculates the shape of a dot while portal-traveling

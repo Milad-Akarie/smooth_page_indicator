@@ -44,6 +44,15 @@ class WormEffect extends BasicIndicatorEffect {
 enum WormType {
   /// Draws normal worm animation
   normal,
+
   /// Draws a thin worm animation
   thin,
+
+  /// Draws normal worm animation that looks like
+  /// it's under the background
+  underground,
+
+  /// Draws a thing worm animation that looks like
+  /// it's under the background
+  thinUnderground,
 }
