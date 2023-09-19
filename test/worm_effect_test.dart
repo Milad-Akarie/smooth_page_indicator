@@ -29,7 +29,7 @@ void main(){
     expect(painter.buildStillDot(1, expectedSize), RRect.fromLTRBR(
         24.0, 0.0, 40.0, 16.0,
         Radius.circular(wormEffect.radius)
-    ));
+    ), reason: "The buildStillDot with the inputs 1 and $expectedSize is not properly drawing the dots at expected location of the rectangle.");
 
     var rect = painter.calcPortalTravel(expectedSize, 8/*offset*/, 0.004/*dot offset*/);
     var target = RRect.fromLTRBR(8.0, 8.0, 8.0, 8.0, const Radius.circular(0.1));
