@@ -289,7 +289,7 @@ class _AnimatedSmoothIndicatorState
       throw 'Offset has not been initialized';
     }
     return SmoothIndicator(
-      offset: offset.evaluate(animation),
+      offset: offset.evaluate(animation) % count,
       count: widget.count,
       effect: widget.effect,
       onDotClicked: widget.onDotClicked,
