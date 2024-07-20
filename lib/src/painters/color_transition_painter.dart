@@ -2,9 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:smooth_page_indicator/src/effects/color_transition_effect.dart';
 
-import 'indicator_painter.dart';
 
 /// Paints a color change transition effect between active
 /// and non-active dots

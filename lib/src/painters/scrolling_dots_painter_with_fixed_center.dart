@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'indicator_painter.dart';
 
 /// Paints dots scrolling transition effect and considers
 /// active dot to always be in the center

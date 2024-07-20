@@ -1,7 +1,13 @@
 # ChangeLog
+
+## [1.2.0+1]
+
+- no changes, just to update readme file
+
 ## [1.2.0]
-- Fix Missing infinite loop support in AnimatedSmoothIndicator #79 
-- export indicator_painter 
+
+- Fix Missing infinite loop support in AnimatedSmoothIndicator #79
+- export indicator_painter
 
 ## [1.1.0]
 
