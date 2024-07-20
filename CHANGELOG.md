@@ -1,5 +1,5 @@
 # ChangeLog
-## [1.2.0+2]
+## [1.2.0+3]
 - no changes, just to update readme file
 - 
 ## [1.2.0]

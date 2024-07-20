@@ -55,7 +55,7 @@ SmoothPageIndicator(
    
 ```   
 ## Usage without a PageController
-Unlike `SmoothPageIndicator `, `AnimatedSmoothIndicator` is self animated and all it needs is the  
+Unlike `SmoothPageIndicator`, `AnimatedSmoothIndicator` is self animated and all it needs is the  
 active index.
 
 ```dart 
@@ -80,6 +80,7 @@ SmoothPageIndicator(
 
 ## Scrolling dots effect
 Smooth page indicator comes with a shipped it scrolling dots effect, (similar to the one used in instagram), it's useful when you have a large number of pages.
+
 ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_4.gif?raw=true)
 
 ## Customization
