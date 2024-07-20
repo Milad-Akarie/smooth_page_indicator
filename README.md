@@ -14,7 +14,7 @@ Page indicators are a crucial part of any app that involves multiple pages. They
 understand the number of pages and their current position. `SmoothPageIndicator` is a Flutter  
 package that provides a set of animated page indicators with a variety of effects.
 
-![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/four_sqaures_demo.gif?raw=true)
+![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/four_squares_demo.gif?raw=true)
 
 
 ## Effects
@@ -41,7 +41,7 @@ for more specific customization, try the `CustomizableEffect` which allows for m
 | Customizable demo-3 [v1.0.0]              |         ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/customizable-3.gif?raw=true)          | 
 | Customizable demo-4 [v1.0.0]              |         ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/customizable-4.gif?raw=true)          |
 
-### Usage
+## Usage
 `SmoothPageIndicator` uses the PageController's scroll offset to animate the active dot.
 
 ```dart
@@ -54,7 +54,7 @@ SmoothPageIndicator(
 )    
    
 ```   
-### Usage without a PageController
+## Usage without a PageController
 Unlike `SmoothPageIndicator `, `AnimatedSmoothIndicator` is self animated and all it needs is the  
 active index.
 
@@ -65,7 +65,7 @@ AnimatedSmoothIndicator(
    effect: WormEffect(), 
 )    
 ```   
-### Vertical layout support
+## Vertical layout support
 Smooth page indicator supports both horizontal and vertical layouts.
 
 ```dart  
@@ -78,11 +78,11 @@ SmoothPageIndicator(
 ```
 ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/vertical_demo.gif?raw=true)
 
-### Scrolling dots effect
-Smooth page indicator comes with a shipped it scrolling dots effect, (similar to the one used in instagram),  
-it's useful when you have a large number of pages.
+## Scrolling dots effect
+Smooth page indicator comes with a shipped it scrolling dots effect, (similar to the one used in instagram), it's useful when you have a large number of pages.
 ![](https://github.com/Milad-Akarie/smooth_page_indicator/blob/master/demo/smooth_page_indicator_demo_4.gif?raw=true)
-### Customization
+
+## Customization
 Each effect comes with its own set of properties that you can customize to your liking.   
 for example, you can customize direction, width, height, radius, spacing, paint style, color and more... of `SlideEffect` like follows:
 
@@ -105,7 +105,7 @@ for example, you can customize direction, width, height, radius, spacing, paint 
    
 ```   
 
-### Support the Library
+## Support the Library
 
 You can support the library by liking it on pub, staring in on Github and reporting any bugs you  
 encounter.

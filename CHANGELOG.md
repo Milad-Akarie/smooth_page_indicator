@@ -1,9 +1,7 @@
 # ChangeLog
-
-## [1.2.0+1]
-
+## [1.2.0+2]
 - no changes, just to update readme file
-
+- 
 ## [1.2.0]
 
 - Fix Missing infinite loop support in AnimatedSmoothIndicator #79
