@@ -119,7 +119,7 @@ class _SmoothPageIndicatorState extends State<SmoothPageIndicator>
     try {
       var offset =
           widget.controller.page ?? widget.controller.initialPage.toDouble();
-      return offset % widget.count;
+      return widget.count == 0 ? 0 : offset % widget.count;
     } catch (_) {
       return widget.controller.initialPage.toDouble();
     }
