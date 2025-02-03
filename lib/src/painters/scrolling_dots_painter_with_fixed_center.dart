@@ -36,7 +36,7 @@ class ScrollingDotsWithFixedCenterPainter extends BasicIndicatorPainter {
       }
 
       var scale = 1.0;
-      const smallDotScale = 0.66;
+      final smallDotScale = effect.smallDotScale;
       final revDotOffset = 1 - dotOffset;
       final switchPoint = (effect.maxVisibleDots - 1) / 2;
 
