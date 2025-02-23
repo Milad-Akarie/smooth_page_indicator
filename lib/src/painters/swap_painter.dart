@@ -30,6 +30,19 @@ class SwapPainter extends BasicIndicatorPainter {
     final yPos = size.height / 2;
     final xAnchor = effect.spacing / 2;
 
+    final isGoingThroughPortal = offset > count - 1;
+    if (isGoingThroughPortal) {
+      final startDot = calcPortalTravel(size, (effect.dotWidth / 2) + xAnchor - ((1 - dotOffset) * distance), dotOffset);
+      canvas.drawRRect(startDot, activePaint);
+
+      final endDot = calcPortalTravel(
+        size,
+        ((count - 1) * distance) + (effect.dotWidth / 2) + xAnchor  + (dotOffset * distance),
+        1 - dotOffset,
+      );
+      canvas.drawRRect(endDot, activePaint);
+    }
+
     void drawDot(double xPos, double yPos, Paint paint, [double scale = 0]) {
       final rRect = RRect.fromLTRBR(
         xPos,
@@ -44,7 +57,7 @@ class SwapPainter extends BasicIndicatorPainter {
 
     for (var i = count - 1; i >= 0; i--) {
       // if current or next
-      if (i == current || (i - 1 == current)) {
+      if ((i == current || (i - 1 == current)) && !isGoingThroughPortal) {
         if (effect.type == SwapType.yRotation) {
           final piFactor = (dotOffset * math.pi);
           if (i == current) {
@@ -74,8 +87,14 @@ class SwapPainter extends BasicIndicatorPainter {
           }
         }
       } else {
+        if (isGoingThroughPortal && i == count - 1) {
+          continue;
+        }
         // draw still dots
-        final xPos = xAnchor + i * distance;
+        var xPos = xAnchor + i * distance;
+        if (isGoingThroughPortal) {
+          xPos = xPos + (dotOffset * distance);
+        }
         drawDot(xPos, yPos, dotPaint);
       }
     }

@@ -7,6 +7,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -19,11 +21,13 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   final controller = PageController(viewportFraction: 0.8, keepPage: true);
 
   @override
@@ -36,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.grey.shade300,
               ),
               margin: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              child: Container(
+              child: SizedBox(
                 height: 280,
                 child: Center(
                     child: Text(

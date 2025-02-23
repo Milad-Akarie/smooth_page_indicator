@@ -47,10 +47,6 @@ class SwapEffect extends BasicIndicatorEffect {
 
   @override
   IndicatorPainter buildPainter(int count, double offset) {
-    assert(
-      offset.ceil() < count,
-      'SwapEffect does not support infinite looping.',
-    );
     return SwapPainter(count: count, offset: offset, effect: this);
   }
 }

@@ -1,4 +1,7 @@
 # ChangeLog
+## [1.2.1]
+- Add infinite loop support to SwapEffect
+- Allow small dot size in ScrollingDotEffect
 ## [1.2.0+3]
 - no changes, just to update readme file
 - 
