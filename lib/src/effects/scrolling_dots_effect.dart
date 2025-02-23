@@ -18,6 +18,10 @@ class ScrollingDotsEffect extends BasicIndicatorEffect {
   /// active dot scaling
   final double activeDotScale;
 
+  /// [smallDotScale] is multiplied by [dotWidth] to resolve
+  /// side dots
+  final double smallDotScale;
+
   /// The max number of dots to display at a time
   /// if count is <= [maxVisibleDots] [maxVisibleDots] = count
   /// must be an odd number that's >= 5
@@ -30,6 +34,7 @@ class ScrollingDotsEffect extends BasicIndicatorEffect {
   const ScrollingDotsEffect({
     this.activeStrokeWidth = 1.5,
     this.activeDotScale = 1.3,
+    this.smallDotScale = 0.66,
     this.maxVisibleDots = 5,
     this.fixedCenter = false,
     double offset = 16.0,
