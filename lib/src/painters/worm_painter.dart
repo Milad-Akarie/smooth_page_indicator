@@ -21,6 +21,10 @@ class WormPainter extends BasicIndicatorPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    if (offset.isNaN || offset.isInfinite) {
+      // Skip painting to avoid crash
+      return;
+    }
     // paint still dots
     paintStillDots(canvas, size);
 
@@ -49,9 +53,10 @@ class WormPainter extends BasicIndicatorPainter {
     var halfHeight = effect.dotHeight / 2;
     final thinWorm =
         effect.type == WormType.thin || effect.type == WormType.thinUnderground;
-    var dotHeight = thinWorm
-        ? halfHeight + (halfHeight * (1 - wormOffset))
-        : effect.dotHeight;
+    var dotHeight =
+        thinWorm
+            ? halfHeight + (halfHeight * (1 - wormOffset))
+            : effect.dotHeight;
 
     if (wormOffset > 1) {
       tail = xPos + effect.dotWidth + (1 * distance);
