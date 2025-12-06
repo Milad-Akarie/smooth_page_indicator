@@ -1,3 +1,4 @@
+import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -20,20 +21,16 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ExpandingDotsEffect();
-      final painter1 =
-          ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 =
-          ExpandingDotsPainter(effect: effect, count: 5, offset: 1.0);
+      final painter1 = ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
+      final painter2 = ExpandingDotsPainter(effect: effect, count: 5, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ExpandingDotsEffect();
-      final painter1 =
-          ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 =
-          ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
+      final painter1 = ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
+      final painter2 = ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -240,4 +237,88 @@ void main() {
       }
     });
   });
+
+  group('ExpandingDotsPainter Golden Tests', () {
+    final offsets = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0];
+
+    goldenTest(
+      'renders correctly at different offsets',
+      fileName: 'expanding_dots_offsets',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 300),
+        children: [
+          for (final offset in offsets)
+            GoldenTestScenario(
+              name: 'offset $offset',
+              child: _buildExpandingDotsPainter(offset: offset),
+            ),
+        ],
+      ),
+    );
+
+    final expansionFactors = [1.5, 2.0, 3.0];
+
+    goldenTest(
+      'renders with different expansion factors',
+      fileName: 'expanding_dots_expansion_factors',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 300),
+        children: [
+          for (final factor in expansionFactors)
+            GoldenTestScenario(
+              name: 'expansion $factor',
+              child: _buildExpandingDotsPainter(
+                effect: ExpandingDotsEffect(expansionFactor: factor),
+                offset: 1.5,
+              ),
+            ),
+        ],
+      ),
+    );
+
+    final colorConfigs = <Map<String, dynamic>>[
+      {'name': 'blue to red', 'dotColor': Colors.blue, 'activeColor': Colors.red},
+      {'name': 'green to orange', 'dotColor': Colors.green, 'activeColor': Colors.orange},
+    ];
+
+    goldenTest(
+      'renders with custom colors',
+      fileName: 'expanding_dots_colors',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 300),
+        children: [
+          for (final config in colorConfigs)
+            GoldenTestScenario(
+              name: config['name'] as String,
+              child: _buildExpandingDotsPainter(
+                effect: ExpandingDotsEffect(
+                  dotColor: config['dotColor'] as Color,
+                  activeDotColor: config['activeColor'] as Color,
+                ),
+                offset: 1.5,
+              ),
+            ),
+        ],
+      ),
+    );
+  });
+}
+
+Widget _buildExpandingDotsPainter({
+  ExpandingDotsEffect effect = const ExpandingDotsEffect(),
+  int count = 5,
+  double offset = 0.0,
+}) {
+  return Container(
+    color: Colors.white,
+    padding: const EdgeInsets.all(16.0),
+    child: CustomPaint(
+      size: effect.calculateSize(count),
+      painter: ExpandingDotsPainter(
+        effect: effect,
+        count: count,
+        offset: offset,
+      ),
+    ),
+  );
 }

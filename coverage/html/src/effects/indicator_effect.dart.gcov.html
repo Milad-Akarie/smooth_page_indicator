@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-06 19:13:10</td>
+            <td class="headerValue">2025-12-06 20:02:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -66,7 +66,7 @@
 <span id="L4"><span class="lineNum">       4</span>              : /// An Abstraction for a dot-indicator animation effect</span>
 <span id="L5"><span class="lineNum">       5</span>              : abstract class IndicatorEffect {</span>
 <span id="L6"><span class="lineNum">       6</span>              :   /// Const constructor</span>
-<span id="L7"><span class="lineNum">       7</span> <span class="tlaGNC">           4 :   const IndicatorEffect();</span></span>
+<span id="L7"><span class="lineNum">       7</span> <span class="tlaGNC">          11 :   const IndicatorEffect();</span></span>
 <span id="L8"><span class="lineNum">       8</span>              : </span>
 <span id="L9"><span class="lineNum">       9</span>              :   /// Builds a new painter every time the page offset changes</span>
 <span id="L10"><span class="lineNum">      10</span>              :   IndicatorPainter buildPainter(int count, double offset);</span>
@@ -113,7 +113,7 @@
 <span id="L51"><span class="lineNum">      51</span>              :   final double strokeWidth;</span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span>              :   /// Default construe</span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           2 :   const BasicIndicatorEffect({</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           9 :   const BasicIndicatorEffect({</span></span>
 <span id="L55"><span class="lineNum">      55</span>              :     required this.strokeWidth,</span>
 <span id="L56"><span class="lineNum">      56</span>              :     required this.dotWidth,</span>
 <span id="L57"><span class="lineNum">      57</span>              :     required this.dotHeight,</span>
@@ -122,10 +122,10 @@
 <span id="L60"><span class="lineNum">      60</span>              :     required this.dotColor,</span>
 <span id="L61"><span class="lineNum">      61</span>              :     required this.paintStyle,</span>
 <span id="L62"><span class="lineNum">      62</span>              :     required this.activeDotColor,</span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">           4 :   }) : assert(dotWidth &gt;= 0 &amp;&amp;</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">           2 :             dotHeight &gt;= 0 &amp;&amp;</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">           2 :             spacing &gt;= 0 &amp;&amp;</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">           2 :             strokeWidth &gt;= 0);</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          18 :   }) : assert(dotWidth &gt;= 0 &amp;&amp;</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">           9 :             dotHeight &gt;= 0 &amp;&amp;</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">           9 :             spacing &gt;= 0 &amp;&amp;</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">           9 :             strokeWidth &gt;= 0);</span></span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           9 :   @override</span></span>
 <span id="L69"><span class="lineNum">      69</span>              :   Size calculateSize(int count) {</span>

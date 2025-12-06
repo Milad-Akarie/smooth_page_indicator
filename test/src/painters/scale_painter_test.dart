@@ -1,3 +1,4 @@
+import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -263,4 +264,85 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
   });
+
+  group('ScalePainter Golden Tests', () {
+    final offsets = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0];
+
+    goldenTest(
+      'renders correctly at different offsets',
+      fileName: 'scale_offsets',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final offset in offsets)
+            GoldenTestScenario(
+              name: 'offset $offset',
+              child: _buildScalePainter(offset: offset),
+            ),
+        ],
+      ),
+    );
+
+    final scales = [1.2, 1.5, 2.0];
+
+    goldenTest(
+      'renders with different scale values',
+      fileName: 'scale_values',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final scale in scales)
+            GoldenTestScenario(
+              name: 'scale $scale',
+              child: _buildScalePainter(
+                effect: ScaleEffect(scale: scale),
+                offset: 1.5,
+              ),
+            ),
+        ],
+      ),
+    );
+
+    final paintStyles = [PaintingStyle.fill, PaintingStyle.stroke];
+
+    goldenTest(
+      'renders with different paint styles',
+      fileName: 'scale_paint_styles',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final style in paintStyles)
+            GoldenTestScenario(
+              name: style.name,
+              child: _buildScalePainter(
+                effect: ScaleEffect(
+                  activePaintStyle: style,
+                  activeStrokeWidth: 2.0,
+                ),
+                offset: 1.5,
+              ),
+            ),
+        ],
+      ),
+    );
+  });
+}
+
+Widget _buildScalePainter({
+  ScaleEffect effect = const ScaleEffect(),
+  int count = 5,
+  double offset = 0.0,
+}) {
+  return Container(
+    color: Colors.white,
+    padding: const EdgeInsets.all(16.0),
+    child: CustomPaint(
+      size: effect.calculateSize(count),
+      painter: ScalePainter(
+        effect: effect,
+        count: count,
+        offset: offset,
+      ),
+    ),
+  );
 }

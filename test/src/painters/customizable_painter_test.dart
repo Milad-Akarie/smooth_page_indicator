@@ -1,3 +1,4 @@
+import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -31,19 +32,15 @@ void main() {
     });
 
     test('shouldRepaint returns true when offset changes', () {
-      final painter1 =
-          CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
-      final painter2 =
-          CustomizablePainter(effect: defaultEffect, count: 5, offset: 1.0);
+      final painter1 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
+      final painter2 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
-      final painter1 =
-          CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
-      final painter2 =
-          CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
+      final painter1 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
+      final painter2 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -181,9 +178,7 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets(
-        'paints with activeDotDecoration verticalOffset >= dotDecoration',
-        (tester) async {
+    testWidgets('paints with activeDotDecoration verticalOffset >= dotDecoration', (tester) async {
       const effect = CustomizableEffect(
         dotDecoration: DotDecoration(
           width: 10,
@@ -297,8 +292,7 @@ void main() {
           height: 14,
           color: Colors.blue,
         ),
-        activeColorOverride: (index) =>
-            Colors.primaries[index % Colors.primaries.length],
+        activeColorOverride: (index) => Colors.primaries[index % Colors.primaries.length],
       );
 
       await tester.pumpWidget(
@@ -331,8 +325,7 @@ void main() {
           height: 14,
           color: Colors.blue,
         ),
-        inActiveColorOverride: (index) =>
-            Colors.accents[index % Colors.accents.length],
+        inActiveColorOverride: (index) => Colors.accents[index % Colors.accents.length],
       );
 
       await tester.pumpWidget(
@@ -365,10 +358,8 @@ void main() {
           height: 14,
           color: Colors.blue,
         ),
-        activeColorOverride: (index) =>
-            Colors.primaries[index % Colors.primaries.length],
-        inActiveColorOverride: (index) =>
-            Colors.accents[index % Colors.accents.length],
+        activeColorOverride: (index) => Colors.primaries[index % Colors.primaries.length],
+        inActiveColorOverride: (index) => Colors.accents[index % Colors.accents.length],
       );
 
       await tester.pumpWidget(
@@ -578,4 +569,188 @@ void main() {
       expect(painter, isA<CustomizablePainter>());
     });
   });
+
+  group('CustomizablePainter Golden Tests', () {
+    const defaultEffect = CustomizableEffect(
+      dotDecoration: DotDecoration(
+        width: 10,
+        height: 10,
+        color: Colors.grey,
+      ),
+      activeDotDecoration: DotDecoration(
+        width: 14,
+        height: 14,
+        color: Colors.blue,
+      ),
+    );
+
+    final offsets = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0];
+
+    goldenTest(
+      'renders correctly at different offsets',
+      fileName: 'customizable_offsets',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final offset in offsets)
+            GoldenTestScenario(
+              name: 'offset $offset',
+              child: _buildCustomizablePainter(
+                effect: defaultEffect,
+                offset: offset,
+              ),
+            ),
+        ],
+      ),
+    );
+
+    goldenTest(
+      'renders with different dot sizes',
+      fileName: 'customizable_dot_sizes',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 250),
+        children: [
+          GoldenTestScenario(
+            name: 'small to large',
+            child: _buildCustomizablePainter(
+              effect: const CustomizableEffect(
+                dotDecoration: DotDecoration(width: 8, height: 8, color: Colors.grey),
+                activeDotDecoration: DotDecoration(width: 20, height: 20, color: Colors.blue),
+              ),
+              offset: 1.5,
+            ),
+          ),
+          GoldenTestScenario(
+            name: 'large to small',
+            child: _buildCustomizablePainter(
+              effect: const CustomizableEffect(
+                dotDecoration: DotDecoration(width: 16, height: 16, color: Colors.grey),
+                activeDotDecoration: DotDecoration(width: 10, height: 10, color: Colors.blue),
+              ),
+              offset: 1.5,
+            ),
+          ),
+          GoldenTestScenario(
+            name: 'wide dots',
+            child: _buildCustomizablePainter(
+              effect: const CustomizableEffect(
+                dotDecoration: DotDecoration(width: 20, height: 8, color: Colors.grey),
+                activeDotDecoration: DotDecoration(width: 30, height: 12, color: Colors.blue),
+              ),
+              offset: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    goldenTest(
+      'renders with different border radius',
+      fileName: 'customizable_border_radius',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          GoldenTestScenario(
+            name: 'circular',
+            child: _buildCustomizablePainter(
+              effect: const CustomizableEffect(
+                dotDecoration: DotDecoration(
+                  width: 12,
+                  height: 12,
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                ),
+                activeDotDecoration: DotDecoration(
+                  width: 16,
+                  height: 16,
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+              ),
+              offset: 1.5,
+            ),
+          ),
+          GoldenTestScenario(
+            name: 'square',
+            child: _buildCustomizablePainter(
+              effect: const CustomizableEffect(
+                dotDecoration: DotDecoration(
+                  width: 12,
+                  height: 12,
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.zero,
+                ),
+                activeDotDecoration: DotDecoration(
+                  width: 16,
+                  height: 16,
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.zero,
+                ),
+              ),
+              offset: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    goldenTest(
+      'renders with vertical offset',
+      fileName: 'customizable_vertical_offset',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          GoldenTestScenario(
+            name: 'active above',
+            child: _buildCustomizablePainter(
+              effect: const CustomizableEffect(
+                dotDecoration: DotDecoration(width: 10, height: 10, color: Colors.grey),
+                activeDotDecoration: DotDecoration(
+                  width: 14,
+                  height: 14,
+                  color: Colors.blue,
+                  verticalOffset: -10,
+                ),
+              ),
+              offset: 1.5,
+            ),
+          ),
+          GoldenTestScenario(
+            name: 'active below',
+            child: _buildCustomizablePainter(
+              effect: const CustomizableEffect(
+                dotDecoration: DotDecoration(width: 10, height: 10, color: Colors.grey),
+                activeDotDecoration: DotDecoration(
+                  width: 14,
+                  height: 14,
+                  color: Colors.blue,
+                  verticalOffset: 10,
+                ),
+              ),
+              offset: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  });
+}
+
+Widget _buildCustomizablePainter({
+  required CustomizableEffect effect,
+  int count = 5,
+  double offset = 0.0,
+}) {
+  return Container(
+    color: Colors.white,
+    padding: const EdgeInsets.all(16.0),
+    child: CustomPaint(
+      size: effect.calculateSize(count),
+      painter: CustomizablePainter(
+        effect: effect,
+        count: count,
+        offset: offset,
+      ),
+    ),
+  );
 }

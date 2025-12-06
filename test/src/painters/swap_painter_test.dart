@@ -1,3 +1,4 @@
+import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -299,4 +300,81 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
   });
+
+  group('SwapPainter Golden Tests', () {
+    final offsets = [0.0, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0];
+
+    goldenTest(
+      'renders correctly at different offsets',
+      fileName: 'swap_offsets',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final offset in offsets)
+            GoldenTestScenario(
+              name: 'offset $offset',
+              child: _buildSwapPainter(offset: offset),
+            ),
+        ],
+      ),
+    );
+
+    final swapTypes = [SwapType.normal, SwapType.yRotation, SwapType.zRotation];
+
+    goldenTest(
+      'renders with different swap types',
+      fileName: 'swap_types',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final type in swapTypes)
+            GoldenTestScenario(
+              name: type.name,
+              child: _buildSwapPainter(
+                effect: SwapEffect(type: type),
+                offset: 0.5,
+              ),
+            ),
+        ],
+      ),
+    );
+
+    goldenTest(
+      'renders swap types at different offsets',
+      fileName: 'swap_types_offsets',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final type in swapTypes)
+            for (final offset in [0.25, 0.5, 0.75])
+              GoldenTestScenario(
+                name: '${type.name} $offset',
+                child: _buildSwapPainter(
+                  effect: SwapEffect(type: type),
+                  offset: offset,
+                ),
+              ),
+        ],
+      ),
+    );
+  });
+}
+
+Widget _buildSwapPainter({
+  SwapEffect effect = const SwapEffect(),
+  int count = 5,
+  double offset = 0.0,
+}) {
+  return Container(
+    color: Colors.white,
+    padding: const EdgeInsets.all(16.0),
+    child: CustomPaint(
+      size: effect.calculateSize(count),
+      painter: SwapPainter(
+        effect: effect,
+        count: count,
+        offset: offset,
+      ),
+    ),
+  );
 }

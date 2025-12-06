@@ -1,3 +1,4 @@
+import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -250,4 +251,111 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
   });
+
+  group('WormPainter Golden Tests', () {
+    final offsets = [0.0, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0];
+
+    goldenTest(
+      'renders correctly at different offsets',
+      fileName: 'worm_offsets',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final offset in offsets)
+            GoldenTestScenario(
+              name: 'offset $offset',
+              child: _buildWormPainter(offset: offset),
+            ),
+        ],
+      ),
+    );
+
+    final wormTypes = [
+      WormType.normal,
+      WormType.thin,
+      WormType.underground,
+      WormType.thinUnderground,
+    ];
+
+    goldenTest(
+      'renders with different worm types',
+      fileName: 'worm_types',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final type in wormTypes)
+            GoldenTestScenario(
+              name: type.name,
+              child: _buildWormPainter(
+                effect: WormEffect(type: type),
+                offset: 0.5,
+              ),
+            ),
+        ],
+      ),
+    );
+
+    goldenTest(
+      'renders worm types at wormOffset > 1',
+      fileName: 'worm_types_high_offset',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final type in wormTypes)
+            GoldenTestScenario(
+              name: '${type.name} offset 1.7',
+              child: _buildWormPainter(
+                effect: WormEffect(type: type),
+                offset: 1.7,
+              ),
+            ),
+        ],
+      ),
+    );
+
+    final colorConfigs = <Map<String, dynamic>>[
+      {'name': 'blue to red', 'dotColor': Colors.blue, 'activeColor': Colors.red},
+      {'name': 'green to orange', 'dotColor': Colors.green, 'activeColor': Colors.orange},
+    ];
+
+    goldenTest(
+      'renders with custom colors',
+      fileName: 'worm_colors',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final config in colorConfigs)
+            GoldenTestScenario(
+              name: config['name'] as String,
+              child: _buildWormPainter(
+                effect: WormEffect(
+                  dotColor: config['dotColor'] as Color,
+                  activeDotColor: config['activeColor'] as Color,
+                ),
+                offset: 0.5,
+              ),
+            ),
+        ],
+      ),
+    );
+  });
+}
+
+Widget _buildWormPainter({
+  WormEffect effect = const WormEffect(),
+  int count = 5,
+  double offset = 0.0,
+}) {
+  return Container(
+    color: Colors.white,
+    padding: const EdgeInsets.all(16.0),
+    child: CustomPaint(
+      size: effect.calculateSize(count),
+      painter: WormPainter(
+        effect: effect,
+        count: count,
+        offset: offset,
+      ),
+    ),
+  );
 }

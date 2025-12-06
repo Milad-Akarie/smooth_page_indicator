@@ -1,3 +1,4 @@
+import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -191,4 +192,88 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
   });
+
+  group('SlidePainter Golden Tests', () {
+    final offsets = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0];
+
+    goldenTest(
+      'renders correctly at different offsets',
+      fileName: 'slide_offsets',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final offset in offsets)
+            GoldenTestScenario(
+              name: 'offset $offset',
+              child: _buildSlidePainter(offset: offset),
+            ),
+        ],
+      ),
+    );
+
+    final slideTypes = [SlideType.normal, SlideType.slideUnder];
+
+    goldenTest(
+      'renders with different slide types',
+      fileName: 'slide_types',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final type in slideTypes)
+            GoldenTestScenario(
+              name: type.name,
+              child: _buildSlidePainter(
+                effect: SlideEffect(type: type),
+                offset: 1.5,
+              ),
+            ),
+        ],
+      ),
+    );
+
+    final colorConfigs = <Map<String, dynamic>>[
+      {'name': 'blue to red', 'dotColor': Colors.blue, 'activeColor': Colors.red},
+      {'name': 'green to orange', 'dotColor': Colors.green, 'activeColor': Colors.orange},
+    ];
+
+    goldenTest(
+      'renders with custom colors',
+      fileName: 'slide_colors',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final config in colorConfigs)
+            GoldenTestScenario(
+              name: config['name'] as String,
+              child: _buildSlidePainter(
+                effect: SlideEffect(
+                  dotColor: config['dotColor'] as Color,
+                  activeDotColor: config['activeColor'] as Color,
+                ),
+                offset: 1.5,
+              ),
+            ),
+        ],
+      ),
+    );
+  });
+}
+
+Widget _buildSlidePainter({
+  SlideEffect effect = const SlideEffect(),
+  int count = 5,
+  double offset = 0.0,
+}) {
+  return Container(
+    color: Colors.white,
+    padding: const EdgeInsets.all(16.0),
+    child: CustomPaint(
+      size: effect.calculateSize(count),
+      painter: SlidePainter(
+        effect: effect,
+        count: count,
+        offset: offset,
+      ),
+    ),
+  );
 }

@@ -1,3 +1,4 @@
+import 'package:alchemist/alchemist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -253,4 +254,82 @@ void main() {
       }
     });
   });
+
+  group('JumpingDotPainter Golden Tests', () {
+    final offsets = [0.0, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0];
+
+    goldenTest(
+      'renders correctly at different offsets',
+      fileName: 'jumping_dot_offsets',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final offset in offsets)
+            GoldenTestScenario(
+              name: 'offset $offset',
+              child: _buildJumpingDotPainter(offset: offset),
+            ),
+        ],
+      ),
+    );
+
+    final verticalOffsets = [0.0, 10.0, 20.0, 30.0];
+
+    goldenTest(
+      'renders with different vertical offsets',
+      fileName: 'jumping_dot_vertical_offsets',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final vOffset in verticalOffsets)
+            GoldenTestScenario(
+              name: 'vOffset $vOffset',
+              child: _buildJumpingDotPainter(
+                effect: JumpingDotEffect(verticalOffset: vOffset),
+                offset: 0.5,
+              ),
+            ),
+        ],
+      ),
+    );
+
+    final jumpScales = [1.0, 1.2, 1.5, 2.0];
+
+    goldenTest(
+      'renders with different jump scales',
+      fileName: 'jumping_dot_scales',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final scale in jumpScales)
+            GoldenTestScenario(
+              name: 'scale $scale',
+              child: _buildJumpingDotPainter(
+                effect: JumpingDotEffect(jumpScale: scale),
+                offset: 0.5,
+              ),
+            ),
+        ],
+      ),
+    );
+  });
+}
+
+Widget _buildJumpingDotPainter({
+  JumpingDotEffect effect = const JumpingDotEffect(),
+  int count = 5,
+  double offset = 0.0,
+}) {
+  return Container(
+    color: Colors.white,
+    padding: const EdgeInsets.all(16.0),
+    child: CustomPaint(
+      size: effect.calculateSize(count),
+      painter: JumpingDotPainter(
+        effect: effect,
+        count: count,
+        offset: offset,
+      ),
+    ),
+  );
 }
