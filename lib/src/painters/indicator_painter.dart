@@ -19,15 +19,14 @@ abstract class BasicIndicatorPainter extends IndicatorPainter {
 
   /// Default constructor
   BasicIndicatorPainter(
-    double offset,
+    super.offset,
     this.count,
     this._effect,
   )   : dotRadius = Radius.circular(_effect.radius),
         dotPaint = Paint()
           ..color = _effect.dotColor
           ..style = _effect.paintStyle
-          ..strokeWidth = _effect.strokeWidth,
-        super(offset);
+          ..strokeWidth = _effect.strokeWidth;
 
   /// The distance between dot lefts
   double get distance => _effect.dotWidth + _effect.spacing;
@@ -63,8 +62,7 @@ abstract class BasicIndicatorPainter extends IndicatorPainter {
   void maskStillDots(Size size, Canvas canvas) {
     var path = Path()..addRect((const Offset(0, 0) & size));
     for (var i = 0; i < count; i++) {
-      path = Path.combine(PathOperation.difference, path,
-          Path()..addRRect(buildStillDot(i, size)));
+      path = Path.combine(PathOperation.difference, path, Path()..addRRect(buildStillDot(i, size)));
     }
     canvas.drawPath(path, Paint()..blendMode = BlendMode.clear);
   }

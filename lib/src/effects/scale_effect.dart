@@ -18,28 +18,19 @@ class ScaleEffect extends BasicIndicatorEffect {
 
   /// Default constructor
   const ScaleEffect({
-    Color activeDotColor = Colors.indigo,
+    super.activeDotColor = Colors.indigo,
     this.activePaintStyle = PaintingStyle.fill,
     this.scale = 1.4,
     this.activeStrokeWidth = 1.0,
     double offset = 16.0,
-    double dotWidth = 16.0,
-    double dotHeight = 16.0,
-    double spacing = 10.0,
-    double radius = 16,
-    Color dotColor = Colors.grey,
-    double strokeWidth = 1.0,
-    PaintingStyle paintStyle = PaintingStyle.fill,
-  }) : super(
-          dotWidth: dotWidth,
-          dotHeight: dotHeight,
-          spacing: spacing,
-          radius: radius,
-          strokeWidth: strokeWidth,
-          paintStyle: paintStyle,
-          dotColor: dotColor,
-          activeDotColor: activeDotColor,
-        );
+    super.dotWidth = 16.0,
+    super.dotHeight = 16.0,
+    super.spacing = 10.0,
+    super.radius = 16,
+    super.dotColor = Colors.grey,
+    super.strokeWidth = 1.0,
+    super.paintStyle = PaintingStyle.fill,
+  });
 
   @override
   Size calculateSize(int count) {

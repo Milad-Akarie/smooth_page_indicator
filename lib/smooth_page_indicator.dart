@@ -1,5 +1,3 @@
-library smooth_page_indicator;
-
 export 'src/effects/color_transition_effect.dart';
 export 'src/effects/expanding_dots_effect.dart';
 export 'src/effects/indicator_effect.dart';

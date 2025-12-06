@@ -14,25 +14,16 @@ class WormEffect extends BasicIndicatorEffect {
   /// Default constructor
   const WormEffect({
     double offset = 16.0,
-    double dotWidth = 16.0,
-    double dotHeight = 16.0,
-    double spacing = 8.0,
-    double radius = 16,
-    Color dotColor = Colors.grey,
-    Color activeDotColor = Colors.indigo,
-    double strokeWidth = 1.0,
-    PaintingStyle paintStyle = PaintingStyle.fill,
+    super.dotWidth = 16.0,
+    super.dotHeight = 16.0,
+    super.spacing = 8.0,
+    super.radius = 16,
+    super.dotColor = Colors.grey,
+    super.activeDotColor = Colors.indigo,
+    super.strokeWidth = 1.0,
+    super.paintStyle = PaintingStyle.fill,
     this.type = WormType.normal,
-  }) : super(
-          dotWidth: dotWidth,
-          dotHeight: dotHeight,
-          spacing: spacing,
-          radius: radius,
-          strokeWidth: strokeWidth,
-          paintStyle: paintStyle,
-          dotColor: dotColor,
-          activeDotColor: activeDotColor,
-        );
+  });
 
   @override
   IndicatorPainter buildPainter(int count, double offset) {

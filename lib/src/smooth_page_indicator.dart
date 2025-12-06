@@ -37,14 +37,14 @@ class SmoothPageIndicator extends StatefulWidget {
 
   /// Default constructor
   const SmoothPageIndicator({
-    Key? key,
+    super.key,
     required this.controller,
     required this.count,
     this.axisDirection = Axis.horizontal,
     this.textDirection,
     this.onDotClicked,
     this.effect = const WormEffect(),
-  }) : super(key: key);
+  });
 
   @override
   State<SmoothPageIndicator> createState() => _SmoothPageIndicatorState();
@@ -80,14 +80,11 @@ mixin _SizeAndRotationCalculatorMixin {
   }
 
   TextDirection? _getDirectionality() {
-    return context
-        .findAncestorWidgetOfExactType<Directionality>()
-        ?.textDirection;
+    return context.findAncestorWidgetOfExactType<Directionality>()?.textDirection;
   }
 }
 
-class _SmoothPageIndicatorState extends State<SmoothPageIndicator>
-    with _SizeAndRotationCalculatorMixin {
+class _SmoothPageIndicatorState extends State<SmoothPageIndicator> with _SizeAndRotationCalculatorMixin {
   @override
   void initState() {
     super.initState();
@@ -117,8 +114,7 @@ class _SmoothPageIndicatorState extends State<SmoothPageIndicator>
 
   double get _offset {
     try {
-      var offset =
-          widget.controller.page ?? widget.controller.initialPage.toDouble();
+      var offset = widget.controller.page ?? widget.controller.initialPage.toDouble();
       return offset % widget.count;
     } catch (_) {
       return widget.controller.initialPage.toDouble();
@@ -163,14 +159,14 @@ class SmoothIndicator extends StatelessWidget {
 
   /// Default constructor
   const SmoothIndicator({
-    Key? key,
+    super.key,
     required this.offset,
     required this.count,
     required this.size,
     this.quarterTurns = 0,
     this.effect = const WormEffect(),
     this.onDotClicked,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +183,7 @@ class SmoothIndicator extends StatelessWidget {
     );
   }
 
-  void _onTap(details) {
+  void _onTap(TapUpDetails details) {
     if (onDotClicked != null) {
       var index = effect.hitTestDots(details.localPosition.dx, count, offset);
       if (index != -1 && index != offset.toInt()) {
@@ -222,30 +218,23 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
 
   /// Default constructor
   const AnimatedSmoothIndicator({
-    Key? key,
+    super.key,
     required this.activeIndex,
     required this.count,
     this.axisDirection = Axis.horizontal,
     this.textDirection,
     this.onDotClicked,
     this.effect = const WormEffect(),
-    Curve curve = Curves.easeInOut,
-    Duration duration = const Duration(milliseconds: 300),
-    VoidCallback? onEnd,
-  }) : super(
-          key: key,
-          duration: duration,
-          curve: curve,
-          onEnd: onEnd,
-        );
+    super.curve = Curves.easeInOut,
+    super.duration = const Duration(milliseconds: 300),
+    super.onEnd,
+  });
 
   @override
-  AnimatedWidgetBaseState<AnimatedSmoothIndicator> createState() =>
-      _AnimatedSmoothIndicatorState();
+  AnimatedWidgetBaseState<AnimatedSmoothIndicator> createState() => _AnimatedSmoothIndicatorState();
 }
 
-class _AnimatedSmoothIndicatorState
-    extends AnimatedWidgetBaseState<AnimatedSmoothIndicator>
+class _AnimatedSmoothIndicatorState extends AnimatedWidgetBaseState<AnimatedSmoothIndicator>
     with _SizeAndRotationCalculatorMixin {
   Tween<double>? _offset;
 
