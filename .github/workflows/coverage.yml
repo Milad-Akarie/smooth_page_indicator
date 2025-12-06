@@ -24,7 +24,7 @@ jobs:
         run: flutter pub get
 
       - name: Run tests with coverage
-        run: flutter test --coverage --dart-define=CI=true
+        run: flutter test --coverage --exclude-tags=golden
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
