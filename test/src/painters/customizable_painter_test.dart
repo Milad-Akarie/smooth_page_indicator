@@ -733,6 +733,39 @@ void main() {
         ],
       ),
     );
+
+    final rotationAngles = [0.0, 45.0, 90.0, 180.0];
+
+    goldenTest(
+      'renders with rotation',
+      fileName: 'customizable_rotation',
+      builder: () => GoldenTestGroup(
+        scenarioConstraints: const BoxConstraints(maxWidth: 200),
+        children: [
+          for (final angle in rotationAngles)
+            GoldenTestScenario(
+              name: 'rotation $angle°',
+              child: _buildCustomizablePainter(
+                effect: CustomizableEffect(
+                  dotDecoration: const DotDecoration(
+                    width: 12,
+                    height: 12,
+                    color: Colors.grey,
+                    rotationAngle: 0,
+                  ),
+                  activeDotDecoration: DotDecoration(
+                    width: 16,
+                    height: 16,
+                    color: Colors.blue,
+                    rotationAngle: angle,
+                  ),
+                ),
+                offset: 1.5,
+              ),
+            ),
+        ],
+      ),
+    );
   });
 }
 

@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-06 20:02:48</td>
+            <td class="headerValue">2025-12-06 20:15:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -75,29 +75,21 @@
 <span id="L13"><span class="lineNum">      13</span> <span class="tlaGNC">           1 :   const ColorTransitionEffect({</span></span>
 <span id="L14"><span class="lineNum">      14</span>              :     this.activeStrokeWidth = 1.5,</span>
 <span id="L15"><span class="lineNum">      15</span>              :     double offset = 16.0,</span>
-<span id="L16"><span class="lineNum">      16</span>              :     double dotWidth = 16.0,</span>
-<span id="L17"><span class="lineNum">      17</span>              :     double dotHeight = 16.0,</span>
-<span id="L18"><span class="lineNum">      18</span>              :     double spacing = 8.0,</span>
-<span id="L19"><span class="lineNum">      19</span>              :     double radius = 16,</span>
-<span id="L20"><span class="lineNum">      20</span>              :     Color dotColor = Colors.grey,</span>
-<span id="L21"><span class="lineNum">      21</span>              :     Color activeDotColor = Colors.indigo,</span>
-<span id="L22"><span class="lineNum">      22</span>              :     double strokeWidth = 1.0,</span>
-<span id="L23"><span class="lineNum">      23</span>              :     PaintingStyle paintStyle = PaintingStyle.fill,</span>
-<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">           1 :   }) : super(</span></span>
-<span id="L25"><span class="lineNum">      25</span>              :             dotWidth: dotWidth,</span>
-<span id="L26"><span class="lineNum">      26</span>              :             dotHeight: dotHeight,</span>
-<span id="L27"><span class="lineNum">      27</span>              :             spacing: spacing,</span>
-<span id="L28"><span class="lineNum">      28</span>              :             radius: radius,</span>
-<span id="L29"><span class="lineNum">      29</span>              :             strokeWidth: strokeWidth,</span>
-<span id="L30"><span class="lineNum">      30</span>              :             paintStyle: paintStyle,</span>
-<span id="L31"><span class="lineNum">      31</span>              :             dotColor: dotColor,</span>
-<span id="L32"><span class="lineNum">      32</span>              :             activeDotColor: activeDotColor);</span>
-<span id="L33"><span class="lineNum">      33</span>              : </span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           2 :   @override</span></span>
-<span id="L35"><span class="lineNum">      35</span>              :   IndicatorPainter buildPainter(int count, double offset) {</span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           2 :     return TransitionPainter(count: count, offset: offset, effect: this);</span></span>
-<span id="L37"><span class="lineNum">      37</span>              :   }</span>
-<span id="L38"><span class="lineNum">      38</span>              : }</span>
+<span id="L16"><span class="lineNum">      16</span>              :     super.dotWidth = 16.0,</span>
+<span id="L17"><span class="lineNum">      17</span>              :     super.dotHeight = 16.0,</span>
+<span id="L18"><span class="lineNum">      18</span>              :     super.spacing = 8.0,</span>
+<span id="L19"><span class="lineNum">      19</span>              :     super.radius = 16,</span>
+<span id="L20"><span class="lineNum">      20</span>              :     super.dotColor = Colors.grey,</span>
+<span id="L21"><span class="lineNum">      21</span>              :     super.activeDotColor = Colors.indigo,</span>
+<span id="L22"><span class="lineNum">      22</span>              :     super.strokeWidth = 1.0,</span>
+<span id="L23"><span class="lineNum">      23</span>              :     super.paintStyle = PaintingStyle.fill,</span>
+<span id="L24"><span class="lineNum">      24</span>              :   });</span>
+<span id="L25"><span class="lineNum">      25</span>              : </span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           2 :   @override</span></span>
+<span id="L27"><span class="lineNum">      27</span>              :   IndicatorPainter buildPainter(int count, double offset) {</span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           2 :     return TransitionPainter(count: count, offset: offset, effect: this);</span></span>
+<span id="L29"><span class="lineNum">      29</span>              :   }</span>
+<span id="L30"><span class="lineNum">      30</span>              : }</span>
         </pre>
               </td>
             </tr>
