@@ -6,6 +6,9 @@ align="center" src="https://img.shields.io/badge/License-MIT-green" alt="MIT Lic
 <a href="https://github.com/Milad-Akarie/smooth_page_indicator/stargazers"><img align="center" src="https://img.shields.io/github/stars/Milad-Akarie/smooth_page_indicator?style=flat&logo=github&colorB=green&label=stars" alt="stars"></a>    
 <a href="https://pub.dev/packages/smooth_page_indicator/versions/1.0.0"><img   
 align="center" src="https://img.shields.io/pub/v/smooth_page_indicator.svg" alt="pub version"></a>    
+<a href="https://codecov.io/github/Milad-Akarie/smooth_page_indicator" > 
+ <img align="center" src="https://codecov.io/github/Milad-Akarie/smooth_page_indicator/graph/badge.svg?token=MQDYUI0M5G"/> 
+ </a>
 <a href="https://www.buymeacoffee.com/miladakarie" target="_blank"><img align="center" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="30px" width= "108px"></a>  
 </p>    
 
