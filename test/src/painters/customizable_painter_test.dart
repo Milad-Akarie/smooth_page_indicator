@@ -31,15 +31,19 @@ void main() {
     });
 
     test('shouldRepaint returns true when offset changes', () {
-      final painter1 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
-      final painter2 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 1.0);
+      final painter1 =
+          CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
+      final painter2 =
+          CustomizablePainter(effect: defaultEffect, count: 5, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
-      final painter1 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
-      final painter2 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
+      final painter1 =
+          CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
+      final painter2 =
+          CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -177,7 +181,9 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('paints with activeDotDecoration verticalOffset >= dotDecoration', (tester) async {
+    testWidgets(
+        'paints with activeDotDecoration verticalOffset >= dotDecoration',
+        (tester) async {
       const effect = CustomizableEffect(
         dotDecoration: DotDecoration(
           width: 10,
@@ -291,7 +297,8 @@ void main() {
           height: 14,
           color: Colors.blue,
         ),
-        activeColorOverride: (index) => Colors.primaries[index % Colors.primaries.length],
+        activeColorOverride: (index) =>
+            Colors.primaries[index % Colors.primaries.length],
       );
 
       await tester.pumpWidget(
@@ -324,7 +331,8 @@ void main() {
           height: 14,
           color: Colors.blue,
         ),
-        inActiveColorOverride: (index) => Colors.accents[index % Colors.accents.length],
+        inActiveColorOverride: (index) =>
+            Colors.accents[index % Colors.accents.length],
       );
 
       await tester.pumpWidget(
@@ -357,8 +365,10 @@ void main() {
           height: 14,
           color: Colors.blue,
         ),
-        activeColorOverride: (index) => Colors.primaries[index % Colors.primaries.length],
-        inActiveColorOverride: (index) => Colors.accents[index % Colors.accents.length],
+        activeColorOverride: (index) =>
+            Colors.primaries[index % Colors.primaries.length],
+        inActiveColorOverride: (index) =>
+            Colors.accents[index % Colors.accents.length],
       );
 
       await tester.pumpWidget(

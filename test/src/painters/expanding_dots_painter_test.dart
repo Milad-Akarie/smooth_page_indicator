@@ -20,16 +20,20 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ExpandingDotsEffect();
-      final painter1 = ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = ExpandingDotsPainter(effect: effect, count: 5, offset: 1.0);
+      final painter1 =
+          ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
+      final painter2 =
+          ExpandingDotsPainter(effect: effect, count: 5, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ExpandingDotsEffect();
-      final painter1 = ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
+      final painter1 =
+          ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
+      final painter2 =
+          ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });

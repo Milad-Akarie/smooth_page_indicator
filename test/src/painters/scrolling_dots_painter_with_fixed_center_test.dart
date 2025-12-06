@@ -20,16 +20,20 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ScrollingDotsEffect(fixedCenter: true);
-      final painter1 = ScrollingDotsWithFixedCenterPainter(effect: effect, count: 10, offset: 0.0);
-      final painter2 = ScrollingDotsWithFixedCenterPainter(effect: effect, count: 10, offset: 1.0);
+      final painter1 = ScrollingDotsWithFixedCenterPainter(
+          effect: effect, count: 10, offset: 0.0);
+      final painter2 = ScrollingDotsWithFixedCenterPainter(
+          effect: effect, count: 10, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ScrollingDotsEffect(fixedCenter: true);
-      final painter1 = ScrollingDotsWithFixedCenterPainter(effect: effect, count: 10, offset: 0.0);
-      final painter2 = ScrollingDotsWithFixedCenterPainter(effect: effect, count: 10, offset: 0.0);
+      final painter1 = ScrollingDotsWithFixedCenterPainter(
+          effect: effect, count: 10, offset: 0.0);
+      final painter2 = ScrollingDotsWithFixedCenterPainter(
+          effect: effect, count: 10, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -97,7 +101,8 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('paints correctly when count <= maxVisibleDots', (tester) async {
+    testWidgets('paints correctly when count <= maxVisibleDots',
+        (tester) async {
       const effect = ScrollingDotsEffect(fixedCenter: true, maxVisibleDots: 7);
 
       await tester.pumpWidget(
@@ -161,7 +166,8 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('paints with scaling at current - (switchPoint - 1)', (tester) async {
+    testWidgets('paints with scaling at current - (switchPoint - 1)',
+        (tester) async {
       const effect = ScrollingDotsEffect(fixedCenter: true, maxVisibleDots: 5);
 
       await tester.pumpWidget(
@@ -203,7 +209,8 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('paints with scaling at current + (switchPoint + 1)', (tester) async {
+    testWidgets('paints with scaling at current + (switchPoint + 1)',
+        (tester) async {
       const effect = ScrollingDotsEffect(fixedCenter: true, maxVisibleDots: 5);
 
       await tester.pumpWidget(

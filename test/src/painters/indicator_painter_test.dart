@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
 import 'package:smooth_page_indicator/src/painters/worm_painter.dart';
 
 void main() {
@@ -44,7 +43,7 @@ void main() {
         offset: 0.0,
       );
 
-      expect(painter.dotPaint.color.value, Colors.red.value);
+      expect(painter.dotPaint.color.toARGB32(), Colors.red.toARGB32());
       expect(painter.dotPaint.style, PaintingStyle.fill);
       expect(painter.dotPaint.strokeWidth, 2.0);
     });
@@ -61,12 +60,13 @@ void main() {
         offset: 0.0,
       );
 
-      expect(painter.dotPaint.color.value, Colors.blue.value);
+      expect(painter.dotPaint.color.toARGB32(), Colors.blue.toARGB32());
       expect(painter.dotPaint.style, PaintingStyle.stroke);
       expect(painter.dotPaint.strokeWidth, 3.0);
     });
 
-    testWidgets('paintStillDots renders correct number of dots', (tester) async {
+    testWidgets('paintStillDots renders correct number of dots',
+        (tester) async {
       const effect = WormEffect();
 
       await tester.pumpWidget(
@@ -134,7 +134,8 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('calcPortalTravel renders portal travel animation', (tester) async {
+    testWidgets('calcPortalTravel renders portal travel animation',
+        (tester) async {
       const effect = WormEffect();
 
       await tester.pumpWidget(

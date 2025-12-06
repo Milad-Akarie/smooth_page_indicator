@@ -20,16 +20,20 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ScrollingDotsEffect();
-      final painter1 = ScrollingDotsPainter(effect: effect, count: 10, offset: 0.0);
-      final painter2 = ScrollingDotsPainter(effect: effect, count: 10, offset: 1.0);
+      final painter1 =
+          ScrollingDotsPainter(effect: effect, count: 10, offset: 0.0);
+      final painter2 =
+          ScrollingDotsPainter(effect: effect, count: 10, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ScrollingDotsEffect();
-      final painter1 = ScrollingDotsPainter(effect: effect, count: 10, offset: 0.0);
-      final painter2 = ScrollingDotsPainter(effect: effect, count: 10, offset: 0.0);
+      final painter1 =
+          ScrollingDotsPainter(effect: effect, count: 10, offset: 0.0);
+      final painter2 =
+          ScrollingDotsPainter(effect: effect, count: 10, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -129,7 +133,8 @@ void main() {
               painter: ScrollingDotsPainter(
                 effect: effect,
                 count: 10,
-                offset: 2.5, // switchPoint + 1 = 3, willStartScrolling when current + 1 == 3
+                offset:
+                    2.5, // switchPoint + 1 = 3, willStartScrolling when current + 1 == 3
               ),
             ),
           ),
@@ -351,7 +356,8 @@ void main() {
               painter: ScrollingDotsPainter(
                 effect: effect,
                 count: 10,
-                offset: 1.5, // Tests lastVisibleDot - 1 scaling in preScrollRange
+                offset:
+                    1.5, // Tests lastVisibleDot - 1 scaling in preScrollRange
               ),
             ),
           ),
@@ -361,7 +367,8 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('handles portal travel with count > maxVisibleDots', (tester) async {
+    testWidgets('handles portal travel with count > maxVisibleDots',
+        (tester) async {
       const effect = ScrollingDotsEffect(maxVisibleDots: 5);
 
       await tester.pumpWidget(
@@ -382,7 +389,8 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('handles portal travel with count <= maxVisibleDots', (tester) async {
+    testWidgets('handles portal travel with count <= maxVisibleDots',
+        (tester) async {
       const effect = ScrollingDotsEffect(maxVisibleDots: 7);
 
       await tester.pumpWidget(
