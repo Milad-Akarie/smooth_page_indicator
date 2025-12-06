@@ -1,0 +1,376 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov.info - src/smooth_page_indicator.dart</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory src">src</a> - smooth_page_indicator.dart</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">89</td>
+            <td class="headerCovTableEntry">89</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-12-06 19:13:10</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">-</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : import 'package:flutter/material.dart';</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span>              : import 'effects/indicator_effect.dart';</span>
+<span id="L4"><span class="lineNum">       4</span>              : import 'effects/worm_effect.dart';</span>
+<span id="L5"><span class="lineNum">       5</span>              : import 'painters/indicator_painter.dart';</span>
+<span id="L6"><span class="lineNum">       6</span>              : </span>
+<span id="L7"><span class="lineNum">       7</span>              : /// Signature for a callback function used to report</span>
+<span id="L8"><span class="lineNum">       8</span>              : /// dot tap-events</span>
+<span id="L9"><span class="lineNum">       9</span>              : typedef OnDotClicked = void Function(int index);</span>
+<span id="L10"><span class="lineNum">      10</span>              : </span>
+<span id="L11"><span class="lineNum">      11</span>              : /// A widget that draws a representation of pages count</span>
+<span id="L12"><span class="lineNum">      12</span>              : /// Inside of a  [PageView]</span>
+<span id="L13"><span class="lineNum">      13</span>              : ///</span>
+<span id="L14"><span class="lineNum">      14</span>              : /// Uses the [PageController.offset] to animate the active dot</span>
+<span id="L15"><span class="lineNum">      15</span>              : class SmoothPageIndicator extends StatefulWidget {</span>
+<span id="L16"><span class="lineNum">      16</span>              :   /// The page view controller</span>
+<span id="L17"><span class="lineNum">      17</span>              :   final PageController controller;</span>
+<span id="L18"><span class="lineNum">      18</span>              : </span>
+<span id="L19"><span class="lineNum">      19</span>              :   /// Holds effect configuration to be used in the [BasicIndicatorPainter]</span>
+<span id="L20"><span class="lineNum">      20</span>              :   final IndicatorEffect effect;</span>
+<span id="L21"><span class="lineNum">      21</span>              : </span>
+<span id="L22"><span class="lineNum">      22</span>              :   /// Layout direction vertical || horizontal</span>
+<span id="L23"><span class="lineNum">      23</span>              :   ///</span>
+<span id="L24"><span class="lineNum">      24</span>              :   /// This will only rotate the canvas in which the dots are drawn.</span>
+<span id="L25"><span class="lineNum">      25</span>              :   ///</span>
+<span id="L26"><span class="lineNum">      26</span>              :   /// It will not affect [effect.dotWidth] and [effect.dotHeight]</span>
+<span id="L27"><span class="lineNum">      27</span>              :   final Axis axisDirection;</span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span>              :   /// The number of pages</span>
+<span id="L30"><span class="lineNum">      30</span>              :   final int count;</span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              :   /// If [textDirection] is [TextDirection.rtl], page direction will be flipped</span>
+<span id="L33"><span class="lineNum">      33</span>              :   final TextDirection? textDirection;</span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span>              :   /// Reports dot taps</span>
+<span id="L36"><span class="lineNum">      36</span>              :   final OnDotClicked? onDotClicked;</span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span>              :   /// Default constructor</span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           1 :   const SmoothPageIndicator({</span></span>
+<span id="L40"><span class="lineNum">      40</span>              :     Key? key,</span>
+<span id="L41"><span class="lineNum">      41</span>              :     required this.controller,</span>
+<span id="L42"><span class="lineNum">      42</span>              :     required this.count,</span>
+<span id="L43"><span class="lineNum">      43</span>              :     this.axisDirection = Axis.horizontal,</span>
+<span id="L44"><span class="lineNum">      44</span>              :     this.textDirection,</span>
+<span id="L45"><span class="lineNum">      45</span>              :     this.onDotClicked,</span>
+<span id="L46"><span class="lineNum">      46</span>              :     this.effect = const WormEffect(),</span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           1 :   }) : super(key: key);</span></span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           1 :   State&lt;SmoothPageIndicator&gt; createState() =&gt; _SmoothPageIndicatorState();</span></span>
+<span id="L51"><span class="lineNum">      51</span>              : }</span>
+<span id="L52"><span class="lineNum">      52</span>              : </span>
+<span id="L53"><span class="lineNum">      53</span>              : mixin _SizeAndRotationCalculatorMixin {</span>
+<span id="L54"><span class="lineNum">      54</span>              :   /// The size of canvas</span>
+<span id="L55"><span class="lineNum">      55</span>              :   late Size size;</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span>              :   /// Rotation quarters of canvas</span>
+<span id="L58"><span class="lineNum">      58</span>              :   int quarterTurns = 0;</span>
+<span id="L59"><span class="lineNum">      59</span>              : </span>
+<span id="L60"><span class="lineNum">      60</span>              :   BuildContext get context;</span>
+<span id="L61"><span class="lineNum">      61</span>              : </span>
+<span id="L62"><span class="lineNum">      62</span>              :   TextDirection? get textDirection;</span>
+<span id="L63"><span class="lineNum">      63</span>              : </span>
+<span id="L64"><span class="lineNum">      64</span>              :   Axis get axisDirection;</span>
+<span id="L65"><span class="lineNum">      65</span>              : </span>
+<span id="L66"><span class="lineNum">      66</span>              :   int get count;</span>
+<span id="L67"><span class="lineNum">      67</span>              : </span>
+<span id="L68"><span class="lineNum">      68</span>              :   IndicatorEffect get effect;</span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           2 :   void updateSizeAndRotation() {</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           8 :     size = effect.calculateSize(count);</span></span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span>              :     /// if textDirection is not provided use the nearest directionality up the widgets tree;</span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">           6 :     final isRTL = (textDirection ?? _getDirectionality()) == TextDirection.rtl;</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">           4 :     if (axisDirection == Axis.vertical) {</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">           2 :       quarterTurns = 1;</span></span>
+<span id="L77"><span class="lineNum">      77</span>              :     } else {</span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">           2 :       quarterTurns = isRTL ? 2 : 0;</span></span>
+<span id="L79"><span class="lineNum">      79</span>              :     }</span>
+<span id="L80"><span class="lineNum">      80</span>              :   }</span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">           2 :   TextDirection? _getDirectionality() {</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">           2 :     return context</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">           2 :         .findAncestorWidgetOfExactType&lt;Directionality&gt;()</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">           2 :         ?.textDirection;</span></span>
+<span id="L86"><span class="lineNum">      86</span>              :   }</span>
+<span id="L87"><span class="lineNum">      87</span>              : }</span>
+<span id="L88"><span class="lineNum">      88</span>              : </span>
+<span id="L89"><span class="lineNum">      89</span>              : class _SmoothPageIndicatorState extends State&lt;SmoothPageIndicator&gt;</span>
+<span id="L90"><span class="lineNum">      90</span>              :     with _SizeAndRotationCalculatorMixin {</span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L92"><span class="lineNum">      92</span>              :   void initState() {</span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">           1 :     super.initState();</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">           1 :     updateSizeAndRotation();</span></span>
+<span id="L95"><span class="lineNum">      95</span>              :   }</span>
+<span id="L96"><span class="lineNum">      96</span>              : </span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L98"><span class="lineNum">      98</span>              :   void didUpdateWidget(covariant SmoothPageIndicator oldWidget) {</span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">           1 :     super.didUpdateWidget(oldWidget);</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">           1 :     updateSizeAndRotation();</span></span>
+<span id="L101"><span class="lineNum">     101</span>              :   }</span>
+<span id="L102"><span class="lineNum">     102</span>              : </span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L104"><span class="lineNum">     104</span>              :   Widget build(BuildContext context) {</span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">           1 :     return AnimatedBuilder(</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">           2 :       animation: widget.controller,</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">           2 :       builder: (context, _) =&gt; SmoothIndicator(</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">           1 :         offset: _offset,</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">           1 :         count: count,</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">           1 :         effect: effect,</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">           2 :         onDotClicked: widget.onDotClicked,</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">           1 :         size: size,</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">           1 :         quarterTurns: quarterTurns,</span></span>
+<span id="L114"><span class="lineNum">     114</span>              :       ),</span>
+<span id="L115"><span class="lineNum">     115</span>              :     );</span>
+<span id="L116"><span class="lineNum">     116</span>              :   }</span>
+<span id="L117"><span class="lineNum">     117</span>              : </span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">           1 :   double get _offset {</span></span>
+<span id="L119"><span class="lineNum">     119</span>              :     try {</span>
+<span id="L120"><span class="lineNum">     120</span>              :       var offset =</span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">           7 :           widget.controller.page ?? widget.controller.initialPage.toDouble();</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">           3 :       return offset % widget.count;</span></span>
+<span id="L123"><span class="lineNum">     123</span>              :     } catch (_) {</span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">           4 :       return widget.controller.initialPage.toDouble();</span></span>
+<span id="L125"><span class="lineNum">     125</span>              :     }</span>
+<span id="L126"><span class="lineNum">     126</span>              :   }</span>
+<span id="L127"><span class="lineNum">     127</span>              : </span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">           2 :   int get count =&gt; widget.count;</span></span>
+<span id="L130"><span class="lineNum">     130</span>              : </span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">           2 :   IndicatorEffect get effect =&gt; widget.effect;</span></span>
+<span id="L133"><span class="lineNum">     133</span>              : </span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">           2 :   Axis get axisDirection =&gt; widget.axisDirection;</span></span>
+<span id="L136"><span class="lineNum">     136</span>              : </span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">           2 :   TextDirection? get textDirection =&gt; widget.textDirection;</span></span>
+<span id="L139"><span class="lineNum">     139</span>              : }</span>
+<span id="L140"><span class="lineNum">     140</span>              : </span>
+<span id="L141"><span class="lineNum">     141</span>              : /// Draws dot-ish representation of pages by</span>
+<span id="L142"><span class="lineNum">     142</span>              : /// the number of [count] and animates the active</span>
+<span id="L143"><span class="lineNum">     143</span>              : /// page using [offset]</span>
+<span id="L144"><span class="lineNum">     144</span>              : class SmoothIndicator extends StatelessWidget {</span>
+<span id="L145"><span class="lineNum">     145</span>              :   /// The active page offset</span>
+<span id="L146"><span class="lineNum">     146</span>              :   final double offset;</span>
+<span id="L147"><span class="lineNum">     147</span>              : </span>
+<span id="L148"><span class="lineNum">     148</span>              :   /// Holds effect configuration to be used in the [BasicIndicatorPainter]</span>
+<span id="L149"><span class="lineNum">     149</span>              :   final IndicatorEffect effect;</span>
+<span id="L150"><span class="lineNum">     150</span>              : </span>
+<span id="L151"><span class="lineNum">     151</span>              :   /// The number of pages</span>
+<span id="L152"><span class="lineNum">     152</span>              :   final int count;</span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span>              :   /// Reports dot-taps</span>
+<span id="L155"><span class="lineNum">     155</span>              :   final OnDotClicked? onDotClicked;</span>
+<span id="L156"><span class="lineNum">     156</span>              : </span>
+<span id="L157"><span class="lineNum">     157</span>              :   /// The size of canvas</span>
+<span id="L158"><span class="lineNum">     158</span>              :   final Size size;</span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span>              :   /// The rotation of cans based on</span>
+<span id="L161"><span class="lineNum">     161</span>              :   /// text directionality and [axisDirection]</span>
+<span id="L162"><span class="lineNum">     162</span>              :   final int quarterTurns;</span>
+<span id="L163"><span class="lineNum">     163</span>              : </span>
+<span id="L164"><span class="lineNum">     164</span>              :   /// Default constructor</span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">           1 :   const SmoothIndicator({</span></span>
+<span id="L166"><span class="lineNum">     166</span>              :     Key? key,</span>
+<span id="L167"><span class="lineNum">     167</span>              :     required this.offset,</span>
+<span id="L168"><span class="lineNum">     168</span>              :     required this.count,</span>
+<span id="L169"><span class="lineNum">     169</span>              :     required this.size,</span>
+<span id="L170"><span class="lineNum">     170</span>              :     this.quarterTurns = 0,</span>
+<span id="L171"><span class="lineNum">     171</span>              :     this.effect = const WormEffect(),</span>
+<span id="L172"><span class="lineNum">     172</span>              :     this.onDotClicked,</span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">           1 :   }) : super(key: key);</span></span>
+<span id="L174"><span class="lineNum">     174</span>              : </span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">           3 :   @override</span></span>
+<span id="L176"><span class="lineNum">     176</span>              :   Widget build(BuildContext context) {</span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">           3 :     return RotatedBox(</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">           3 :       quarterTurns: quarterTurns,</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">           3 :       child: GestureDetector(</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">           3 :         onTapUp: _onTap,</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">           3 :         child: CustomPaint(</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">           3 :           size: size,</span></span>
+<span id="L183"><span class="lineNum">     183</span>              :           // rebuild the painter with the new offset every time it updates</span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">          12 :           painter: effect.buildPainter(count, offset),</span></span>
+<span id="L185"><span class="lineNum">     185</span>              :         ),</span>
+<span id="L186"><span class="lineNum">     186</span>              :       ),</span>
+<span id="L187"><span class="lineNum">     187</span>              :     );</span>
+<span id="L188"><span class="lineNum">     188</span>              :   }</span>
+<span id="L189"><span class="lineNum">     189</span>              : </span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">           1 :   void _onTap(details) {</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">           1 :     if (onDotClicked != null) {</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">           6 :       var index = effect.hitTestDots(details.localPosition.dx, count, offset);</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">           5 :       if (index != -1 &amp;&amp; index != offset.toInt()) {</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">           2 :         onDotClicked?.call(index);</span></span>
+<span id="L195"><span class="lineNum">     195</span>              :       }</span>
+<span id="L196"><span class="lineNum">     196</span>              :     }</span>
+<span id="L197"><span class="lineNum">     197</span>              :   }</span>
+<span id="L198"><span class="lineNum">     198</span>              : }</span>
+<span id="L199"><span class="lineNum">     199</span>              : </span>
+<span id="L200"><span class="lineNum">     200</span>              : /// Unlike [SmoothPageIndicator] this indicator is self-animated</span>
+<span id="L201"><span class="lineNum">     201</span>              : /// and it only needs to know active index</span>
+<span id="L202"><span class="lineNum">     202</span>              : ///</span>
+<span id="L203"><span class="lineNum">     203</span>              : /// Useful for paging widgets that does not use [PageController]</span>
+<span id="L204"><span class="lineNum">     204</span>              : class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {</span>
+<span id="L205"><span class="lineNum">     205</span>              :   /// The index of active page</span>
+<span id="L206"><span class="lineNum">     206</span>              :   final int activeIndex;</span>
+<span id="L207"><span class="lineNum">     207</span>              : </span>
+<span id="L208"><span class="lineNum">     208</span>              :   /// Holds effect configuration to be used in the [BasicIndicatorPainter]</span>
+<span id="L209"><span class="lineNum">     209</span>              :   final IndicatorEffect effect;</span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span>              :   /// layout direction vertical || horizontal</span>
+<span id="L212"><span class="lineNum">     212</span>              :   final Axis axisDirection;</span>
+<span id="L213"><span class="lineNum">     213</span>              : </span>
+<span id="L214"><span class="lineNum">     214</span>              :   /// The number of children in [PageView]</span>
+<span id="L215"><span class="lineNum">     215</span>              :   final int count;</span>
+<span id="L216"><span class="lineNum">     216</span>              : </span>
+<span id="L217"><span class="lineNum">     217</span>              :   /// If [textDirection] is [TextDirection.rtl], page direction will be flipped</span>
+<span id="L218"><span class="lineNum">     218</span>              :   final TextDirection? textDirection;</span>
+<span id="L219"><span class="lineNum">     219</span>              : </span>
+<span id="L220"><span class="lineNum">     220</span>              :   /// Reports dot-taps</span>
+<span id="L221"><span class="lineNum">     221</span>              :   final Function(int index)? onDotClicked;</span>
+<span id="L222"><span class="lineNum">     222</span>              : </span>
+<span id="L223"><span class="lineNum">     223</span>              :   /// Default constructor</span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">           1 :   const AnimatedSmoothIndicator({</span></span>
+<span id="L225"><span class="lineNum">     225</span>              :     Key? key,</span>
+<span id="L226"><span class="lineNum">     226</span>              :     required this.activeIndex,</span>
+<span id="L227"><span class="lineNum">     227</span>              :     required this.count,</span>
+<span id="L228"><span class="lineNum">     228</span>              :     this.axisDirection = Axis.horizontal,</span>
+<span id="L229"><span class="lineNum">     229</span>              :     this.textDirection,</span>
+<span id="L230"><span class="lineNum">     230</span>              :     this.onDotClicked,</span>
+<span id="L231"><span class="lineNum">     231</span>              :     this.effect = const WormEffect(),</span>
+<span id="L232"><span class="lineNum">     232</span>              :     Curve curve = Curves.easeInOut,</span>
+<span id="L233"><span class="lineNum">     233</span>              :     Duration duration = const Duration(milliseconds: 300),</span>
+<span id="L234"><span class="lineNum">     234</span>              :     VoidCallback? onEnd,</span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">           1 :   }) : super(</span></span>
+<span id="L236"><span class="lineNum">     236</span>              :           key: key,</span>
+<span id="L237"><span class="lineNum">     237</span>              :           duration: duration,</span>
+<span id="L238"><span class="lineNum">     238</span>              :           curve: curve,</span>
+<span id="L239"><span class="lineNum">     239</span>              :           onEnd: onEnd,</span>
+<span id="L240"><span class="lineNum">     240</span>              :         );</span>
+<span id="L241"><span class="lineNum">     241</span>              : </span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L243"><span class="lineNum">     243</span>              :   AnimatedWidgetBaseState&lt;AnimatedSmoothIndicator&gt; createState() =&gt;</span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">           1 :       _AnimatedSmoothIndicatorState();</span></span>
+<span id="L245"><span class="lineNum">     245</span>              : }</span>
+<span id="L246"><span class="lineNum">     246</span>              : </span>
+<span id="L247"><span class="lineNum">     247</span>              : class _AnimatedSmoothIndicatorState</span>
+<span id="L248"><span class="lineNum">     248</span>              :     extends AnimatedWidgetBaseState&lt;AnimatedSmoothIndicator&gt;</span>
+<span id="L249"><span class="lineNum">     249</span>              :     with _SizeAndRotationCalculatorMixin {</span>
+<span id="L250"><span class="lineNum">     250</span>              :   Tween&lt;double&gt;? _offset;</span>
+<span id="L251"><span class="lineNum">     251</span>              : </span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L253"><span class="lineNum">     253</span>              :   void initState() {</span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">           1 :     super.initState();</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">           1 :     updateSizeAndRotation();</span></span>
+<span id="L256"><span class="lineNum">     256</span>              :   }</span>
+<span id="L257"><span class="lineNum">     257</span>              : </span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L259"><span class="lineNum">     259</span>              :   void didUpdateWidget(covariant AnimatedSmoothIndicator oldWidget) {</span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">           1 :     super.didUpdateWidget(oldWidget);</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">           1 :     updateSizeAndRotation();</span></span>
+<span id="L262"><span class="lineNum">     262</span>              :   }</span>
+<span id="L263"><span class="lineNum">     263</span>              : </span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L265"><span class="lineNum">     265</span>              :   void forEachTween(visitor) {</span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">           2 :     _offset = visitor(</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">           1 :       _offset,</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">           3 :       widget.activeIndex.toDouble(),</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">           2 :       (dynamic value) =&gt; Tween&lt;double&gt;(begin: value as double),</span></span>
+<span id="L270"><span class="lineNum">     270</span>              :     ) as Tween&lt;double&gt;;</span>
+<span id="L271"><span class="lineNum">     271</span>              :   }</span>
+<span id="L272"><span class="lineNum">     272</span>              : </span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">           2 :   int get count =&gt; widget.count;</span></span>
+<span id="L275"><span class="lineNum">     275</span>              : </span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">           2 :   IndicatorEffect get effect =&gt; widget.effect;</span></span>
+<span id="L278"><span class="lineNum">     278</span>              : </span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">           2 :   Axis get axisDirection =&gt; widget.axisDirection;</span></span>
+<span id="L281"><span class="lineNum">     281</span>              : </span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">           2 :   TextDirection? get textDirection =&gt; widget.textDirection;</span></span>
+<span id="L284"><span class="lineNum">     284</span>              : </span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L286"><span class="lineNum">     286</span>              :   Widget build(BuildContext context) {</span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">           1 :     final offset = _offset;</span></span>
+<span id="L288"><span class="lineNum">     288</span>              :     if (offset == null) {</span>
+<span id="L289"><span class="lineNum">     289</span>              :       throw 'Offset has not been initialized';</span>
+<span id="L290"><span class="lineNum">     290</span>              :     }</span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">           1 :     return SmoothIndicator(</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">           4 :       offset: offset.evaluate(animation) % count,</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">           2 :       count: widget.count,</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">           2 :       effect: widget.effect,</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">           2 :       onDotClicked: widget.onDotClicked,</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">           1 :       size: size,</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">           1 :       quarterTurns: quarterTurns,</span></span>
+<span id="L298"><span class="lineNum">     298</span>              :     );</span>
+<span id="L299"><span class="lineNum">     299</span>              :   }</span>
+<span id="L300"><span class="lineNum">     300</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.3.2-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

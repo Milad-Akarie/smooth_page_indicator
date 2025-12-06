@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov.info - src/effects/customizable_effect.dart</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory src/effects">src/effects</a> - customizable_effect.dart</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">55</td>
+            <td class="headerCovTableEntry">55</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-12-06 19:13:10</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">-</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : import 'dart:math';</span>
+<span id="L2"><span class="lineNum">       2</span>              : import 'dart:ui' as ui show lerpDouble;</span>
+<span id="L3"><span class="lineNum">       3</span>              : </span>
+<span id="L4"><span class="lineNum">       4</span>              : import 'package:flutter/material.dart';</span>
+<span id="L5"><span class="lineNum">       5</span>              : import 'package:smooth_page_indicator/src/painters/customizable_painter.dart';</span>
+<span id="L6"><span class="lineNum">       6</span>              : import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';</span>
+<span id="L7"><span class="lineNum">       7</span>              : </span>
+<span id="L8"><span class="lineNum">       8</span>              : import 'indicator_effect.dart';</span>
+<span id="L9"><span class="lineNum">       9</span>              : </span>
+<span id="L10"><span class="lineNum">      10</span>              : /// Signature for a function that returns color</span>
+<span id="L11"><span class="lineNum">      11</span>              : /// for each [index]</span>
+<span id="L12"><span class="lineNum">      12</span>              : typedef ColorBuilder = Color Function(int index);</span>
+<span id="L13"><span class="lineNum">      13</span>              : </span>
+<span id="L14"><span class="lineNum">      14</span>              : /// Holds painting configuration to be used by [CustomizablePainter]</span>
+<span id="L15"><span class="lineNum">      15</span>              : class CustomizableEffect extends IndicatorEffect {</span>
+<span id="L16"><span class="lineNum">      16</span>              :   /// Holds painting decoration for inactive dots</span>
+<span id="L17"><span class="lineNum">      17</span>              :   final DotDecoration dotDecoration;</span>
+<span id="L18"><span class="lineNum">      18</span>              : </span>
+<span id="L19"><span class="lineNum">      19</span>              :   /// Holds painting decoration for active dots</span>
+<span id="L20"><span class="lineNum">      20</span>              :   final DotDecoration activeDotDecoration;</span>
+<span id="L21"><span class="lineNum">      21</span>              : </span>
+<span id="L22"><span class="lineNum">      22</span>              :   /// Builds dynamic colors for active dot</span>
+<span id="L23"><span class="lineNum">      23</span>              :   final ColorBuilder? activeColorOverride;</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              :   /// Builds dynamic colors for inactive dots</span>
+<span id="L26"><span class="lineNum">      26</span>              :   final ColorBuilder? inActiveColorOverride;</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              :   /// The space between two dots</span>
+<span id="L29"><span class="lineNum">      29</span>              :   final double spacing;</span>
+<span id="L30"><span class="lineNum">      30</span>              : </span>
+<span id="L31"><span class="lineNum">      31</span>              :   /// Default constructor</span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           2 :   const CustomizableEffect({</span></span>
+<span id="L33"><span class="lineNum">      33</span>              :     required this.dotDecoration,</span>
+<span id="L34"><span class="lineNum">      34</span>              :     required this.activeDotDecoration,</span>
+<span id="L35"><span class="lineNum">      35</span>              :     this.activeColorOverride,</span>
+<span id="L36"><span class="lineNum">      36</span>              :     this.spacing = 8,</span>
+<span id="L37"><span class="lineNum">      37</span>              :     this.inActiveColorOverride,</span>
+<span id="L38"><span class="lineNum">      38</span>              :   });</span>
+<span id="L39"><span class="lineNum">      39</span>              : </span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           2 :   @override</span></span>
+<span id="L41"><span class="lineNum">      41</span>              :   Size calculateSize(int count) {</span>
+<span id="L42"><span class="lineNum">      42</span>              :     final activeDotWidth =</span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">          12 :         activeDotDecoration.width + activeDotDecoration.dotBorder.neededSpace;</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">          12 :     final dotWidth = dotDecoration.width + dotDecoration.dotBorder.neededSpace;</span></span>
+<span id="L45"><span class="lineNum">      45</span>              : </span>
+<span id="L46"><span class="lineNum">      46</span>              :     final maxWidth =</span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">          12 :         dotWidth * (count - 1) + (spacing * count) + activeDotWidth;</span></span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span>              :     final offsetSpace =</span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">          10 :         (dotDecoration.verticalOffset - activeDotDecoration.verticalOffset)</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           2 :             .abs();</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           2 :     final maxHeight = max(</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">          14 :       dotDecoration.height + offsetSpace + dotDecoration.dotBorder.neededSpace,</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           6 :       activeDotDecoration.height +</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           2 :           offsetSpace +</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           6 :           activeDotDecoration.dotBorder.neededSpace,</span></span>
+<span id="L57"><span class="lineNum">      57</span>              :     );</span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           2 :     return Size(maxWidth, maxHeight);</span></span>
+<span id="L59"><span class="lineNum">      59</span>              :   }</span>
+<span id="L60"><span class="lineNum">      60</span>              : </span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           2 :   @override</span></span>
+<span id="L62"><span class="lineNum">      62</span>              :   IndicatorPainter buildPainter(int count, double offset) {</span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">           2 :     return CustomizablePainter(count: count, offset: offset, effect: this);</span></span>
+<span id="L64"><span class="lineNum">      64</span>              :   }</span>
+<span id="L65"><span class="lineNum">      65</span>              : </span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">           2 :   @override</span></span>
+<span id="L67"><span class="lineNum">      67</span>              :   int hitTestDots(double dx, int count, double current) {</span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           6 :     var anchor = -spacing / 2;</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">           3 :     for (var index = 0; index &lt; count; index++) {</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">          12 :       var dotWidth = dotDecoration.width + dotDecoration.dotBorder.neededSpace;</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           2 :       if (index == current) {</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           6 :         dotWidth = activeDotDecoration.width +</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">           6 :             activeDotDecoration.dotBorder.neededSpace;</span></span>
+<span id="L74"><span class="lineNum">      74</span>              :       }</span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">           4 :       var widthBound = dotWidth + spacing;</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">           4 :       if (dx &lt;= (anchor += widthBound)) {</span></span>
+<span id="L78"><span class="lineNum">      78</span>              :         return index;</span>
+<span id="L79"><span class="lineNum">      79</span>              :       }</span>
+<span id="L80"><span class="lineNum">      80</span>              :     }</span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">           1 :     return -1;</span></span>
+<span id="L82"><span class="lineNum">      82</span>              :   }</span>
+<span id="L83"><span class="lineNum">      83</span>              : }</span>
+<span id="L84"><span class="lineNum">      84</span>              : </span>
+<span id="L85"><span class="lineNum">      85</span>              : /// Holds dot painting specs</span>
+<span id="L86"><span class="lineNum">      86</span>              : class DotDecoration {</span>
+<span id="L87"><span class="lineNum">      87</span>              :   /// The border radius of the dot</span>
+<span id="L88"><span class="lineNum">      88</span>              :   final BorderRadius borderRadius;</span>
+<span id="L89"><span class="lineNum">      89</span>              : </span>
+<span id="L90"><span class="lineNum">      90</span>              :   /// The color of the dot</span>
+<span id="L91"><span class="lineNum">      91</span>              :   final Color color;</span>
+<span id="L92"><span class="lineNum">      92</span>              : </span>
+<span id="L93"><span class="lineNum">      93</span>              :   /// The dotBorder configuration of the dot</span>
+<span id="L94"><span class="lineNum">      94</span>              :   final DotBorder dotBorder;</span>
+<span id="L95"><span class="lineNum">      95</span>              : </span>
+<span id="L96"><span class="lineNum">      96</span>              :   /// The vertical offset of the dot</span>
+<span id="L97"><span class="lineNum">      97</span>              :   final double verticalOffset;</span>
+<span id="L98"><span class="lineNum">      98</span>              : </span>
+<span id="L99"><span class="lineNum">      99</span>              :   /// The rotation angle of the dot</span>
+<span id="L100"><span class="lineNum">     100</span>              :   final double rotationAngle;</span>
+<span id="L101"><span class="lineNum">     101</span>              : </span>
+<span id="L102"><span class="lineNum">     102</span>              :   /// The width of the dot</span>
+<span id="L103"><span class="lineNum">     103</span>              :   final double width;</span>
+<span id="L104"><span class="lineNum">     104</span>              : </span>
+<span id="L105"><span class="lineNum">     105</span>              :   /// the height of the dot</span>
+<span id="L106"><span class="lineNum">     106</span>              :   final double height;</span>
+<span id="L107"><span class="lineNum">     107</span>              : </span>
+<span id="L108"><span class="lineNum">     108</span>              :   /// Default constructor</span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">           2 :   const DotDecoration(</span></span>
+<span id="L110"><span class="lineNum">     110</span>              :       {this.borderRadius = BorderRadius.zero,</span>
+<span id="L111"><span class="lineNum">     111</span>              :       this.color = Colors.white,</span>
+<span id="L112"><span class="lineNum">     112</span>              :       this.dotBorder = DotBorder.none,</span>
+<span id="L113"><span class="lineNum">     113</span>              :       this.verticalOffset = 0.0,</span>
+<span id="L114"><span class="lineNum">     114</span>              :       this.rotationAngle = 0.0,</span>
+<span id="L115"><span class="lineNum">     115</span>              :       this.width = 8,</span>
+<span id="L116"><span class="lineNum">     116</span>              :       this.height = 8});</span>
+<span id="L117"><span class="lineNum">     117</span>              : </span>
+<span id="L118"><span class="lineNum">     118</span>              :   /// Lerps the value between active dot and prev-active dot</span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">           2 :   static DotDecoration lerp(DotDecoration a, DotDecoration b, double t) {</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">           2 :     return DotDecoration(</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">           6 :         borderRadius: BorderRadius.lerp(a.borderRadius, b.borderRadius, t)!,</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">           6 :         width: ui.lerpDouble(a.width, b.width, t) ?? 0.0,</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">           6 :         height: ui.lerpDouble(a.height, b.height, t) ?? 0.0,</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">           6 :         color: Color.lerp(a.color, b.color, t)!,</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">           6 :         dotBorder: DotBorder.lerp(a.dotBorder, b.dotBorder, t),</span></span>
+<span id="L126"><span class="lineNum">     126</span>              :         verticalOffset:</span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">           6 :             ui.lerpDouble(a.verticalOffset, b.verticalOffset, t) ?? 0.0,</span></span>
+<span id="L128"><span class="lineNum">     128</span>              :         rotationAngle:</span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">           6 :             ui.lerpDouble(a.rotationAngle, b.rotationAngle, t) ?? 0.0);</span></span>
+<span id="L130"><span class="lineNum">     130</span>              :   }</span>
+<span id="L131"><span class="lineNum">     131</span>              : </span>
+<span id="L132"><span class="lineNum">     132</span>              :   /// Builds a new instance with the given</span>
+<span id="L133"><span class="lineNum">     133</span>              :   /// override values</span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">           2 :   DotDecoration copyWith({</span></span>
+<span id="L135"><span class="lineNum">     135</span>              :     BorderRadius? borderRadius,</span>
+<span id="L136"><span class="lineNum">     136</span>              :     double? width,</span>
+<span id="L137"><span class="lineNum">     137</span>              :     double? height,</span>
+<span id="L138"><span class="lineNum">     138</span>              :     Color? color,</span>
+<span id="L139"><span class="lineNum">     139</span>              :     DotBorder? dotBorder,</span>
+<span id="L140"><span class="lineNum">     140</span>              :     double? verticalOffset,</span>
+<span id="L141"><span class="lineNum">     141</span>              :     double? rotationAngle,</span>
+<span id="L142"><span class="lineNum">     142</span>              :   }) {</span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">           2 :     return DotDecoration(</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">           2 :       borderRadius: borderRadius ?? this.borderRadius,</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">           1 :       width: width ?? this.width,</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">           2 :       height: height ?? this.height,</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">           1 :       color: color ?? this.color,</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">           2 :       dotBorder: dotBorder ?? this.dotBorder,</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">           2 :       verticalOffset: verticalOffset ?? this.verticalOffset,</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">           2 :       rotationAngle: rotationAngle ?? this.rotationAngle,</span></span>
+<span id="L151"><span class="lineNum">     151</span>              :     );</span>
+<span id="L152"><span class="lineNum">     152</span>              :   }</span>
+<span id="L153"><span class="lineNum">     153</span>              : }</span>
+<span id="L154"><span class="lineNum">     154</span>              : </span>
+<span id="L155"><span class="lineNum">     155</span>              : /// The variants of dot borders</span>
+<span id="L156"><span class="lineNum">     156</span>              : enum DotBorderType {</span>
+<span id="L157"><span class="lineNum">     157</span>              :   /// Draw a sold border</span>
+<span id="L158"><span class="lineNum">     158</span>              :   solid,</span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span>              :   /// Draw nothing</span>
+<span id="L161"><span class="lineNum">     161</span>              :   none</span>
+<span id="L162"><span class="lineNum">     162</span>              : }</span>
+<span id="L163"><span class="lineNum">     163</span>              : </span>
+<span id="L164"><span class="lineNum">     164</span>              : /// Holds dot-border painting specs</span>
+<span id="L165"><span class="lineNum">     165</span>              : class DotBorder {</span>
+<span id="L166"><span class="lineNum">     166</span>              :   /// The thinness of the border line</span>
+<span id="L167"><span class="lineNum">     167</span>              :   final double width;</span>
+<span id="L168"><span class="lineNum">     168</span>              : </span>
+<span id="L169"><span class="lineNum">     169</span>              :   /// The color of the border</span>
+<span id="L170"><span class="lineNum">     170</span>              :   final Color color;</span>
+<span id="L171"><span class="lineNum">     171</span>              : </span>
+<span id="L172"><span class="lineNum">     172</span>              :   /// The padding between the dot and the border</span>
+<span id="L173"><span class="lineNum">     173</span>              :   final double padding;</span>
+<span id="L174"><span class="lineNum">     174</span>              : </span>
+<span id="L175"><span class="lineNum">     175</span>              :   /// The border variant</span>
+<span id="L176"><span class="lineNum">     176</span>              :   final DotBorderType type;</span>
+<span id="L177"><span class="lineNum">     177</span>              : </span>
+<span id="L178"><span class="lineNum">     178</span>              :   /// Default constructor</span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">           2 :   const DotBorder({</span></span>
+<span id="L180"><span class="lineNum">     180</span>              :     this.width = 1.0,</span>
+<span id="L181"><span class="lineNum">     181</span>              :     this.color = Colors.black87,</span>
+<span id="L182"><span class="lineNum">     182</span>              :     this.padding = 0.0,</span>
+<span id="L183"><span class="lineNum">     183</span>              :     this.type = DotBorderType.solid,</span>
+<span id="L184"><span class="lineNum">     184</span>              :   });</span>
+<span id="L185"><span class="lineNum">     185</span>              : </span>
+<span id="L186"><span class="lineNum">     186</span>              :   /// Calculates the needed gap based on [type]</span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">           2 :   double get neededSpace =&gt;</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">          14 :       type == DotBorderType.none ? 0.0 : (width / 2 + (padding * 2));</span></span>
+<span id="L189"><span class="lineNum">     189</span>              : </span>
+<span id="L190"><span class="lineNum">     190</span>              :   /// Builds an instance with type [DotBorderType.none]</span>
+<span id="L191"><span class="lineNum">     191</span>              :   static const none = DotBorder._none();</span>
+<span id="L192"><span class="lineNum">     192</span>              : </span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">           2 :   const DotBorder._none()</span></span>
+<span id="L194"><span class="lineNum">     194</span>              :       : width = 0.0,</span>
+<span id="L195"><span class="lineNum">     195</span>              :         color = Colors.transparent,</span>
+<span id="L196"><span class="lineNum">     196</span>              :         padding = 0.0,</span>
+<span id="L197"><span class="lineNum">     197</span>              :         type = DotBorderType.none;</span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span>              :   /// Lerps the value between active dot border and prev-active dot's border</span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">           2 :   static DotBorder lerp(DotBorder a, DotBorder b, double t) {</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">           2 :     if (t == 0.0) {</span></span>
+<span id="L202"><span class="lineNum">     202</span>              :       return a;</span>
+<span id="L203"><span class="lineNum">     203</span>              :     }</span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">           2 :     if (t == 1.0) {</span></span>
+<span id="L205"><span class="lineNum">     205</span>              :       return b;</span>
+<span id="L206"><span class="lineNum">     206</span>              :     }</span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">           2 :     return DotBorder(</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">           6 :         color: Color.lerp(a.color, b.color, t)!,</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">           6 :         width: ui.lerpDouble(a.width, b.width, t)!,</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">           6 :         padding: ui.lerpDouble(a.padding, b.padding, t)!);</span></span>
+<span id="L211"><span class="lineNum">     211</span>              :   }</span>
+<span id="L212"><span class="lineNum">     212</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.3.2-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>
