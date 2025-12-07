@@ -14,18 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Smooth Page Indicator Demo',
-      theme: ThemeData.light().copyWith(primaryColor: Colors.green).copyWith(extensions: [
-        SmoothPageIndicatorTheme(
-          defaultColors: DefaultIndicatorColors(
-            active: Colors.green,
-            inactive: Colors.blue,
-          ),
-          effect: SlideEffect(
-            dotHeight: 20,
-            dotWidth: 20,
-          ),
-        ),
-      ]),
+      theme: ThemeData.from(colorScheme: ColorScheme.light(primary: Colors.indigo)),
       home: HomePage(),
     );
   }
@@ -44,22 +33,23 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final pages = List.generate(
-        6,
-        (index) => Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.grey.shade300,
-              ),
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              child: SizedBox(
-                height: 280,
-                child: Center(
-                    child: Text(
-                  "Page $index",
-                  style: TextStyle(color: Colors.indigo),
-                )),
-              ),
-            ));
+      6,
+      (index) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.grey.shade300,
+        ),
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        child: SizedBox(
+          height: 280,
+          child: Center(
+              child: Text(
+            "Page $index",
+            style: TextStyle(color: Colors.indigo),
+          )),
+        ),
+      ),
+    );
 
     return Scaffold(
       body: SafeArea(
