@@ -6,7 +6,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 void main() {
   group('debugFillProperties', () {
     group('_SmoothPageIndicatorState', () {
-      testWidgets('includes count, effect, size, and quarterTurns', (tester) async {
+      testWidgets('includes count, effect, size, and quarterTurns',
+          (tester) async {
         final controller = PageController();
         const effect = WormEffect(dotWidth: 12, dotHeight: 12);
 
@@ -69,13 +70,16 @@ void main() {
         final builder = DiagnosticPropertiesBuilder();
         state.debugFillProperties(builder);
 
-        final quarterTurnsProp = builder.properties.firstWhere((p) => p.name == 'quarterTurns');
-        expect(quarterTurnsProp.value, 1, reason: 'Vertical axis should have quarterTurns = 1');
+        final quarterTurnsProp =
+            builder.properties.firstWhere((p) => p.name == 'quarterTurns');
+        expect(quarterTurnsProp.value, 1,
+            reason: 'Vertical axis should have quarterTurns = 1');
       });
     });
 
     group('SmoothIndicator', () {
-      testWidgets('includes offset, count, effect, size, and quarterTurns', (tester) async {
+      testWidgets('includes offset, count, effect, size, and quarterTurns',
+          (tester) async {
         const effect = ExpandingDotsEffect(dotWidth: 10, dotHeight: 10);
         const size = Size(100, 10);
 
@@ -93,7 +97,8 @@ void main() {
           ),
         );
 
-        final widget = tester.widget<SmoothIndicator>(find.byType(SmoothIndicator));
+        final widget =
+            tester.widget<SmoothIndicator>(find.byType(SmoothIndicator));
         final builder = DiagnosticPropertiesBuilder();
         widget.debugFillProperties(builder);
 
@@ -110,7 +115,8 @@ void main() {
           reason: 'Should have count property with value 5',
         );
         expect(
-          properties.any((p) => p.name == 'effect' && p.value is ExpandingDotsEffect),
+          properties
+              .any((p) => p.name == 'effect' && p.value is ExpandingDotsEffect),
           isTrue,
           reason: 'Should have effect property',
         );
@@ -128,7 +134,8 @@ void main() {
     });
 
     group('_AnimatedSmoothIndicatorState', () {
-      testWidgets('includes count, effect, size, and quarterTurns', (tester) async {
+      testWidgets('includes count, effect, size, and quarterTurns',
+          (tester) async {
         const effect = ScaleEffect(scale: 1.5);
 
         await tester.pumpWidget(
@@ -171,7 +178,8 @@ void main() {
         );
       });
 
-      testWidgets('quarterTurns reflects vertical axisDirection', (tester) async {
+      testWidgets('quarterTurns reflects vertical axisDirection',
+          (tester) async {
         await tester.pumpWidget(
           const MaterialApp(
             home: Scaffold(
@@ -188,8 +196,10 @@ void main() {
         final builder = DiagnosticPropertiesBuilder();
         state.debugFillProperties(builder);
 
-        final quarterTurnsProp = builder.properties.firstWhere((p) => p.name == 'quarterTurns');
-        expect(quarterTurnsProp.value, 1, reason: 'Vertical axis should have quarterTurns = 1');
+        final quarterTurnsProp =
+            builder.properties.firstWhere((p) => p.name == 'quarterTurns');
+        expect(quarterTurnsProp.value, 1,
+            reason: 'Vertical axis should have quarterTurns = 1');
       });
 
       testWidgets('quarterTurns reflects RTL textDirection', (tester) async {
@@ -211,13 +221,16 @@ void main() {
         final builder = DiagnosticPropertiesBuilder();
         state.debugFillProperties(builder);
 
-        final quarterTurnsProp = builder.properties.firstWhere((p) => p.name == 'quarterTurns');
-        expect(quarterTurnsProp.value, 2, reason: 'RTL direction should have quarterTurns = 2');
+        final quarterTurnsProp =
+            builder.properties.firstWhere((p) => p.name == 'quarterTurns');
+        expect(quarterTurnsProp.value, 2,
+            reason: 'RTL direction should have quarterTurns = 2');
       });
     });
 
     group('property types', () {
-      testWidgets('SmoothIndicator uses correct property types', (tester) async {
+      testWidgets('SmoothIndicator uses correct property types',
+          (tester) async {
         await tester.pumpWidget(
           const MaterialApp(
             home: Scaffold(
@@ -230,15 +243,20 @@ void main() {
           ),
         );
 
-        final widget = tester.widget<SmoothIndicator>(find.byType(SmoothIndicator));
+        final widget =
+            tester.widget<SmoothIndicator>(find.byType(SmoothIndicator));
         final builder = DiagnosticPropertiesBuilder();
         widget.debugFillProperties(builder);
 
-        final offsetProp = builder.properties.firstWhere((p) => p.name == 'offset');
-        final countProp = builder.properties.firstWhere((p) => p.name == 'count');
-        final effectProp = builder.properties.firstWhere((p) => p.name == 'effect');
+        final offsetProp =
+            builder.properties.firstWhere((p) => p.name == 'offset');
+        final countProp =
+            builder.properties.firstWhere((p) => p.name == 'count');
+        final effectProp =
+            builder.properties.firstWhere((p) => p.name == 'effect');
         final sizeProp = builder.properties.firstWhere((p) => p.name == 'size');
-        final quarterTurnsProp = builder.properties.firstWhere((p) => p.name == 'quarterTurns');
+        final quarterTurnsProp =
+            builder.properties.firstWhere((p) => p.name == 'quarterTurns');
 
         expect(offsetProp, isA<DoubleProperty>());
         expect(countProp, isA<IntProperty>());
@@ -265,10 +283,13 @@ void main() {
         final builder = DiagnosticPropertiesBuilder();
         state.debugFillProperties(builder);
 
-        final countProp = builder.properties.firstWhere((p) => p.name == 'count');
-        final effectProp = builder.properties.firstWhere((p) => p.name == 'effect');
+        final countProp =
+            builder.properties.firstWhere((p) => p.name == 'count');
+        final effectProp =
+            builder.properties.firstWhere((p) => p.name == 'effect');
         final sizeProp = builder.properties.firstWhere((p) => p.name == 'size');
-        final quarterTurnsProp = builder.properties.firstWhere((p) => p.name == 'quarterTurns');
+        final quarterTurnsProp =
+            builder.properties.firstWhere((p) => p.name == 'quarterTurns');
 
         expect(countProp, isA<IntProperty>());
         expect(effectProp, isA<DiagnosticsProperty<IndicatorEffect>>());
@@ -278,7 +299,9 @@ void main() {
     });
 
     group('effect from theme', () {
-      testWidgets('debugFillProperties shows theme effect when widget effect is null', (tester) async {
+      testWidgets(
+          'debugFillProperties shows theme effect when widget effect is null',
+          (tester) async {
         final controller = PageController();
 
         await tester.pumpWidget(
@@ -302,7 +325,8 @@ void main() {
         final builder = DiagnosticPropertiesBuilder();
         state.debugFillProperties(builder);
 
-        final effectProp = builder.properties.firstWhere((p) => p.name == 'effect');
+        final effectProp =
+            builder.properties.firstWhere((p) => p.name == 'effect');
         expect(effectProp.value, isA<JumpingDotEffect>());
       });
     });

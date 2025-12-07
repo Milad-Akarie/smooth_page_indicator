@@ -22,20 +22,32 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ScaleEffect();
-      final painter1 =
-          ScalePainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
-      final painter2 =
-          ScalePainter(effect: effect, count: 5, offset: 1.0, indicatorColors: DefaultIndicatorColors.defaults);
+      final painter1 = ScalePainter(
+          effect: effect,
+          count: 5,
+          offset: 0.0,
+          indicatorColors: DefaultIndicatorColors.defaults);
+      final painter2 = ScalePainter(
+          effect: effect,
+          count: 5,
+          offset: 1.0,
+          indicatorColors: DefaultIndicatorColors.defaults);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ScaleEffect();
-      final painter1 =
-          ScalePainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
-      final painter2 =
-          ScalePainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
+      final painter1 = ScalePainter(
+          effect: effect,
+          count: 5,
+          offset: 0.0,
+          indicatorColors: DefaultIndicatorColors.defaults);
+      final painter2 = ScalePainter(
+          effect: effect,
+          count: 5,
+          offset: 0.0,
+          indicatorColors: DefaultIndicatorColors.defaults);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });

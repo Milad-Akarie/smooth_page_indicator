@@ -49,8 +49,11 @@ class WormPainter extends BasicIndicatorPainter {
     var head = xPos;
     var tail = xPos + effect.dotWidth + (wormOffset * distance);
     var halfHeight = effect.dotHeight / 2;
-    final thinWorm = effect.type == WormType.thin || effect.type == WormType.thinUnderground;
-    var dotHeight = thinWorm ? halfHeight + (halfHeight * (1 - wormOffset)) : effect.dotHeight;
+    final thinWorm =
+        effect.type == WormType.thin || effect.type == WormType.thinUnderground;
+    var dotHeight = thinWorm
+        ? halfHeight + (halfHeight * (1 - wormOffset))
+        : effect.dotHeight;
 
     if (wormOffset > 1) {
       tail = xPos + effect.dotWidth + (1 * distance);
@@ -66,7 +69,8 @@ class WormPainter extends BasicIndicatorPainter {
       yPos + dotHeight / 2,
       dotRadius,
     );
-    if (effect.type == WormType.underground || effect.type == WormType.thinUnderground) {
+    if (effect.type == WormType.underground ||
+        effect.type == WormType.thinUnderground) {
       canvas.saveLayer(Rect.largest, Paint());
       canvas.drawRRect(worm, activeDotPaint);
       maskStillDots(size, canvas);

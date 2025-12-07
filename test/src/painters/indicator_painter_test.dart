@@ -69,7 +69,8 @@ void main() {
       expect(painter.dotPaint.strokeWidth, 3.0);
     });
 
-    testWidgets('paintStillDots renders correct number of dots', (tester) async {
+    testWidgets('paintStillDots renders correct number of dots',
+        (tester) async {
       const effect = WormEffect();
 
       await tester.pumpWidget(
@@ -140,7 +141,8 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('calcPortalTravel renders portal travel animation', (tester) async {
+    testWidgets('calcPortalTravel renders portal travel animation',
+        (tester) async {
       const effect = WormEffect();
 
       await tester.pumpWidget(
@@ -166,23 +168,43 @@ void main() {
   group('IndicatorPainter', () {
     test('shouldRepaint returns true when offset changes', () {
       const effect = WormEffect();
-      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
-      final painter2 = WormPainter(effect: effect, count: 5, offset: 1.0, indicatorColors: DefaultIndicatorColors.defaults);
+      final painter1 = WormPainter(
+          effect: effect,
+          count: 5,
+          offset: 0.0,
+          indicatorColors: DefaultIndicatorColors.defaults);
+      final painter2 = WormPainter(
+          effect: effect,
+          count: 5,
+          offset: 1.0,
+          indicatorColors: DefaultIndicatorColors.defaults);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = WormEffect();
-      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
-      final painter2 = WormPainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
+      final painter1 = WormPainter(
+          effect: effect,
+          count: 5,
+          offset: 0.0,
+          indicatorColors: DefaultIndicatorColors.defaults);
+      final painter2 = WormPainter(
+          effect: effect,
+          count: 5,
+          offset: 0.0,
+          indicatorColors: DefaultIndicatorColors.defaults);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
 
     test('offset is stored correctly', () {
       const effect = WormEffect();
-      final painter = WormPainter(effect: effect, count: 5, offset: 2.5, indicatorColors: DefaultIndicatorColors.defaults);
+      final painter = WormPainter(
+          effect: effect,
+          count: 5,
+          offset: 2.5,
+          indicatorColors: DefaultIndicatorColors.defaults);
 
       expect(painter.offset, 2.5);
     });

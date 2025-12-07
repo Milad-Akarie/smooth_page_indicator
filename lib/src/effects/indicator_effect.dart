@@ -12,7 +12,8 @@ abstract class IndicatorEffect {
   /// Builds a new painter every time the page offset changes
   ///
   /// [indicatorColors] is used to resolve null dot colors
-  IndicatorPainter buildPainter(int count, double offset, DefaultIndicatorColors indicatorColors);
+  IndicatorPainter buildPainter(
+      int count, double offset, DefaultIndicatorColors indicatorColors);
 
   /// Calculates the size of canvas based on
   /// dots count, size and spacing
@@ -71,7 +72,10 @@ abstract class BasicIndicatorEffect extends IndicatorEffect {
     required this.dotColor,
     required this.paintStyle,
     required this.activeDotColor,
-  }) : assert(dotWidth >= 0 && dotHeight >= 0 && spacing >= 0 && strokeWidth >= 0);
+  }) : assert(dotWidth >= 0 &&
+            dotHeight >= 0 &&
+            spacing >= 0 &&
+            strokeWidth >= 0);
 
   @override
   Size calculateSize(int count) {
@@ -91,5 +95,6 @@ abstract class BasicIndicatorEffect extends IndicatorEffect {
 
   /// Helper method for lerping double values
   @protected
-  static double? lerpDouble(double? a, double? b, double t) => ui.lerpDouble(a, b, t);
+  static double? lerpDouble(double? a, double? b, double t) =>
+      ui.lerpDouble(a, b, t);
 }

@@ -75,7 +75,8 @@ abstract class BasicIndicatorPainter extends IndicatorPainter {
   void maskStillDots(Size size, Canvas canvas) {
     var path = Path()..addRect((const Offset(0, 0) & size));
     for (var i = 0; i < count; i++) {
-      path = Path.combine(PathOperation.difference, path, Path()..addRRect(buildStillDot(i, size)));
+      path = Path.combine(PathOperation.difference, path,
+          Path()..addRRect(buildStillDot(i, size)));
     }
     canvas.drawPath(path, Paint()..blendMode = BlendMode.clear);
   }

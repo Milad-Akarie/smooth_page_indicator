@@ -34,13 +34,18 @@ class SwapPainter extends BasicIndicatorPainter {
 
     final isGoingThroughPortal = offset > count - 1;
     if (isGoingThroughPortal) {
-      final startDot =
-          calcPortalTravel(size, (effect.dotWidth / 2) + xAnchor - ((1 - dotOffset) * distance), dotOffset);
+      final startDot = calcPortalTravel(
+          size,
+          (effect.dotWidth / 2) + xAnchor - ((1 - dotOffset) * distance),
+          dotOffset);
       canvas.drawRRect(startDot, activePaint);
 
       final endDot = calcPortalTravel(
         size,
-        ((count - 1) * distance) + (effect.dotWidth / 2) + xAnchor + (dotOffset * distance),
+        ((count - 1) * distance) +
+            (effect.dotWidth / 2) +
+            xAnchor +
+            (dotOffset * distance),
         1 - dotOffset,
       );
       canvas.drawRRect(endDot, activePaint);

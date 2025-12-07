@@ -70,7 +70,8 @@ class DefaultIndicatorColors {
 ///   ),
 /// )
 /// ```
-class SmoothPageIndicatorTheme extends ThemeExtension<SmoothPageIndicatorTheme> {
+class SmoothPageIndicatorTheme
+    extends ThemeExtension<SmoothPageIndicatorTheme> {
   /// The default effect to use when none is specified.
   /// If null, [WormEffect] will be used as the fallback.
   final IndicatorEffect? effect;
@@ -107,14 +108,17 @@ class SmoothPageIndicatorTheme extends ThemeExtension<SmoothPageIndicatorTheme> 
 
     // Lerp effects if both are non-null and same type
     IndicatorEffect? lerpedEffect;
-    if (effect != null && other.effect != null && effect.runtimeType == other.effect.runtimeType) {
+    if (effect != null &&
+        other.effect != null &&
+        effect.runtimeType == other.effect.runtimeType) {
       lerpedEffect = effect!.lerp(other.effect, t);
     } else {
       lerpedEffect = t < 0.5 ? effect : other.effect;
     }
 
     // Lerp colors if both are non-null
-    final lerpedColors = defaultColors?.lerp(other.defaultColors, t) ?? (t < 0.5 ? null : other.defaultColors);
+    final lerpedColors = defaultColors?.lerp(other.defaultColors, t) ??
+        (t < 0.5 ? null : other.defaultColors);
 
     return SmoothPageIndicatorTheme(
       effect: lerpedEffect,
@@ -133,12 +137,14 @@ class SmoothPageIndicatorTheme extends ThemeExtension<SmoothPageIndicatorTheme> 
   /// If no effect is specified in the theme, defaults to [WormEffect].
   /// If no colors are specified, derives them from the app theme.
   /// Returns a record of (effect, colors).
-  static (IndicatorEffect effect, DefaultIndicatorColors colors) resolveDefaults(
+  static (IndicatorEffect effect, DefaultIndicatorColors colors)
+      resolveDefaults(
     BuildContext context,
   ) {
     final theme = SmoothPageIndicatorTheme.of(context);
     final effect = theme?.effect ?? const WormEffect();
-    final colors = theme?.defaultColors ?? DefaultIndicatorColors.fromContext(context);
+    final colors =
+        theme?.defaultColors ?? DefaultIndicatorColors.fromContext(context);
     return (effect, colors);
   }
 }

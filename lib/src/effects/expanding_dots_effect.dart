@@ -28,19 +28,28 @@ class ExpandingDotsEffect extends BasicIndicatorEffect {
   @override
   Size calculateSize(int count) {
     /// Add the expanded dot width to our size calculation
-    return Size(((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth), dotHeight);
+    return Size(
+        ((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth),
+        dotHeight);
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, DefaultIndicatorColors indicatorColors) {
-    return ExpandingDotsPainter(count: count, offset: offset, effect: this, indicatorColors: indicatorColors);
+  IndicatorPainter buildPainter(
+      int count, double offset, DefaultIndicatorColors indicatorColors) {
+    return ExpandingDotsPainter(
+        count: count,
+        offset: offset,
+        effect: this,
+        indicatorColors: indicatorColors);
   }
 
   @override
   int hitTestDots(double dx, int count, double current) {
     var anchor = -spacing / 2;
     for (var index = 0; index < count; index++) {
-      var widthBound = (index == current ? (dotWidth * expansionFactor) : dotWidth) + spacing;
+      var widthBound =
+          (index == current ? (dotWidth * expansionFactor) : dotWidth) +
+              spacing;
       if (dx <= (anchor += widthBound)) {
         return index;
       }
@@ -52,14 +61,17 @@ class ExpandingDotsEffect extends BasicIndicatorEffect {
   ExpandingDotsEffect lerp(covariant ExpandingDotsEffect? other, double t) {
     if (other == null) return this;
     return ExpandingDotsEffect(
-      expansionFactor: BasicIndicatorEffect.lerpDouble(expansionFactor, other.expansionFactor, t)!,
+      expansionFactor: BasicIndicatorEffect.lerpDouble(
+          expansionFactor, other.expansionFactor, t)!,
       dotWidth: BasicIndicatorEffect.lerpDouble(dotWidth, other.dotWidth, t)!,
-      dotHeight: BasicIndicatorEffect.lerpDouble(dotHeight, other.dotHeight, t)!,
+      dotHeight:
+          BasicIndicatorEffect.lerpDouble(dotHeight, other.dotHeight, t)!,
       spacing: BasicIndicatorEffect.lerpDouble(spacing, other.spacing, t)!,
       radius: BasicIndicatorEffect.lerpDouble(radius, other.radius, t)!,
       dotColor: Color.lerp(dotColor, other.dotColor, t),
       activeDotColor: Color.lerp(activeDotColor, other.activeDotColor, t),
-      strokeWidth: BasicIndicatorEffect.lerpDouble(strokeWidth, other.strokeWidth, t)!,
+      strokeWidth:
+          BasicIndicatorEffect.lerpDouble(strokeWidth, other.strokeWidth, t)!,
       paintStyle: t < 0.5 ? paintStyle : other.paintStyle,
     );
   }

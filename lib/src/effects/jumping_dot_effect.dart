@@ -39,23 +39,32 @@ class JumpingDotEffect extends BasicIndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, DefaultIndicatorColors indicatorColors) {
-    return JumpingDotPainter(count: count, offset: offset, effect: this, indicatorColors: indicatorColors);
+  IndicatorPainter buildPainter(
+      int count, double offset, DefaultIndicatorColors indicatorColors) {
+    return JumpingDotPainter(
+        count: count,
+        offset: offset,
+        effect: this,
+        indicatorColors: indicatorColors);
   }
 
   @override
   JumpingDotEffect lerp(covariant JumpingDotEffect? other, double t) {
     if (other == null) return this;
     return JumpingDotEffect(
-      jumpScale: BasicIndicatorEffect.lerpDouble(jumpScale, other.jumpScale, t)!,
-      verticalOffset: BasicIndicatorEffect.lerpDouble(verticalOffset, other.verticalOffset, t)!,
+      jumpScale:
+          BasicIndicatorEffect.lerpDouble(jumpScale, other.jumpScale, t)!,
+      verticalOffset: BasicIndicatorEffect.lerpDouble(
+          verticalOffset, other.verticalOffset, t)!,
       dotWidth: BasicIndicatorEffect.lerpDouble(dotWidth, other.dotWidth, t)!,
-      dotHeight: BasicIndicatorEffect.lerpDouble(dotHeight, other.dotHeight, t)!,
+      dotHeight:
+          BasicIndicatorEffect.lerpDouble(dotHeight, other.dotHeight, t)!,
       spacing: BasicIndicatorEffect.lerpDouble(spacing, other.spacing, t)!,
       radius: BasicIndicatorEffect.lerpDouble(radius, other.radius, t)!,
       dotColor: Color.lerp(dotColor, other.dotColor, t),
       activeDotColor: Color.lerp(activeDotColor, other.activeDotColor, t),
-      strokeWidth: BasicIndicatorEffect.lerpDouble(strokeWidth, other.strokeWidth, t)!,
+      strokeWidth:
+          BasicIndicatorEffect.lerpDouble(strokeWidth, other.strokeWidth, t)!,
       paintStyle: t < 0.5 ? paintStyle : other.paintStyle,
     );
   }

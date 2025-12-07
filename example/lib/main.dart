@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Smooth Page Indicator Demo',
-      theme: ThemeData.from(colorScheme: ColorScheme.light(primary: Colors.indigo)),
+      theme: ThemeData.from(
+          colorScheme: ColorScheme.light(primary: Colors.indigo)),
       home: HomePage(),
     );
   }

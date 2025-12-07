@@ -107,7 +107,38 @@ for example, you can customize direction, width, height, radius, spacing, paint 
   ), 
 )    
    
-```   
+```
+
+## Theme-based Colors
+By default, `SmoothPageIndicator` derives its colors from the app theme:
+- `activeDotColor` defaults to `Theme.of(context).primaryColor`
+- `dotColor` defaults to `Theme.of(context).unselectedWidgetColor` with reduced opacity
+
+This means the indicator automatically adapts to your app's color scheme. You can override these by explicitly setting `dotColor` and `activeDotColor` in any effect.
+
+## SmoothPageIndicatorTheme
+You can configure default settings for all `SmoothPageIndicator` and `AnimatedSmoothIndicator` widgets app-wide using `SmoothPageIndicatorTheme`.
+
+```dart
+MaterialApp(
+  theme: ThemeData.light().copyWith(
+    extensions: [
+      SmoothPageIndicatorTheme(
+        effect: ExpandingDotsEffect(), // default effect when none is specified
+        defaultColors: DefaultIndicatorColors(
+          active: Colors.blue,
+          inactive: Colors.grey,
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+- `defaultColors`: Applies to **all** indicator effects across the app (unless overridden by the effect itself)
+- `effect`: The default effect used when no effect is specified in the widget. Colors set within this effect (e.g., `activeDotColor`) only apply to this default effect.
+
+This is useful when you want consistent indicator styling across your entire app without repeating the same configuration.   
 
 ## Support the Library
 

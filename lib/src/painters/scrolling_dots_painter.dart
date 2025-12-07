@@ -29,10 +29,12 @@ class ScrollingDotsPainter extends BasicIndicatorPainter {
   void paint(Canvas canvas, Size size) {
     final current = super.offset.floor();
     final switchPoint = (effect.maxVisibleDots / 2).floor();
-    final firstVisibleDot = (current < switchPoint || count - 1 < effect.maxVisibleDots)
-        ? 0
-        : min(current - switchPoint, count - effect.maxVisibleDots);
-    final lastVisibleDot = min(firstVisibleDot + effect.maxVisibleDots, count - 1);
+    final firstVisibleDot =
+        (current < switchPoint || count - 1 < effect.maxVisibleDots)
+            ? 0
+            : min(current - switchPoint, count - effect.maxVisibleDots);
+    final lastVisibleDot =
+        min(firstVisibleDot + effect.maxVisibleDots, count - 1);
     final inPreScrollRange = current < switchPoint;
     final inAfterScrollRange = current >= (count - 1) - switchPoint;
     final willStartScrolling = (current + 1) == switchPoint + 1;
@@ -43,8 +45,9 @@ class ScrollingDotsPainter extends BasicIndicatorPainter {
       ..strokeWidth = effect.strokeWidth
       ..style = effect.paintStyle;
 
-    final drawingAnchor =
-        (inPreScrollRange || inAfterScrollRange) ? -(firstVisibleDot * distance) : -((offset - switchPoint) * distance);
+    final drawingAnchor = (inPreScrollRange || inAfterScrollRange)
+        ? -(firstVisibleDot * distance)
+        : -((offset - switchPoint) * distance);
 
     final smallDotScale = effect.smallDotScale;
     final activeScale = effect.activeDotScale - 1.0;
@@ -55,22 +58,26 @@ class ScrollingDotsPainter extends BasicIndicatorPainter {
 
       if (index == current) {
         // ! Both a and b are non nullable
-        color = Color.lerp(effectiveActiveColor, effectiveInactiveColor, dotOffset)!;
+        color = Color.lerp(
+            effectiveActiveColor, effectiveInactiveColor, dotOffset)!;
         if (offset > count - 1 && count > effect.maxVisibleDots) {
           scale = effect.activeDotScale - (smallDotScale * dotOffset);
         } else {
           scale = effect.activeDotScale - (activeScale * dotOffset);
         }
       } else if ((index == firstVisibleDot && offset > count - 1)) {
-        color = Color.lerp(effectiveInactiveColor, effectiveActiveColor, dotOffset)!;
+        color = Color.lerp(
+            effectiveInactiveColor, effectiveActiveColor, dotOffset)!;
         if (count <= effect.maxVisibleDots) {
           scale = 1 + (activeScale * dotOffset);
         } else {
-          scale = smallDotScale + (((1 - smallDotScale) + activeScale) * dotOffset);
+          scale =
+              smallDotScale + (((1 - smallDotScale) + activeScale) * dotOffset);
         }
       } else if (index - 1 == current) {
         // ! Both a and b are non nullable
-        color = Color.lerp(effectiveInactiveColor, effectiveActiveColor, dotOffset)!;
+        color = Color.lerp(
+            effectiveInactiveColor, effectiveActiveColor, dotOffset)!;
         scale = 1.0 + (activeScale * dotOffset);
       } else if (count - 1 < effect.maxVisibleDots) {
         scale = 1.0;
@@ -82,7 +89,8 @@ class ScrollingDotsPainter extends BasicIndicatorPainter {
         } else if (!inPreScrollRange) {
           scale = smallDotScale * (1.0 - dotOffset);
         }
-      } else if (index == firstVisibleDot + 1 && !(inPreScrollRange || inAfterScrollRange)) {
+      } else if (index == firstVisibleDot + 1 &&
+          !(inPreScrollRange || inAfterScrollRange)) {
         scale = 1.0 - (dotOffset * (1.0 - smallDotScale));
       } else if (index == lastVisibleDot - 1.0) {
         if (inPreScrollRange) {

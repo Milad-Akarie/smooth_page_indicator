@@ -32,15 +32,19 @@ void main() {
     });
 
     test('shouldRepaint returns true when offset changes', () {
-      final painter1 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
-      final painter2 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 1.0);
+      final painter1 =
+          CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
+      final painter2 =
+          CustomizablePainter(effect: defaultEffect, count: 5, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
-      final painter1 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
-      final painter2 = CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
+      final painter1 =
+          CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
+      final painter2 =
+          CustomizablePainter(effect: defaultEffect, count: 5, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -178,7 +182,9 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('paints with activeDotDecoration verticalOffset >= dotDecoration', (tester) async {
+    testWidgets(
+        'paints with activeDotDecoration verticalOffset >= dotDecoration',
+        (tester) async {
       const effect = CustomizableEffect(
         dotDecoration: DotDecoration(
           width: 10,
@@ -292,7 +298,8 @@ void main() {
           height: 14,
           color: Colors.blue,
         ),
-        activeColorOverride: (index) => Colors.primaries[index % Colors.primaries.length],
+        activeColorOverride: (index) =>
+            Colors.primaries[index % Colors.primaries.length],
       );
 
       await tester.pumpWidget(
@@ -325,7 +332,8 @@ void main() {
           height: 14,
           color: Colors.blue,
         ),
-        inActiveColorOverride: (index) => Colors.accents[index % Colors.accents.length],
+        inActiveColorOverride: (index) =>
+            Colors.accents[index % Colors.accents.length],
       );
 
       await tester.pumpWidget(
@@ -358,8 +366,10 @@ void main() {
           height: 14,
           color: Colors.blue,
         ),
-        activeColorOverride: (index) => Colors.primaries[index % Colors.primaries.length],
-        inActiveColorOverride: (index) => Colors.accents[index % Colors.accents.length],
+        activeColorOverride: (index) =>
+            Colors.primaries[index % Colors.primaries.length],
+        inActiveColorOverride: (index) =>
+            Colors.accents[index % Colors.accents.length],
       );
 
       await tester.pumpWidget(
@@ -565,7 +575,8 @@ void main() {
         activeDotDecoration: DotDecoration(width: 14, height: 14),
       );
 
-      final painter = effect.buildPainter(5, 0, DefaultIndicatorColors.defaults);
+      final painter =
+          effect.buildPainter(5, 0, DefaultIndicatorColors.defaults);
       expect(painter, isA<CustomizablePainter>());
     });
   });
@@ -614,8 +625,10 @@ void main() {
             name: 'small to large',
             child: _buildCustomizablePainter(
               effect: const CustomizableEffect(
-                dotDecoration: DotDecoration(width: 8, height: 8, color: Colors.grey),
-                activeDotDecoration: DotDecoration(width: 20, height: 20, color: Colors.blue),
+                dotDecoration:
+                    DotDecoration(width: 8, height: 8, color: Colors.grey),
+                activeDotDecoration:
+                    DotDecoration(width: 20, height: 20, color: Colors.blue),
               ),
               offset: 1.5,
             ),
@@ -624,8 +637,10 @@ void main() {
             name: 'large to small',
             child: _buildCustomizablePainter(
               effect: const CustomizableEffect(
-                dotDecoration: DotDecoration(width: 16, height: 16, color: Colors.grey),
-                activeDotDecoration: DotDecoration(width: 10, height: 10, color: Colors.blue),
+                dotDecoration:
+                    DotDecoration(width: 16, height: 16, color: Colors.grey),
+                activeDotDecoration:
+                    DotDecoration(width: 10, height: 10, color: Colors.blue),
               ),
               offset: 1.5,
             ),
@@ -634,8 +649,10 @@ void main() {
             name: 'wide dots',
             child: _buildCustomizablePainter(
               effect: const CustomizableEffect(
-                dotDecoration: DotDecoration(width: 20, height: 8, color: Colors.grey),
-                activeDotDecoration: DotDecoration(width: 30, height: 12, color: Colors.blue),
+                dotDecoration:
+                    DotDecoration(width: 20, height: 8, color: Colors.grey),
+                activeDotDecoration:
+                    DotDecoration(width: 30, height: 12, color: Colors.blue),
               ),
               offset: 1.5,
             ),
@@ -704,7 +721,8 @@ void main() {
             name: 'active above',
             child: _buildCustomizablePainter(
               effect: const CustomizableEffect(
-                dotDecoration: DotDecoration(width: 10, height: 10, color: Colors.grey),
+                dotDecoration:
+                    DotDecoration(width: 10, height: 10, color: Colors.grey),
                 activeDotDecoration: DotDecoration(
                   width: 14,
                   height: 14,
@@ -719,7 +737,8 @@ void main() {
             name: 'active below',
             child: _buildCustomizablePainter(
               effect: const CustomizableEffect(
-                dotDecoration: DotDecoration(width: 10, height: 10, color: Colors.grey),
+                dotDecoration:
+                    DotDecoration(width: 10, height: 10, color: Colors.grey),
                 activeDotDecoration: DotDecoration(
                   width: 14,
                   height: 14,

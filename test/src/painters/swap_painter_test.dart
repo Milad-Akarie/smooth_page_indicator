@@ -22,20 +22,32 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = SwapEffect();
-      final painter1 =
-          SwapPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
-      final painter2 =
-          SwapPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 1.0);
+      final painter1 = SwapPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
+      final painter2 = SwapPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 5,
+          offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = SwapEffect();
-      final painter1 =
-          SwapPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
-      final painter2 =
-          SwapPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
+      final painter1 = SwapPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
+      final painter2 = SwapPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });

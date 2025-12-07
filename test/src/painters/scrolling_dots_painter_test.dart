@@ -7,7 +7,8 @@ void main() {
   group('ScrollingDotsPainter', () {
     test('creates painter with correct properties', () {
       const effect = ScrollingDotsEffect();
-      final painter = ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+      final painter = ScrollingDotsPainter(
+        indicatorColors: DefaultIndicatorColors.defaults,
         effect: effect,
         count: 10,
         offset: 0.0,
@@ -20,16 +21,32 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ScrollingDotsEffect();
-      final painter1 = ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 10, offset: 0.0);
-      final painter2 = ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 10, offset: 1.0);
+      final painter1 = ScrollingDotsPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 10,
+          offset: 0.0);
+      final painter2 = ScrollingDotsPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 10,
+          offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ScrollingDotsEffect();
-      final painter1 = ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 10, offset: 0.0);
-      final painter2 = ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 10, offset: 0.0);
+      final painter1 = ScrollingDotsPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 10,
+          offset: 0.0);
+      final painter2 = ScrollingDotsPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 10,
+          offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -42,7 +59,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 0.0,
@@ -63,7 +81,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 1.0, // In pre-scroll range
@@ -84,7 +103,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 5.0, // In scroll range
@@ -105,7 +125,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 8.0, // In after-scroll range
@@ -126,10 +147,12 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
-                offset: 2.5, // switchPoint + 1 = 3, willStartScrolling when current + 1 == 3
+                offset:
+                    2.5, // switchPoint + 1 = 3, willStartScrolling when current + 1 == 3
               ),
             ),
           ),
@@ -147,7 +170,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 6.5, // Tests willStopScrolling
@@ -168,7 +192,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 9.5,
@@ -189,7 +214,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5, // Less than maxVisibleDots
                 offset: 2.0,
@@ -213,7 +239,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 0.0,
@@ -237,7 +264,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 0.0,
@@ -258,7 +286,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 3.0,
@@ -282,7 +311,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 5.5,
@@ -305,7 +335,8 @@ void main() {
             home: Scaffold(
               body: CustomPaint(
                 size: effect.calculateSize(10),
-                painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+                painter: ScrollingDotsPainter(
+                  indicatorColors: DefaultIndicatorColors.defaults,
                   effect: effect,
                   count: 10,
                   offset: offset,
@@ -327,7 +358,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 4.5, // Tests firstVisibleDot + 1 scaling
@@ -348,10 +380,12 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
-                offset: 1.5, // Tests lastVisibleDot - 1 scaling in preScrollRange
+                offset:
+                    1.5, // Tests lastVisibleDot - 1 scaling in preScrollRange
               ),
             ),
           ),
@@ -361,7 +395,8 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('handles portal travel with count > maxVisibleDots', (tester) async {
+    testWidgets('handles portal travel with count > maxVisibleDots',
+        (tester) async {
       const effect = ScrollingDotsEffect(maxVisibleDots: 5);
 
       await tester.pumpWidget(
@@ -369,7 +404,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 10,
                 offset: 9.3, // offset > count - 1 with count > maxVisibleDots
@@ -382,7 +418,8 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('handles portal travel with count <= maxVisibleDots', (tester) async {
+    testWidgets('handles portal travel with count <= maxVisibleDots',
+        (tester) async {
       const effect = ScrollingDotsEffect(maxVisibleDots: 7);
 
       await tester.pumpWidget(
@@ -390,7 +427,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: ScrollingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, 
+              painter: ScrollingDotsPainter(
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 4.3, // offset > count - 1 with count <= maxVisibleDots

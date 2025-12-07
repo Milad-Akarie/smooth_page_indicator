@@ -1,4 +1,9 @@
 # ChangeLog
+## [2.0.0] [Breaking change]
+- **Breaking**: Default colors (`dotColor`, `activeDotColor`) are now derived from the app's theme (`primaryColor` and `unselectedWidgetColor`) instead of hardcoded values. This may affect existing implementations that relied on the previous default colors.
+- Add `SmoothPageIndicatorTheme` - a `ThemeExtension` that allows configuring default effect and colors app-wide
+- Add `DefaultIndicatorColors` class for managing indicator color defaults
+
 ## [1.2.1]
 - Add infinite loop support to SwapEffect
 - Allow small dot size in ScrollingDotEffect

@@ -22,20 +22,32 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = WormEffect();
-      final painter1 =
-          WormPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
-      final painter2 =
-          WormPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 1.0);
+      final painter1 = WormPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
+      final painter2 = WormPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 5,
+          offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = WormEffect();
-      final painter1 =
-          WormPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
-      final painter2 =
-          WormPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
+      final painter1 = WormPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
+      final painter2 = WormPainter(
+          indicatorColors: DefaultIndicatorColors.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -329,8 +341,16 @@ void main() {
     );
 
     final colorConfigs = <Map<String, dynamic>>[
-      {'name': 'blue to red', 'dotColor': Colors.blue, 'activeColor': Colors.red},
-      {'name': 'green to orange', 'dotColor': Colors.green, 'activeColor': Colors.orange},
+      {
+        'name': 'blue to red',
+        'dotColor': Colors.blue,
+        'activeColor': Colors.red
+      },
+      {
+        'name': 'green to orange',
+        'dotColor': Colors.green,
+        'activeColor': Colors.orange
+      },
     ];
 
     goldenTest(

@@ -83,11 +83,14 @@ mixin _SizeAndRotationCalculatorMixin {
   }
 
   TextDirection? _getDirectionality() {
-    return context.findAncestorWidgetOfExactType<Directionality>()?.textDirection;
+    return context
+        .findAncestorWidgetOfExactType<Directionality>()
+        ?.textDirection;
   }
 }
 
-class _SmoothPageIndicatorState extends State<SmoothPageIndicator> with _SizeAndRotationCalculatorMixin {
+class _SmoothPageIndicatorState extends State<SmoothPageIndicator>
+    with _SizeAndRotationCalculatorMixin {
   late IndicatorEffect _effect;
 
   @override
@@ -105,7 +108,9 @@ class _SmoothPageIndicatorState extends State<SmoothPageIndicator> with _SizeAnd
   }
 
   void _updateEffect() {
-    _effect = widget.effect ?? SmoothPageIndicatorTheme.of(context)?.effect ?? const WormEffect();
+    _effect = widget.effect ??
+        SmoothPageIndicatorTheme.of(context)?.effect ??
+        const WormEffect();
   }
 
   @override
@@ -193,7 +198,8 @@ class SmoothIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (_, indicatorColors) = SmoothPageIndicatorTheme.resolveDefaults(context);
+    final (_, indicatorColors) =
+        SmoothPageIndicatorTheme.resolveDefaults(context);
     return RotatedBox(
       quarterTurns: quarterTurns,
       child: GestureDetector(
@@ -266,10 +272,12 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
   });
 
   @override
-  AnimatedWidgetBaseState<AnimatedSmoothIndicator> createState() => _AnimatedSmoothIndicatorState();
+  AnimatedWidgetBaseState<AnimatedSmoothIndicator> createState() =>
+      _AnimatedSmoothIndicatorState();
 }
 
-class _AnimatedSmoothIndicatorState extends AnimatedWidgetBaseState<AnimatedSmoothIndicator>
+class _AnimatedSmoothIndicatorState
+    extends AnimatedWidgetBaseState<AnimatedSmoothIndicator>
     with _SizeAndRotationCalculatorMixin {
   Tween<double>? _offset;
   late IndicatorEffect _effect;
@@ -289,7 +297,9 @@ class _AnimatedSmoothIndicatorState extends AnimatedWidgetBaseState<AnimatedSmoo
   }
 
   void _updateEffect() {
-    _effect = widget.effect ?? SmoothPageIndicatorTheme.of(context)?.effect ?? const WormEffect();
+    _effect = widget.effect ??
+        SmoothPageIndicatorTheme.of(context)?.effect ??
+        const WormEffect();
   }
 
   @override

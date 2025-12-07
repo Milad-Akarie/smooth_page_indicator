@@ -296,7 +296,8 @@ void main() {
       controller.dispose();
     });
 
-    testWidgets('handles controller returning NaN for page value', (tester) async {
+    testWidgets('handles controller returning NaN for page value',
+        (tester) async {
       final controller = _NaNPageController(initialPage: 2);
 
       await tester.pumpWidget(

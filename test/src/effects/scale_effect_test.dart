@@ -21,7 +21,8 @@ void main() {
 
     test('buildPainter returns IndicatorPainter', () {
       const effect = ScaleEffect();
-      final painter = effect.buildPainter(5, 0, DefaultIndicatorColors.defaults);
+      final painter =
+          effect.buildPainter(5, 0, DefaultIndicatorColors.defaults);
 
       expect(painter, isA<IndicatorPainter>());
     });
@@ -34,7 +35,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5, DefaultIndicatorColors.defaults),
+              painter:
+                  effect.buildPainter(5, 1.5, DefaultIndicatorColors.defaults),
             ),
           ),
         ),
