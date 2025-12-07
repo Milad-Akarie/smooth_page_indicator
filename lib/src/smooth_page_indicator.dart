@@ -114,7 +114,10 @@ class _SmoothPageIndicatorState extends State<SmoothPageIndicator> with _SizeAnd
 
   double get _offset {
     try {
-      var offset = widget.controller.page ?? widget.controller.initialPage.toDouble();
+      var offset = widget.controller.page;
+      if (offset == null || offset.isNaN) {
+        return widget.controller.initialPage.toDouble();
+      }
       return offset % widget.count;
     } catch (_) {
       return widget.controller.initialPage.toDouble();

@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+class _NaNPageController extends PageController {
+  _NaNPageController({super.initialPage});
+
+  @override
+  double? get page => double.nan;
+}
+
 void main() {
   group('SmoothPageIndicator', () {
     late PageController pageController;
@@ -272,6 +279,25 @@ void main() {
 
     testWidgets('handles controller with initial page', (tester) async {
       final controller = PageController(initialPage: 2);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SmoothPageIndicator(
+              controller: controller,
+              count: 5,
+            ),
+          ),
+        ),
+      );
+
+      expect(find.byType(SmoothPageIndicator), findsOneWidget);
+
+      controller.dispose();
+    });
+
+    testWidgets('handles controller returning NaN for page value', (tester) async {
+      final controller = _NaNPageController(initialPage: 2);
 
       await tester.pumpWidget(
         MaterialApp(
