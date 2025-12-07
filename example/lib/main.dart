@@ -83,95 +83,92 @@ class HomePageState extends State<HomePage> {
                   type: WormType.thinUnderground,
                 ),
               ),
-              //
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 16, bottom: 8),
-              //   child: Text(
-              //     'Jumping Dot',
-              //     style: TextStyle(color: Colors.black54),
-              //   ),
-              // ),
-              // Container(
-              //   child: SmoothPageIndicator(
-              //     controller: controller,
-              //     count: pages.length,
-              //     effect: JumpingDotEffect(
-              //       dotHeight: 16,
-              //       dotWidth: 16,
-              //       jumpScale: .7,
-              //       verticalOffset: 15,
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 16, bottom: 12),
-              //   child: Text(
-              //     'Scrolling Dots',
-              //     style: TextStyle(color: Colors.black54),
-              //   ),
-              // ),
-              // SmoothPageIndicator(
-              //     controller: controller,
-              //     count: pages.length,
-              //     effect: ScrollingDotsEffect(
-              //       activeStrokeWidth: 2.6,
-              //       activeDotScale: 1.3,
-              //       maxVisibleDots: 5,
-              //       radius: 8,
-              //       spacing: 10,
-              //       dotHeight: 12,
-              //       dotWidth: 12,
-              //     )),
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 16, bottom: 16),
-              //   child: Text(
-              //     'Customizable Effect',
-              //     style: TextStyle(color: Colors.black54),
-              //   ),
-              // ),
-              // Container(
-              //   // color: Colors.red.withOpacity(.4),
-              //   child: SmoothPageIndicator(
-              //     controller: controller,
-              //     count: pages.length,
-              //     effect: CustomizableEffect(
-              //       activeDotDecoration: DotDecoration(
-              //         width: 32,
-              //         height: 12,
-              //         color: Colors.indigo,
-              //         rotationAngle: 180,
-              //         verticalOffset: -10,
-              //         borderRadius: BorderRadius.circular(24),
-              //         // dotBorder: DotBorder(
-              //         //   padding: 2,
-              //         //   width: 2,
-              //         //   color: Colors.indigo,
-              //         // ),
-              //       ),
-              //       dotDecoration: DotDecoration(
-              //         width: 24,
-              //         height: 12,
-              //         color: Colors.grey,
-              //         // dotBorder: DotBorder(
-              //         //   padding: 2,
-              //         //   width: 2,
-              //         //   color: Colors.grey,
-              //         // ),
-              //         // borderRadius: BorderRadius.only(
-              //         //     topLeft: Radius.circular(2),
-              //         //     topRight: Radius.circular(16),
-              //         //     bottomLeft: Radius.circular(16),
-              //         //     bottomRight: Radius.circular(2)),
-              //         borderRadius: BorderRadius.circular(16),
-              //         verticalOffset: 0,
-              //       ),
-              //       spacing: 6.0,
-              //       // activeColorOverride: (i) => colors[i],
-              //       inActiveColorOverride: (i) => colors[i],
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(height: 32.0),
+              Padding(
+                padding: const EdgeInsets.only(top: 16, bottom: 8),
+                child: Text(
+                  'Jumping Dot',
+                  style: TextStyle(color: Colors.black54),
+                ),
+              ),
+              SmoothPageIndicator(
+                controller: controller,
+                count: pages.length,
+                effect: JumpingDotEffect(
+                  dotHeight: 16,
+                  dotWidth: 16,
+                  jumpScale: .7,
+                  verticalOffset: 15,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16, bottom: 12),
+                child: Text(
+                  'Scrolling Dots',
+                  style: TextStyle(color: Colors.black54),
+                ),
+              ),
+              SmoothPageIndicator(
+                  controller: controller,
+                  count: pages.length,
+                  effect: ScrollingDotsEffect(
+                    activeStrokeWidth: 2.6,
+                    activeDotScale: 1.3,
+                    maxVisibleDots: 5,
+                    radius: 8,
+                    spacing: 10,
+                    dotHeight: 12,
+                    dotWidth: 12,
+                  )),
+              Padding(
+                padding: const EdgeInsets.only(top: 16, bottom: 16),
+                child: Text(
+                  'Customizable Effect',
+                  style: TextStyle(color: Colors.black54),
+                ),
+              ),
+              Container(
+                // color: Colors.red.withOpacity(.4),
+                child: SmoothPageIndicator(
+                  controller: controller,
+                  count: pages.length,
+                  effect: CustomizableEffect(
+                    activeDotDecoration: DotDecoration(
+                      width: 32,
+                      height: 12,
+                      color: Colors.indigo,
+                      rotationAngle: 180,
+                      verticalOffset: -10,
+                      borderRadius: BorderRadius.circular(24),
+                      // dotBorder: DotBorder(
+                      //   padding: 2,
+                      //   width: 2,
+                      //   color: Colors.indigo,
+                      // ),
+                    ),
+                    dotDecoration: DotDecoration(
+                      width: 24,
+                      height: 12,
+                      color: Colors.grey,
+                      // dotBorder: DotBorder(
+                      //   padding: 2,
+                      //   width: 2,
+                      //   color: Colors.grey,
+                      // ),
+                      // borderRadius: BorderRadius.only(
+                      //     topLeft: Radius.circular(2),
+                      //     topRight: Radius.circular(16),
+                      //     bottomLeft: Radius.circular(16),
+                      //     bottomRight: Radius.circular(2)),
+                      borderRadius: BorderRadius.circular(16),
+                      verticalOffset: 0,
+                    ),
+                    spacing: 6.0,
+                    // activeColorOverride: (i) => colors[i],
+                    inActiveColorOverride: (i) => colors[i],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 32.0),
             ],
           ),
         ),
