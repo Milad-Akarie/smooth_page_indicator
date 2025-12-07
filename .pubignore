@@ -1,0 +1,29 @@
+# Test files (not needed by package users, available on GitHub)
+test/
+
+# Demo GIFs (shown in README via GitHub links)
+demo/
+
+# Example app build artifacts (keep example/lib for pub.dev Example tab)
+example/android/
+example/ios/
+example/web/
+example/build/
+example/pubspec.lock
+
+# Coverage reports
+coverage/
+
+# Build artifacts
+build/
+
+# Development files
+.dart_tool/
+.idea/
+*.iml
+.vscode/
+
+# Scripts
+run_coverage.sh
+
+
