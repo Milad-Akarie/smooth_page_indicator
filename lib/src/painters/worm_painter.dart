@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/effects/worm_effect.dart';
+import 'package:smooth_page_indicator/src/theme_defaults.dart';
 
 import 'indicator_painter.dart';
 
@@ -17,14 +18,15 @@ class WormPainter extends BasicIndicatorPainter {
     required this.effect,
     required int count,
     required double offset,
-  }) : super(offset, count, effect);
+    required ThemeDefaults themeDefaults,
+  }) : super(offset, count, effect, themeDefaults);
 
   @override
   void paint(Canvas canvas, Size size) {
     // paint still dots
     paintStillDots(canvas, size);
 
-    final activeDotPaint = Paint()..color = effect.activeDotColor;
+    final activeDotPaint = Paint()..color = effectiveActiveColor;
     final dotOffset = (offset - offset.toInt());
 
     // handle dot travel from end to start (for infinite pager support)
@@ -47,11 +49,8 @@ class WormPainter extends BasicIndicatorPainter {
     var head = xPos;
     var tail = xPos + effect.dotWidth + (wormOffset * distance);
     var halfHeight = effect.dotHeight / 2;
-    final thinWorm =
-        effect.type == WormType.thin || effect.type == WormType.thinUnderground;
-    var dotHeight = thinWorm
-        ? halfHeight + (halfHeight * (1 - wormOffset))
-        : effect.dotHeight;
+    final thinWorm = effect.type == WormType.thin || effect.type == WormType.thinUnderground;
+    var dotHeight = thinWorm ? halfHeight + (halfHeight * (1 - wormOffset)) : effect.dotHeight;
 
     if (wormOffset > 1) {
       tail = xPos + effect.dotWidth + (1 * distance);
@@ -67,8 +66,7 @@ class WormPainter extends BasicIndicatorPainter {
       yPos + dotHeight / 2,
       dotRadius,
     );
-    if (effect.type == WormType.underground ||
-        effect.type == WormType.thinUnderground) {
+    if (effect.type == WormType.underground || effect.type == WormType.thinUnderground) {
       canvas.saveLayer(Rect.largest, Paint());
       canvas.drawRRect(worm, activeDotPaint);
       maskStillDots(size, canvas);

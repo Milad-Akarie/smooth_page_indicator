@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'effects/indicator_effect.dart';
 import 'effects/worm_effect.dart';
 import 'painters/indicator_painter.dart';
+import 'theme_defaults.dart';
 
 /// Signature for a callback function used to report
 /// dot tap-events
@@ -173,6 +174,7 @@ class SmoothIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeDefaults = ThemeDefaults.fromContext(context);
     return RotatedBox(
       quarterTurns: quarterTurns,
       child: GestureDetector(
@@ -180,7 +182,7 @@ class SmoothIndicator extends StatelessWidget {
         child: CustomPaint(
           size: size,
           // rebuild the painter with the new offset every time it updates
-          painter: effect.buildPainter(count, offset),
+          painter: effect.buildPainter(count, offset, themeDefaults),
         ),
       ),
     );

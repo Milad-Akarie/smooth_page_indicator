@@ -9,6 +9,7 @@ void main() {
     test('creates painter with correct properties', () {
       const effect = WormEffect();
       final painter = WormPainter(
+        themeDefaults: ThemeDefaults.defaults,
         effect: effect,
         count: 5,
         offset: 0.0,
@@ -21,16 +22,32 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = WormEffect();
-      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = WormPainter(effect: effect, count: 5, offset: 1.0);
+      final painter1 = WormPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
+      final painter2 = WormPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = WormEffect();
-      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = WormPainter(effect: effect, count: 5, offset: 0.0);
+      final painter1 = WormPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
+      final painter2 = WormPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -44,6 +61,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -65,6 +83,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.5,
@@ -86,6 +105,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.3,
@@ -107,6 +127,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.0,
@@ -128,6 +149,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.7,
@@ -149,6 +171,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.7, // wormOffset will be > 1
@@ -170,6 +193,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 4.5, // offset > count - 1
@@ -194,6 +218,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -218,6 +243,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -239,6 +265,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.7, // wormOffset > 1
@@ -342,6 +369,7 @@ void main() {
 }
 
 Widget _buildWormPainter({
+  ThemeDefaults themeDefaults = ThemeDefaults.defaults,
   WormEffect effect = const WormEffect(),
   int count = 5,
   double offset = 0.0,
@@ -352,6 +380,7 @@ Widget _buildWormPainter({
     child: CustomPaint(
       size: effect.calculateSize(count),
       painter: WormPainter(
+        themeDefaults: themeDefaults,
         effect: effect,
         count: count,
         offset: offset,

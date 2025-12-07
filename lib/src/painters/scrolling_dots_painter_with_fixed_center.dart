@@ -14,7 +14,8 @@ class ScrollingDotsWithFixedCenterPainter extends BasicIndicatorPainter {
     required this.effect,
     required int count,
     required double offset,
-  }) : super(offset, count, effect);
+    required ThemeDefaults themeDefaults,
+  }) : super(offset, count, effect, themeDefaults);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -25,14 +26,13 @@ class ScrollingDotsWithFixedCenterPainter extends BasicIndicatorPainter {
       ..style = effect.paintStyle;
 
     for (var index = 0; index < count; index++) {
-      var color = effect.dotColor;
+      var color = effectiveInactiveColor;
       if (index == current) {
         // ! Both a and b are non nullable
-        color = Color.lerp(effect.activeDotColor, effect.dotColor, dotOffset)!;
+        color = Color.lerp(effectiveActiveColor, effectiveInactiveColor, dotOffset)!;
       } else if (index - 1 == current) {
         // ! Both a and b are non nullable
-        color =
-            Color.lerp(effect.activeDotColor, effect.dotColor, 1 - dotOffset)!;
+        color = Color.lerp(effectiveActiveColor, effectiveInactiveColor, 1 - dotOffset)!;
       }
 
       var scale = 1.0;
@@ -41,8 +41,7 @@ class ScrollingDotsWithFixedCenterPainter extends BasicIndicatorPainter {
       final switchPoint = (effect.maxVisibleDots - 1) / 2;
 
       if (count > effect.maxVisibleDots) {
-        if (index >= current - switchPoint &&
-            index <= current + (switchPoint + 1)) {
+        if (index >= current - switchPoint && index <= current + (switchPoint + 1)) {
           if (index == (current + switchPoint)) {
             scale = smallDotScale + ((1 - smallDotScale) * dotOffset);
           } else if (index == current - (switchPoint - 1)) {
@@ -67,18 +66,16 @@ class ScrollingDotsWithFixedCenterPainter extends BasicIndicatorPainter {
       canvas.drawRRect(rRect, dotPaint..color = color);
     }
 
-    final rRect =
-        _calcBounds(size.height, size.width / 2, 0, effect.activeDotScale);
+    final rRect = _calcBounds(size.height, size.width / 2, 0, effect.activeDotScale);
     canvas.drawRRect(
         rRect,
         Paint()
-          ..color = effect.activeDotColor
+          ..color = effectiveActiveColor
           ..strokeWidth = effect.activeStrokeWidth
           ..style = PaintingStyle.stroke);
   }
 
-  RRect _calcBounds(double canvasHeight, double startingPoint, num i,
-      [double scale = 1.0]) {
+  RRect _calcBounds(double canvasHeight, double startingPoint, num i, [double scale = 1.0]) {
     final scaledWidth = effect.dotWidth * scale;
     final scaledHeight = effect.dotHeight * scale;
 

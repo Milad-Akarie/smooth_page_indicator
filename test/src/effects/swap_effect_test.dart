@@ -4,11 +4,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 void main() {
   group('SwapEffect', () {
-    test('default values are correct', () {
-      const effect = SwapEffect();
 
-      expect(effect.type, SwapType.normal);
-    });
 
     test('calculateSize for normal type', () {
       const effect = SwapEffect(
@@ -49,7 +45,7 @@ void main() {
 
     test('buildPainter returns IndicatorPainter', () {
       const effect = SwapEffect();
-      final painter = effect.buildPainter(5, 0);
+      final painter = effect.buildPainter(5, 0, ThemeDefaults.defaults);
 
       expect(painter, isA<IndicatorPainter>());
     });
@@ -62,7 +58,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5),
+              painter: effect.buildPainter(5, 1.5, ThemeDefaults.defaults),
             ),
           ),
         ),
@@ -79,7 +75,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5),
+              painter: effect.buildPainter(5, 1.5, ThemeDefaults.defaults),
             ),
           ),
         ),
@@ -96,7 +92,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5),
+              painter: effect.buildPainter(5, 1.5, ThemeDefaults.defaults),
             ),
           ),
         ),

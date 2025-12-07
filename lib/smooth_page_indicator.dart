@@ -10,3 +10,4 @@ export 'src/effects/worm_effect.dart';
 export 'src/effects/customizable_effect.dart';
 export 'src/painters/indicator_painter.dart';
 export 'src/smooth_page_indicator.dart';
+export 'src/theme_defaults.dart';

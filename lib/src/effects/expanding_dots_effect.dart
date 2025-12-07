@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/painters/expanding_dots_painter.dart';
 import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
+import 'package:smooth_page_indicator/src/theme_defaults.dart';
 
 import 'indicator_effect.dart';
 
@@ -18,8 +19,8 @@ class ExpandingDotsEffect extends BasicIndicatorEffect {
     super.dotHeight = 16.0,
     super.spacing = 8.0,
     super.radius = 16.0,
-    super.activeDotColor = Colors.indigo,
-    super.dotColor = Colors.grey,
+    super.activeDotColor,
+    super.dotColor,
     super.strokeWidth = 1.0,
     super.paintStyle = PaintingStyle.fill,
   }) : assert(expansionFactor > 1);
@@ -31,8 +32,8 @@ class ExpandingDotsEffect extends BasicIndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return ExpandingDotsPainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(int count, double offset, ThemeDefaults themeDefaults) {
+    return ExpandingDotsPainter(count: count, offset: offset, effect: this, themeDefaults: themeDefaults);
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/effects/slide_effect.dart';
+import 'package:smooth_page_indicator/src/theme_defaults.dart';
 
 import 'indicator_painter.dart';
 
@@ -17,7 +18,8 @@ class SlidePainter extends BasicIndicatorPainter {
     required this.effect,
     required int count,
     required double offset,
-  }) : super(offset, count, effect);
+    required ThemeDefaults themeDefaults,
+  }) : super(offset, count, effect, themeDefaults);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -25,7 +27,7 @@ class SlidePainter extends BasicIndicatorPainter {
 
     paintStillDots(canvas, size);
 
-    final activeDotPainter = Paint()..color = effect.activeDotColor;
+    final activeDotPainter = Paint()..color = effectiveActiveColor;
     final dotOffset = offset - offset.toInt();
     // handle dot travel from end to start (for infinite pager support)
     if (offset > count - 1) {

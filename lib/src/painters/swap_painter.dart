@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/effects/swap_effect.dart';
+import 'package:smooth_page_indicator/src/theme_defaults.dart';
 
 import 'indicator_painter.dart';
 
@@ -19,31 +20,27 @@ class SwapPainter extends BasicIndicatorPainter {
     required double offset,
     required this.effect,
     required int count,
-  }) : super(offset, count, effect);
+    required ThemeDefaults themeDefaults,
+  }) : super(offset, count, effect, themeDefaults);
 
   @override
   void paint(Canvas canvas, Size size) {
     final current = offset.floor();
     final dotOffset = offset - offset.floor();
-    final activePaint = Paint()..color = effect.activeDotColor;
+    final activePaint = Paint()..color = effectiveActiveColor;
     var dotScale = effect.dotWidth * .2;
     final yPos = size.height / 2;
     final xAnchor = effect.spacing / 2;
 
     final isGoingThroughPortal = offset > count - 1;
     if (isGoingThroughPortal) {
-      final startDot = calcPortalTravel(
-          size,
-          (effect.dotWidth / 2) + xAnchor - ((1 - dotOffset) * distance),
-          dotOffset);
+      final startDot =
+          calcPortalTravel(size, (effect.dotWidth / 2) + xAnchor - ((1 - dotOffset) * distance), dotOffset);
       canvas.drawRRect(startDot, activePaint);
 
       final endDot = calcPortalTravel(
         size,
-        ((count - 1) * distance) +
-            (effect.dotWidth / 2) +
-            xAnchor +
-            (dotOffset * distance),
+        ((count - 1) * distance) + (effect.dotWidth / 2) + xAnchor + (dotOffset * distance),
         1 - dotOffset,
       );
       canvas.drawRRect(endDot, activePaint);

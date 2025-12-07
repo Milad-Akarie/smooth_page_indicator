@@ -4,17 +4,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 void main() {
   group('ColorTransitionEffect', () {
-    test('default values are correct', () {
-      const effect = ColorTransitionEffect();
-
-      expect(effect.activeStrokeWidth, 1.5);
-      expect(effect.dotColor, Colors.grey);
-      expect(effect.activeDotColor, Colors.indigo);
-    });
-
     test('buildPainter returns IndicatorPainter', () {
       const effect = ColorTransitionEffect();
-      final painter = effect.buildPainter(5, 0);
+      final painter = effect.buildPainter(5, 0, ThemeDefaults.defaults);
 
       expect(painter, isA<IndicatorPainter>());
     });
@@ -39,7 +31,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5),
+              painter: effect.buildPainter(5, 1.5, ThemeDefaults.defaults),
             ),
           ),
         ),

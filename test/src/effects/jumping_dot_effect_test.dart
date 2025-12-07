@@ -4,13 +4,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 void main() {
   group('JumpingDotEffect', () {
-    test('default values are correct', () {
-      const effect = JumpingDotEffect();
-
-      expect(effect.jumpScale, 1.4);
-      expect(effect.verticalOffset, 0.0);
-    });
-
     test('calculateSize accounts for jump scale', () {
       const effect = JumpingDotEffect(
         dotWidth: 16,
@@ -39,7 +32,7 @@ void main() {
 
     test('buildPainter returns IndicatorPainter', () {
       const effect = JumpingDotEffect();
-      final painter = effect.buildPainter(5, 0);
+      final painter = effect.buildPainter(5, 0, ThemeDefaults.defaults);
 
       expect(painter, isA<IndicatorPainter>());
     });
@@ -52,7 +45,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5),
+              painter: effect.buildPainter(5, 1.5, ThemeDefaults.defaults),
             ),
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
+import 'package:smooth_page_indicator/src/theme_defaults.dart';
 
 /// An Abstraction for a dot-indicator animation effect
 abstract class IndicatorEffect {
@@ -7,7 +8,9 @@ abstract class IndicatorEffect {
   const IndicatorEffect();
 
   /// Builds a new painter every time the page offset changes
-  IndicatorPainter buildPainter(int count, double offset);
+  ///
+  /// [themeDefaults] is used to resolve null dot colors
+  IndicatorPainter buildPainter(int count, double offset, ThemeDefaults themeDefaults);
 
   /// Calculates the size of canvas based on
   /// dots count, size and spacing
@@ -39,10 +42,12 @@ abstract class BasicIndicatorEffect extends IndicatorEffect {
   final double radius;
 
   /// Inactive dots color or all dots in some effects
-  final Color dotColor;
+  /// If null, defaults to the app's primary color with reduced opacity
+  final Color? dotColor;
 
   /// The active dot color
-  final Color activeDotColor;
+  /// If null, defaults to the app's primary color
+  final Color? activeDotColor;
 
   /// Inactive dots paint style (fill|stroke) defaults to fill.
   final PaintingStyle paintStyle;
@@ -60,10 +65,7 @@ abstract class BasicIndicatorEffect extends IndicatorEffect {
     required this.dotColor,
     required this.paintStyle,
     required this.activeDotColor,
-  }) : assert(dotWidth >= 0 &&
-            dotHeight >= 0 &&
-            spacing >= 0 &&
-            strokeWidth >= 0);
+  }) : assert(dotWidth >= 0 && dotHeight >= 0 && spacing >= 0 && strokeWidth >= 0);
 
   @override
   Size calculateSize(int count) {

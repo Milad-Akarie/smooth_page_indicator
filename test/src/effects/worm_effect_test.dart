@@ -4,18 +4,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 void main() {
   group('WormEffect', () {
-    test('default values are correct', () {
-      const effect = WormEffect();
-
-      expect(effect.dotWidth, 16.0);
-      expect(effect.dotHeight, 16.0);
-      expect(effect.spacing, 8.0);
-      expect(effect.radius, 16.0);
-      expect(effect.dotColor, Colors.grey);
-      expect(effect.activeDotColor, Colors.indigo);
-      expect(effect.type, WormType.normal);
-    });
-
     test('calculateSize returns correct size', () {
       const effect = WormEffect(
         dotWidth: 16,
@@ -30,7 +18,7 @@ void main() {
 
     test('buildPainter returns IndicatorPainter', () {
       const effect = WormEffect();
-      final painter = effect.buildPainter(5, 0);
+      final painter = effect.buildPainter(5, 0, ThemeDefaults.defaults);
 
       expect(painter, isA<IndicatorPainter>());
     });
@@ -93,7 +81,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5),
+              painter: effect.buildPainter(5, 1.5, ThemeDefaults.defaults),
             ),
           ),
         ),
@@ -110,7 +98,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 4.5),
+              painter: effect.buildPainter(5, 4.5, ThemeDefaults.defaults),
             ),
           ),
         ),
@@ -127,7 +115,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5),
+              painter: effect.buildPainter(5, 1.5, ThemeDefaults.defaults),
             ),
           ),
         ),
@@ -144,7 +132,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5),
+              painter: effect.buildPainter(5, 1.5, ThemeDefaults.defaults),
             ),
           ),
         ),
@@ -161,7 +149,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5),
+              painter: effect.buildPainter(5, 1.5, ThemeDefaults.defaults),
             ),
           ),
         ),

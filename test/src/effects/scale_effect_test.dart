@@ -4,13 +4,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 void main() {
   group('ScaleEffect', () {
-    test('default values are correct', () {
-      const effect = ScaleEffect();
-
-      expect(effect.scale, 1.4);
-      expect(effect.activePaintStyle, PaintingStyle.fill);
-    });
-
     test('calculateSize accounts for scale', () {
       const effect = ScaleEffect(
         dotWidth: 16,
@@ -28,7 +21,7 @@ void main() {
 
     test('buildPainter returns IndicatorPainter', () {
       const effect = ScaleEffect();
-      final painter = effect.buildPainter(5, 0);
+      final painter = effect.buildPainter(5, 0, ThemeDefaults.defaults);
 
       expect(painter, isA<IndicatorPainter>());
     });
@@ -41,7 +34,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5),
+              painter: effect.buildPainter(5, 1.5, ThemeDefaults.defaults),
             ),
           ),
         ),

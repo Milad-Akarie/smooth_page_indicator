@@ -8,7 +8,7 @@ void main() {
   group('TransitionPainter', () {
     test('creates painter with correct properties', () {
       const effect = ColorTransitionEffect();
-      final painter = TransitionPainter(
+      final painter = TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
         effect: effect,
         count: 5,
         offset: 0.0,
@@ -21,16 +21,16 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ColorTransitionEffect();
-      final painter1 = TransitionPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = TransitionPainter(effect: effect, count: 5, offset: 1.0);
+      final painter1 = TransitionPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 5, offset: 0.0);
+      final painter2 = TransitionPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 5, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ColorTransitionEffect();
-      final painter1 = TransitionPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = TransitionPainter(effect: effect, count: 5, offset: 0.0);
+      final painter1 = TransitionPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 5, offset: 0.0);
+      final painter2 = TransitionPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 5, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -43,7 +43,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: TransitionPainter(
+              painter: TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -64,7 +64,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: TransitionPainter(
+              painter: TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 5,
                 offset: 2.5,
@@ -85,7 +85,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: TransitionPainter(
+              painter: TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 5,
                 offset: 4.5,
@@ -109,7 +109,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: TransitionPainter(
+              painter: TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -133,7 +133,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: TransitionPainter(
+              painter: TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -156,7 +156,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: TransitionPainter(
+              painter: TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 5,
                 offset: 1.5,
@@ -181,7 +181,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: TransitionPainter(
+              painter: TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 5,
                 offset: 2.0,
@@ -204,7 +204,7 @@ void main() {
             home: Scaffold(
               body: CustomPaint(
                 size: effect.calculateSize(5),
-                painter: TransitionPainter(
+                painter: TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
                   effect: effect,
                   count: 5,
                   offset: offset,
@@ -226,7 +226,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: TransitionPainter(
+              painter: TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 5,
                 offset: 2.3, // current = 2, tests first branch
@@ -247,7 +247,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: TransitionPainter(
+              painter: TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 5,
                 offset: 2.7, // current = 2, i = 3 tests second branch
@@ -386,7 +386,7 @@ Widget _buildPainter({
     padding: const EdgeInsets.all(16.0),
     child: CustomPaint(
       size: effect.calculateSize(count),
-      painter: TransitionPainter(
+      painter: TransitionPainter(themeDefaults: ThemeDefaults.defaults, 
         effect: effect,
         count: count,
         offset: offset,

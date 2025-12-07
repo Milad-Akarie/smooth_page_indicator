@@ -9,6 +9,7 @@ void main() {
     test('creates painter with correct properties', () {
       const effect = ExpandingDotsEffect();
       final painter = ExpandingDotsPainter(
+        themeDefaults: ThemeDefaults.defaults,
         effect: effect,
         count: 5,
         offset: 0.0,
@@ -21,16 +22,32 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ExpandingDotsEffect();
-      final painter1 = ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = ExpandingDotsPainter(effect: effect, count: 5, offset: 1.0);
+      final painter1 = ExpandingDotsPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
+      final painter2 = ExpandingDotsPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ExpandingDotsEffect();
-      final painter1 = ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = ExpandingDotsPainter(effect: effect, count: 5, offset: 0.0);
+      final painter1 = ExpandingDotsPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
+      final painter2 = ExpandingDotsPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -44,6 +61,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -65,6 +83,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.5,
@@ -86,6 +105,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 4.0,
@@ -107,6 +127,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 4.5, // offset > count - 1
@@ -131,6 +152,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -152,6 +174,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.5,
@@ -176,6 +199,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -201,6 +225,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.0,
@@ -224,6 +249,7 @@ void main() {
               body: CustomPaint(
                 size: effect.calculateSize(5),
                 painter: ExpandingDotsPainter(
+                  themeDefaults: ThemeDefaults.defaults,
                   effect: effect,
                   count: 5,
                   offset: offset,
@@ -305,6 +331,7 @@ void main() {
 }
 
 Widget _buildExpandingDotsPainter({
+  ThemeDefaults themeDefaults = ThemeDefaults.defaults,
   ExpandingDotsEffect effect = const ExpandingDotsEffect(),
   int count = 5,
   double offset = 0.0,
@@ -315,6 +342,7 @@ Widget _buildExpandingDotsPainter({
     child: CustomPaint(
       size: effect.calculateSize(count),
       painter: ExpandingDotsPainter(
+        themeDefaults: themeDefaults,
         effect: effect,
         count: count,
         offset: offset,

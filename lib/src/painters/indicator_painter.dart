@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/effects/indicator_effect.dart';
+import 'package:smooth_page_indicator/src/theme_defaults.dart';
 
 /// Basic implementation of [IndicatorPainter] that holds some shared
 /// properties and behaviors between different painters
@@ -10,6 +11,15 @@ abstract class BasicIndicatorPainter extends IndicatorPainter {
   /// The provided effect is passed to this super class
   /// to make some calculations and paint still dots
   final BasicIndicatorEffect _effect;
+
+  /// The resolved theme defaults
+  final ThemeDefaults themeDefaults;
+
+  /// The resolved dot color (inactive dots)
+  final Color effectiveInactiveColor;
+
+  /// The resolved active dot color
+  final Color effectiveActiveColor;
 
   /// Inactive dot paint or base paint in one-color effects.
   final Paint dotPaint;
@@ -22,9 +32,12 @@ abstract class BasicIndicatorPainter extends IndicatorPainter {
     super.offset,
     this.count,
     this._effect,
+    this.themeDefaults,
   )   : dotRadius = Radius.circular(_effect.radius),
+        effectiveInactiveColor = themeDefaults.resolveInactiveColor(_effect),
+        effectiveActiveColor = themeDefaults.resolveActiveColor(_effect),
         dotPaint = Paint()
-          ..color = _effect.dotColor
+          ..color = themeDefaults.resolveInactiveColor(_effect)
           ..style = _effect.paintStyle
           ..strokeWidth = _effect.strokeWidth;
 

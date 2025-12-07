@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/effects/jumping_dot_effect.dart';
+import 'package:smooth_page_indicator/src/theme_defaults.dart';
 
 import 'indicator_painter.dart';
 
@@ -19,7 +20,8 @@ class JumpingDotPainter extends BasicIndicatorPainter {
     required this.effect,
     required int count,
     required double offset,
-  }) : super(offset, count, effect);
+    required ThemeDefaults themeDefaults,
+  }) : super(offset, count, effect, themeDefaults);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -28,7 +30,7 @@ class JumpingDotPainter extends BasicIndicatorPainter {
       canvas.translate(0, effect.verticalOffset / 2);
     }
     paintStillDots(canvas, size);
-    final activeDotPainter = Paint()..color = effect.activeDotColor;
+    final activeDotPainter = Paint()..color = effectiveActiveColor;
     final dotOffset = offset - offset.toInt();
 
     // handle dot travel from end to start (for infinite pager support)

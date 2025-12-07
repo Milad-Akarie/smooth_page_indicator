@@ -14,6 +14,7 @@ void main() {
         effect: effect,
         count: 5,
         offset: 0.0,
+        themeDefaults: ThemeDefaults.defaults,
       );
 
       // distance = dotWidth + spacing = 16 + 8 = 24
@@ -26,6 +27,7 @@ void main() {
         effect: effect,
         count: 5,
         offset: 0.0,
+        themeDefaults: ThemeDefaults.defaults,
       );
 
       expect(painter.dotRadius, const Radius.circular(8));
@@ -41,6 +43,7 @@ void main() {
         effect: effect,
         count: 5,
         offset: 0.0,
+        themeDefaults: ThemeDefaults.defaults,
       );
 
       expect(painter.dotPaint.color.toARGB32(), Colors.red.toARGB32());
@@ -58,6 +61,7 @@ void main() {
         effect: effect,
         count: 5,
         offset: 0.0,
+        themeDefaults: ThemeDefaults.defaults,
       );
 
       expect(painter.dotPaint.color.toARGB32(), Colors.blue.toARGB32());
@@ -65,8 +69,7 @@ void main() {
       expect(painter.dotPaint.strokeWidth, 3.0);
     });
 
-    testWidgets('paintStillDots renders correct number of dots',
-        (tester) async {
+    testWidgets('paintStillDots renders correct number of dots', (tester) async {
       const effect = WormEffect();
 
       await tester.pumpWidget(
@@ -78,6 +81,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -104,6 +108,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -125,6 +130,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 1.5,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -134,8 +140,7 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('calcPortalTravel renders portal travel animation',
-        (tester) async {
+    testWidgets('calcPortalTravel renders portal travel animation', (tester) async {
       const effect = WormEffect();
 
       await tester.pumpWidget(
@@ -147,6 +152,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 4.5, // Triggers portal travel
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -160,23 +166,23 @@ void main() {
   group('IndicatorPainter', () {
     test('shouldRepaint returns true when offset changes', () {
       const effect = WormEffect();
-      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = WormPainter(effect: effect, count: 5, offset: 1.0);
+      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0, themeDefaults: ThemeDefaults.defaults);
+      final painter2 = WormPainter(effect: effect, count: 5, offset: 1.0, themeDefaults: ThemeDefaults.defaults);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = WormEffect();
-      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = WormPainter(effect: effect, count: 5, offset: 0.0);
+      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0, themeDefaults: ThemeDefaults.defaults);
+      final painter2 = WormPainter(effect: effect, count: 5, offset: 0.0, themeDefaults: ThemeDefaults.defaults);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
 
     test('offset is stored correctly', () {
       const effect = WormEffect();
-      final painter = WormPainter(effect: effect, count: 5, offset: 2.5);
+      final painter = WormPainter(effect: effect, count: 5, offset: 2.5, themeDefaults: ThemeDefaults.defaults);
 
       expect(painter.offset, 2.5);
     });

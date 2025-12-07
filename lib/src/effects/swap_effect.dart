@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
 import 'package:smooth_page_indicator/src/painters/swap_painter.dart';
+import 'package:smooth_page_indicator/src/theme_defaults.dart';
 
 import 'indicator_effect.dart';
 
@@ -13,13 +14,13 @@ class SwapEffect extends BasicIndicatorEffect {
 
   /// Default constructor
   const SwapEffect({
-    super.activeDotColor = Colors.indigo,
+    super.activeDotColor,
     double offset = 16.0,
     super.dotWidth = 16.0,
     super.dotHeight = 16.0,
     super.spacing = 8.0,
     super.radius = 16,
-    super.dotColor = Colors.grey,
+    super.dotColor,
     super.strokeWidth = 1.0,
     this.type = SwapType.normal,
     super.paintStyle = PaintingStyle.fill,
@@ -37,8 +38,8 @@ class SwapEffect extends BasicIndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return SwapPainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(int count, double offset, ThemeDefaults themeDefaults) {
+    return SwapPainter(count: count, offset: offset, effect: this, themeDefaults: themeDefaults);
   }
 }
 

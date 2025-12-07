@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
 import 'package:smooth_page_indicator/src/painters/scrolling_dots_painter.dart';
 import 'package:smooth_page_indicator/src/painters/scrolling_dots_painter_with_fixed_center.dart';
+import 'package:smooth_page_indicator/src/theme_defaults.dart';
 
 import 'indicator_effect.dart';
 
@@ -42,8 +43,8 @@ class ScrollingDotsEffect extends BasicIndicatorEffect {
     super.dotHeight = 16.0,
     super.spacing = 8.0,
     super.radius = 16,
-    super.dotColor = Colors.grey,
-    super.activeDotColor = Colors.indigo,
+    super.dotColor,
+    super.activeDotColor,
     super.strokeWidth = 1.0,
     super.paintStyle = PaintingStyle.fill,
   })  : assert(activeDotScale >= 0.0),
@@ -80,7 +81,7 @@ class ScrollingDotsEffect extends BasicIndicatorEffect {
   }
 
   @override
-  BasicIndicatorPainter buildPainter(int count, double offset) {
+  BasicIndicatorPainter buildPainter(int count, double offset, ThemeDefaults themeDefaults) {
     if (fixedCenter) {
       assert(
         offset.ceil() < count,
@@ -90,12 +91,14 @@ class ScrollingDotsEffect extends BasicIndicatorEffect {
         count: count,
         offset: offset,
         effect: this,
+        themeDefaults: themeDefaults,
       );
     } else {
       return ScrollingDotsPainter(
         count: count,
         offset: offset,
         effect: this,
+        themeDefaults: themeDefaults,
       );
     }
   }

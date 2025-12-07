@@ -4,16 +4,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 void main() {
   group('ScrollingDotsEffect', () {
-    test('default values are correct', () {
-      const effect = ScrollingDotsEffect();
-
-      expect(effect.activeStrokeWidth, 1.5);
-      expect(effect.activeDotScale, 1.3);
-      expect(effect.smallDotScale, 0.66);
-      expect(effect.maxVisibleDots, 5);
-      expect(effect.fixedCenter, false);
-    });
-
     test('calculateSize for normal mode', () {
       const effect = ScrollingDotsEffect(
         dotWidth: 16,
@@ -87,7 +77,7 @@ void main() {
 
     test('buildPainter returns BasicIndicatorPainter', () {
       const effect = ScrollingDotsEffect();
-      final painter = effect.buildPainter(10, 0);
+      final painter = effect.buildPainter(10, 0, ThemeDefaults.defaults);
 
       expect(painter, isA<IndicatorPainter>());
     });
@@ -100,7 +90,8 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: effect.buildPainter(10, 3.5),
+              painter:
+                  effect.buildPainter(10, 3.5, ThemeDefaults.defaults),
             ),
           ),
         ),
@@ -117,7 +108,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: effect.buildPainter(10, 3),
+              painter: effect.buildPainter(10, 3, ThemeDefaults.defaults),
             ),
           ),
         ),

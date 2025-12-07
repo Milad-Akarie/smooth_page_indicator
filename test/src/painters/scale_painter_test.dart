@@ -12,6 +12,7 @@ void main() {
         effect: effect,
         count: 5,
         offset: 0.0,
+        themeDefaults: ThemeDefaults.defaults,
       );
 
       expect(painter.count, 5);
@@ -21,16 +22,16 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ScaleEffect();
-      final painter1 = ScalePainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = ScalePainter(effect: effect, count: 5, offset: 1.0);
+      final painter1 = ScalePainter(effect: effect, count: 5, offset: 0.0, themeDefaults: ThemeDefaults.defaults);
+      final painter2 = ScalePainter(effect: effect, count: 5, offset: 1.0, themeDefaults: ThemeDefaults.defaults);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ScaleEffect();
-      final painter1 = ScalePainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = ScalePainter(effect: effect, count: 5, offset: 0.0);
+      final painter1 = ScalePainter(effect: effect, count: 5, offset: 0.0, themeDefaults: ThemeDefaults.defaults);
+      final painter2 = ScalePainter(effect: effect, count: 5, offset: 0.0, themeDefaults: ThemeDefaults.defaults);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -47,6 +48,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -68,6 +70,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 2.5,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -89,6 +92,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 4.5,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -110,6 +114,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 1.5,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -134,6 +139,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -158,6 +164,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -182,6 +189,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 2.0,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -207,6 +215,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 1.0,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -230,6 +239,7 @@ void main() {
                   effect: effect,
                   count: 5,
                   offset: offset,
+                  themeDefaults: ThemeDefaults.defaults,
                 ),
               ),
             ),
@@ -255,6 +265,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
+                themeDefaults: ThemeDefaults.defaults,
               ),
             ),
           ),
@@ -329,6 +340,7 @@ void main() {
 }
 
 Widget _buildScalePainter({
+  ThemeDefaults themeDefaults = ThemeDefaults.defaults,
   ScaleEffect effect = const ScaleEffect(),
   int count = 5,
   double offset = 0.0,
@@ -339,6 +351,7 @@ Widget _buildScalePainter({
     child: CustomPaint(
       size: effect.calculateSize(count),
       painter: ScalePainter(
+        themeDefaults: themeDefaults,
         effect: effect,
         count: count,
         offset: offset,

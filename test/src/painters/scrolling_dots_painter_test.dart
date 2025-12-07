@@ -7,7 +7,7 @@ void main() {
   group('ScrollingDotsPainter', () {
     test('creates painter with correct properties', () {
       const effect = ScrollingDotsEffect();
-      final painter = ScrollingDotsPainter(
+      final painter = ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
         effect: effect,
         count: 10,
         offset: 0.0,
@@ -20,16 +20,16 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ScrollingDotsEffect();
-      final painter1 = ScrollingDotsPainter(effect: effect, count: 10, offset: 0.0);
-      final painter2 = ScrollingDotsPainter(effect: effect, count: 10, offset: 1.0);
+      final painter1 = ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 10, offset: 0.0);
+      final painter2 = ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 10, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ScrollingDotsEffect();
-      final painter1 = ScrollingDotsPainter(effect: effect, count: 10, offset: 0.0);
-      final painter2 = ScrollingDotsPainter(effect: effect, count: 10, offset: 0.0);
+      final painter1 = ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 10, offset: 0.0);
+      final painter2 = ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 10, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -42,7 +42,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 0.0,
@@ -63,7 +63,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 1.0, // In pre-scroll range
@@ -84,7 +84,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 5.0, // In scroll range
@@ -105,7 +105,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 8.0, // In after-scroll range
@@ -126,7 +126,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 2.5, // switchPoint + 1 = 3, willStartScrolling when current + 1 == 3
@@ -147,7 +147,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 6.5, // Tests willStopScrolling
@@ -168,7 +168,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 9.5,
@@ -189,7 +189,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 5, // Less than maxVisibleDots
                 offset: 2.0,
@@ -213,7 +213,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 0.0,
@@ -237,7 +237,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 0.0,
@@ -258,7 +258,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 3.0,
@@ -282,7 +282,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 5.5,
@@ -305,7 +305,7 @@ void main() {
             home: Scaffold(
               body: CustomPaint(
                 size: effect.calculateSize(10),
-                painter: ScrollingDotsPainter(
+                painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                   effect: effect,
                   count: 10,
                   offset: offset,
@@ -327,7 +327,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 4.5, // Tests firstVisibleDot + 1 scaling
@@ -348,7 +348,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 1.5, // Tests lastVisibleDot - 1 scaling in preScrollRange
@@ -369,7 +369,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 9.3, // offset > count - 1 with count > maxVisibleDots
@@ -390,7 +390,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: ScrollingDotsPainter(
+              painter: ScrollingDotsPainter(themeDefaults: ThemeDefaults.defaults, 
                 effect: effect,
                 count: 5,
                 offset: 4.3, // offset > count - 1 with count <= maxVisibleDots

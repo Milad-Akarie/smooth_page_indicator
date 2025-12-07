@@ -9,6 +9,7 @@ void main() {
     test('creates painter with correct properties', () {
       const effect = SwapEffect();
       final painter = SwapPainter(
+        themeDefaults: ThemeDefaults.defaults,
         effect: effect,
         count: 5,
         offset: 0.0,
@@ -21,16 +22,32 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = SwapEffect();
-      final painter1 = SwapPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = SwapPainter(effect: effect, count: 5, offset: 1.0);
+      final painter1 = SwapPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
+      final painter2 = SwapPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = SwapEffect();
-      final painter1 = SwapPainter(effect: effect, count: 5, offset: 0.0);
-      final painter2 = SwapPainter(effect: effect, count: 5, offset: 0.0);
+      final painter1 = SwapPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
+      final painter2 = SwapPainter(
+          themeDefaults: ThemeDefaults.defaults,
+          effect: effect,
+          count: 5,
+          offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -44,6 +61,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SwapPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -65,6 +83,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SwapPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.5,
@@ -86,6 +105,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SwapPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.5,
@@ -107,6 +127,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SwapPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.5,
@@ -128,6 +149,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SwapPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.5,
@@ -149,6 +171,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SwapPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.7, // dotOffset > 0.5
@@ -170,6 +193,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SwapPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 4.5,
@@ -194,6 +218,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SwapPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -218,6 +243,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SwapPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -243,6 +269,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SwapPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.0,
@@ -266,6 +293,7 @@ void main() {
               body: CustomPaint(
                 size: effect.calculateSize(5),
                 painter: SwapPainter(
+                  themeDefaults: ThemeDefaults.defaults,
                   effect: effect,
                   count: 5,
                   offset: offset,
@@ -288,6 +316,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SwapPainter(
+                themeDefaults: ThemeDefaults.defaults,
                 effect: effect,
                 count: 5,
                 offset: 4.0,
@@ -361,6 +390,7 @@ void main() {
 }
 
 Widget _buildSwapPainter({
+  ThemeDefaults themeDefaults = ThemeDefaults.defaults,
   SwapEffect effect = const SwapEffect(),
   int count = 5,
   double offset = 0.0,
@@ -371,6 +401,7 @@ Widget _buildSwapPainter({
     child: CustomPaint(
       size: effect.calculateSize(count),
       painter: SwapPainter(
+        themeDefaults: themeDefaults,
         effect: effect,
         count: count,
         offset: offset,
