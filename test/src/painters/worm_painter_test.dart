@@ -9,7 +9,7 @@ void main() {
     test('creates painter with correct properties', () {
       const effect = WormEffect();
       final painter = WormPainter(
-        indicatorColors: IndicatorColors.defaults,
+        indicatorColors: DefaultIndicatorColors.defaults,
         effect: effect,
         count: 5,
         offset: 0.0,
@@ -22,32 +22,20 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = WormEffect();
-      final painter1 = WormPainter(
-          indicatorColors: IndicatorColors.defaults,
-          effect: effect,
-          count: 5,
-          offset: 0.0);
-      final painter2 = WormPainter(
-          indicatorColors: IndicatorColors.defaults,
-          effect: effect,
-          count: 5,
-          offset: 1.0);
+      final painter1 =
+          WormPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
+      final painter2 =
+          WormPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = WormEffect();
-      final painter1 = WormPainter(
-          indicatorColors: IndicatorColors.defaults,
-          effect: effect,
-          count: 5,
-          offset: 0.0);
-      final painter2 = WormPainter(
-          indicatorColors: IndicatorColors.defaults,
-          effect: effect,
-          count: 5,
-          offset: 0.0);
+      final painter1 =
+          WormPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
+      final painter2 =
+          WormPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -61,7 +49,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -83,7 +71,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.5,
@@ -105,7 +93,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.3,
@@ -127,7 +115,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.0,
@@ -149,7 +137,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.7,
@@ -171,7 +159,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.7, // wormOffset will be > 1
@@ -193,7 +181,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 4.5, // offset > count - 1
@@ -218,7 +206,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -243,7 +231,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -265,7 +253,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: WormPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.7, // wormOffset > 1
@@ -369,7 +357,7 @@ void main() {
 }
 
 Widget _buildWormPainter({
-  IndicatorColors indicatorColors = IndicatorColors.defaults,
+  DefaultIndicatorColors indicatorColors = DefaultIndicatorColors.defaults,
   WormEffect effect = const WormEffect(),
   int count = 5,
   double offset = 0.0,

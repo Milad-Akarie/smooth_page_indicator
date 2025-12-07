@@ -18,7 +18,7 @@ void main() {
 
     test('buildPainter returns IndicatorPainter', () {
       const effect = WormEffect();
-      final painter = effect.buildPainter(5, 0, IndicatorColors.defaults);
+      final painter = effect.buildPainter(5, 0, DefaultIndicatorColors.defaults);
 
       expect(painter, isA<IndicatorPainter>());
     });
@@ -81,7 +81,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5, IndicatorColors.defaults),
+              painter: effect.buildPainter(5, 1.5, DefaultIndicatorColors.defaults),
             ),
           ),
         ),
@@ -98,7 +98,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 4.5, IndicatorColors.defaults),
+              painter: effect.buildPainter(5, 4.5, DefaultIndicatorColors.defaults),
             ),
           ),
         ),
@@ -115,7 +115,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5, IndicatorColors.defaults),
+              painter: effect.buildPainter(5, 1.5, DefaultIndicatorColors.defaults),
             ),
           ),
         ),
@@ -132,7 +132,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5, IndicatorColors.defaults),
+              painter: effect.buildPainter(5, 1.5, DefaultIndicatorColors.defaults),
             ),
           ),
         ),
@@ -149,7 +149,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: effect.buildPainter(5, 1.5, IndicatorColors.defaults),
+              painter: effect.buildPainter(5, 1.5, DefaultIndicatorColors.defaults),
             ),
           ),
         ),

@@ -12,7 +12,7 @@ void main() {
         effect: effect,
         count: 5,
         offset: 0.0,
-        indicatorColors: IndicatorColors.defaults,
+        indicatorColors: DefaultIndicatorColors.defaults,
       );
 
       expect(painter.count, 5);
@@ -22,16 +22,20 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ScaleEffect();
-      final painter1 = ScalePainter(effect: effect, count: 5, offset: 0.0, indicatorColors: IndicatorColors.defaults);
-      final painter2 = ScalePainter(effect: effect, count: 5, offset: 1.0, indicatorColors: IndicatorColors.defaults);
+      final painter1 =
+          ScalePainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
+      final painter2 =
+          ScalePainter(effect: effect, count: 5, offset: 1.0, indicatorColors: DefaultIndicatorColors.defaults);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ScaleEffect();
-      final painter1 = ScalePainter(effect: effect, count: 5, offset: 0.0, indicatorColors: IndicatorColors.defaults);
-      final painter2 = ScalePainter(effect: effect, count: 5, offset: 0.0, indicatorColors: IndicatorColors.defaults);
+      final painter1 =
+          ScalePainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
+      final painter2 =
+          ScalePainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -48,7 +52,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -70,7 +74,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 2.5,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -92,7 +96,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 4.5,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -114,7 +118,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 1.5,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -139,7 +143,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -164,7 +168,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -189,7 +193,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 2.0,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -215,7 +219,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 1.0,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -239,7 +243,7 @@ void main() {
                   effect: effect,
                   count: 5,
                   offset: offset,
-                  indicatorColors: IndicatorColors.defaults,
+                  indicatorColors: DefaultIndicatorColors.defaults,
                 ),
               ),
             ),
@@ -265,7 +269,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -340,7 +344,7 @@ void main() {
 }
 
 Widget _buildScalePainter({
-  IndicatorColors indicatorColors = IndicatorColors.defaults,
+  DefaultIndicatorColors indicatorColors = DefaultIndicatorColors.defaults,
   ScaleEffect effect = const ScaleEffect(),
   int count = 5,
   double offset = 0.0,

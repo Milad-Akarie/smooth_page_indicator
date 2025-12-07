@@ -92,7 +92,7 @@ class SmoothPageIndicatorTheme extends ThemeExtension<SmoothPageIndicatorTheme> 
   }) {
     return SmoothPageIndicatorTheme(
       effect: effect ?? this.effect,
-      defaultColors: colors ?? this.defaultColors,
+      defaultColors: colors ?? defaultColors,
     );
   }
 
@@ -128,6 +128,11 @@ class SmoothPageIndicatorTheme extends ThemeExtension<SmoothPageIndicatorTheme> 
     return Theme.of(context).extension<SmoothPageIndicatorTheme>();
   }
 
+  /// Resolves the default [IndicatorEffect] and [DefaultIndicatorColors]
+  /// from the theme or provides fallbacks.
+  /// If no effect is specified in the theme, defaults to [WormEffect].
+  /// If no colors are specified, derives them from the app theme.
+  /// Returns a record of (effect, colors).
   static (IndicatorEffect effect, DefaultIndicatorColors colors) resolveDefaults(
     BuildContext context,
   ) {

@@ -14,7 +14,7 @@ void main() {
         effect: effect,
         count: 5,
         offset: 0.0,
-        indicatorColors: IndicatorColors.defaults,
+        indicatorColors: DefaultIndicatorColors.defaults,
       );
 
       // distance = dotWidth + spacing = 16 + 8 = 24
@@ -27,7 +27,7 @@ void main() {
         effect: effect,
         count: 5,
         offset: 0.0,
-        indicatorColors: IndicatorColors.defaults,
+        indicatorColors: DefaultIndicatorColors.defaults,
       );
 
       expect(painter.dotRadius, const Radius.circular(8));
@@ -43,7 +43,7 @@ void main() {
         effect: effect,
         count: 5,
         offset: 0.0,
-        indicatorColors: IndicatorColors.defaults,
+        indicatorColors: DefaultIndicatorColors.defaults,
       );
 
       expect(painter.dotPaint.color.toARGB32(), Colors.red.toARGB32());
@@ -61,7 +61,7 @@ void main() {
         effect: effect,
         count: 5,
         offset: 0.0,
-        indicatorColors: IndicatorColors.defaults,
+        indicatorColors: DefaultIndicatorColors.defaults,
       );
 
       expect(painter.dotPaint.color.toARGB32(), Colors.blue.toARGB32());
@@ -81,7 +81,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -108,7 +108,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 0.0,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -130,7 +130,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 1.5,
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -152,7 +152,7 @@ void main() {
                 effect: effect,
                 count: 5,
                 offset: 4.5, // Triggers portal travel
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
               ),
             ),
           ),
@@ -166,23 +166,23 @@ void main() {
   group('IndicatorPainter', () {
     test('shouldRepaint returns true when offset changes', () {
       const effect = WormEffect();
-      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0, indicatorColors: IndicatorColors.defaults);
-      final painter2 = WormPainter(effect: effect, count: 5, offset: 1.0, indicatorColors: IndicatorColors.defaults);
+      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
+      final painter2 = WormPainter(effect: effect, count: 5, offset: 1.0, indicatorColors: DefaultIndicatorColors.defaults);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = WormEffect();
-      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0, indicatorColors: IndicatorColors.defaults);
-      final painter2 = WormPainter(effect: effect, count: 5, offset: 0.0, indicatorColors: IndicatorColors.defaults);
+      final painter1 = WormPainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
+      final painter2 = WormPainter(effect: effect, count: 5, offset: 0.0, indicatorColors: DefaultIndicatorColors.defaults);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
 
     test('offset is stored correctly', () {
       const effect = WormEffect();
-      final painter = WormPainter(effect: effect, count: 5, offset: 2.5, indicatorColors: IndicatorColors.defaults);
+      final painter = WormPainter(effect: effect, count: 5, offset: 2.5, indicatorColors: DefaultIndicatorColors.defaults);
 
       expect(painter.offset, 2.5);
     });

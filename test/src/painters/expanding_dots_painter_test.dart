@@ -9,7 +9,7 @@ void main() {
     test('creates painter with correct properties', () {
       const effect = ExpandingDotsEffect();
       final painter = ExpandingDotsPainter(
-        indicatorColors: IndicatorColors.defaults,
+        indicatorColors: DefaultIndicatorColors.defaults,
         effect: effect,
         count: 5,
         offset: 0.0,
@@ -22,32 +22,20 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ExpandingDotsEffect();
-      final painter1 = ExpandingDotsPainter(
-          indicatorColors: IndicatorColors.defaults,
-          effect: effect,
-          count: 5,
-          offset: 0.0);
-      final painter2 = ExpandingDotsPainter(
-          indicatorColors: IndicatorColors.defaults,
-          effect: effect,
-          count: 5,
-          offset: 1.0);
+      final painter1 =
+          ExpandingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
+      final painter2 =
+          ExpandingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ExpandingDotsEffect();
-      final painter1 = ExpandingDotsPainter(
-          indicatorColors: IndicatorColors.defaults,
-          effect: effect,
-          count: 5,
-          offset: 0.0);
-      final painter2 = ExpandingDotsPainter(
-          indicatorColors: IndicatorColors.defaults,
-          effect: effect,
-          count: 5,
-          offset: 0.0);
+      final painter1 =
+          ExpandingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
+      final painter2 =
+          ExpandingDotsPainter(indicatorColors: DefaultIndicatorColors.defaults, effect: effect, count: 5, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -61,7 +49,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -83,7 +71,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.5,
@@ -105,7 +93,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 4.0,
@@ -127,7 +115,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 4.5, // offset > count - 1
@@ -152,7 +140,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -174,7 +162,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.5,
@@ -199,7 +187,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -225,7 +213,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: ExpandingDotsPainter(
-                indicatorColors: IndicatorColors.defaults,
+                indicatorColors: DefaultIndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.0,
@@ -249,7 +237,7 @@ void main() {
               body: CustomPaint(
                 size: effect.calculateSize(5),
                 painter: ExpandingDotsPainter(
-                  indicatorColors: IndicatorColors.defaults,
+                  indicatorColors: DefaultIndicatorColors.defaults,
                   effect: effect,
                   count: 5,
                   offset: offset,
@@ -331,7 +319,7 @@ void main() {
 }
 
 Widget _buildExpandingDotsPainter({
-  IndicatorColors indicatorColors = IndicatorColors.defaults,
+  DefaultIndicatorColors indicatorColors = DefaultIndicatorColors.defaults,
   ExpandingDotsEffect effect = const ExpandingDotsEffect(),
   int count = 5,
   double offset = 0.0,

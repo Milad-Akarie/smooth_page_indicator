@@ -565,7 +565,7 @@ void main() {
         activeDotDecoration: DotDecoration(width: 14, height: 14),
       );
 
-      final painter = effect.buildPainter(5, 0, IndicatorColors.defaults);
+      final painter = effect.buildPainter(5, 0, DefaultIndicatorColors.defaults);
       expect(painter, isA<CustomizablePainter>());
     });
   });
