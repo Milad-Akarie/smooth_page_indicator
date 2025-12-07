@@ -27,8 +27,24 @@ class SlideEffect extends BasicIndicatorEffect {
   });
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, ThemeDefaults themeDefaults) {
-    return SlidePainter(count: count, offset: offset, effect: this, themeDefaults: themeDefaults);
+  IndicatorPainter buildPainter(int count, double offset, DefaultIndicatorColors indicatorColors) {
+    return SlidePainter(count: count, offset: offset, effect: this, indicatorColors: indicatorColors);
+  }
+
+  @override
+  SlideEffect lerp(covariant SlideEffect? other, double t) {
+    if (other == null) return this;
+    return SlideEffect(
+      type: t < 0.5 ? type : other.type,
+      dotWidth: BasicIndicatorEffect.lerpDouble(dotWidth, other.dotWidth, t)!,
+      dotHeight: BasicIndicatorEffect.lerpDouble(dotHeight, other.dotHeight, t)!,
+      spacing: BasicIndicatorEffect.lerpDouble(spacing, other.spacing, t)!,
+      radius: BasicIndicatorEffect.lerpDouble(radius, other.radius, t)!,
+      dotColor: Color.lerp(dotColor, other.dotColor, t),
+      activeDotColor: Color.lerp(activeDotColor, other.activeDotColor, t),
+      strokeWidth: BasicIndicatorEffect.lerpDouble(strokeWidth, other.strokeWidth, t)!,
+      paintStyle: t < 0.5 ? paintStyle : other.paintStyle,
+    );
   }
 }
 

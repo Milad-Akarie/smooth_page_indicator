@@ -32,8 +32,8 @@ class ExpandingDotsEffect extends BasicIndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, ThemeDefaults themeDefaults) {
-    return ExpandingDotsPainter(count: count, offset: offset, effect: this, themeDefaults: themeDefaults);
+  IndicatorPainter buildPainter(int count, double offset, DefaultIndicatorColors indicatorColors) {
+    return ExpandingDotsPainter(count: count, offset: offset, effect: this, indicatorColors: indicatorColors);
   }
 
   @override
@@ -46,5 +46,21 @@ class ExpandingDotsEffect extends BasicIndicatorEffect {
       }
     }
     return -1;
+  }
+
+  @override
+  ExpandingDotsEffect lerp(covariant ExpandingDotsEffect? other, double t) {
+    if (other == null) return this;
+    return ExpandingDotsEffect(
+      expansionFactor: BasicIndicatorEffect.lerpDouble(expansionFactor, other.expansionFactor, t)!,
+      dotWidth: BasicIndicatorEffect.lerpDouble(dotWidth, other.dotWidth, t)!,
+      dotHeight: BasicIndicatorEffect.lerpDouble(dotHeight, other.dotHeight, t)!,
+      spacing: BasicIndicatorEffect.lerpDouble(spacing, other.spacing, t)!,
+      radius: BasicIndicatorEffect.lerpDouble(radius, other.radius, t)!,
+      dotColor: Color.lerp(dotColor, other.dotColor, t),
+      activeDotColor: Color.lerp(activeDotColor, other.activeDotColor, t),
+      strokeWidth: BasicIndicatorEffect.lerpDouble(strokeWidth, other.strokeWidth, t)!,
+      paintStyle: t < 0.5 ? paintStyle : other.paintStyle,
+    );
   }
 }

@@ -81,7 +81,7 @@ class ScrollingDotsEffect extends BasicIndicatorEffect {
   }
 
   @override
-  BasicIndicatorPainter buildPainter(int count, double offset, ThemeDefaults themeDefaults) {
+  BasicIndicatorPainter buildPainter(int count, double offset, DefaultIndicatorColors indicatorColors) {
     if (fixedCenter) {
       assert(
         offset.ceil() < count,
@@ -91,15 +91,35 @@ class ScrollingDotsEffect extends BasicIndicatorEffect {
         count: count,
         offset: offset,
         effect: this,
-        themeDefaults: themeDefaults,
+        indicatorColors: indicatorColors,
       );
     } else {
       return ScrollingDotsPainter(
         count: count,
         offset: offset,
         effect: this,
-        themeDefaults: themeDefaults,
+        indicatorColors: indicatorColors,
       );
     }
+  }
+
+  @override
+  ScrollingDotsEffect lerp(covariant ScrollingDotsEffect? other, double t) {
+    if (other == null) return this;
+    return ScrollingDotsEffect(
+      activeStrokeWidth: BasicIndicatorEffect.lerpDouble(activeStrokeWidth, other.activeStrokeWidth, t)!,
+      activeDotScale: BasicIndicatorEffect.lerpDouble(activeDotScale, other.activeDotScale, t)!,
+      smallDotScale: BasicIndicatorEffect.lerpDouble(smallDotScale, other.smallDotScale, t)!,
+      maxVisibleDots: t < 0.5 ? maxVisibleDots : other.maxVisibleDots,
+      fixedCenter: t < 0.5 ? fixedCenter : other.fixedCenter,
+      dotWidth: BasicIndicatorEffect.lerpDouble(dotWidth, other.dotWidth, t)!,
+      dotHeight: BasicIndicatorEffect.lerpDouble(dotHeight, other.dotHeight, t)!,
+      spacing: BasicIndicatorEffect.lerpDouble(spacing, other.spacing, t)!,
+      radius: BasicIndicatorEffect.lerpDouble(radius, other.radius, t)!,
+      dotColor: Color.lerp(dotColor, other.dotColor, t),
+      activeDotColor: Color.lerp(activeDotColor, other.activeDotColor, t),
+      strokeWidth: BasicIndicatorEffect.lerpDouble(strokeWidth, other.strokeWidth, t)!,
+      paintStyle: t < 0.5 ? paintStyle : other.paintStyle,
+    );
   }
 }

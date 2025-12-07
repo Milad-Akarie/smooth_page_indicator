@@ -54,7 +54,7 @@ class CustomizableEffect extends IndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset, ThemeDefaults themeDefaults) {
+  IndicatorPainter buildPainter(int count, double offset, DefaultIndicatorColors indicatorColors) {
     return CustomizablePainter(count: count, offset: offset, effect: this);
   }
 
@@ -73,6 +73,18 @@ class CustomizableEffect extends IndicatorEffect {
       }
     }
     return -1;
+  }
+
+  @override
+  CustomizableEffect lerp(covariant CustomizableEffect? other, double t) {
+    if (other == null) return this;
+    return CustomizableEffect(
+      dotDecoration: DotDecoration.lerp(dotDecoration, other.dotDecoration, t),
+      activeDotDecoration: DotDecoration.lerp(activeDotDecoration, other.activeDotDecoration, t),
+      activeColorOverride: t < 0.5 ? activeColorOverride : other.activeColorOverride,
+      inActiveColorOverride: t < 0.5 ? inActiveColorOverride : other.inActiveColorOverride,
+      spacing: ui.lerpDouble(spacing, other.spacing, t)!,
+    );
   }
 }
 

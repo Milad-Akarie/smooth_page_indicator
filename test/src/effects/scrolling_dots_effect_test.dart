@@ -77,7 +77,7 @@ void main() {
 
     test('buildPainter returns BasicIndicatorPainter', () {
       const effect = ScrollingDotsEffect();
-      final painter = effect.buildPainter(10, 0, ThemeDefaults.defaults);
+      final painter = effect.buildPainter(10, 0, IndicatorColors.defaults);
 
       expect(painter, isA<IndicatorPainter>());
     });
@@ -91,7 +91,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(10),
               painter:
-                  effect.buildPainter(10, 3.5, ThemeDefaults.defaults),
+                  effect.buildPainter(10, 3.5, IndicatorColors.defaults),
             ),
           ),
         ),
@@ -108,7 +108,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: effect.buildPainter(10, 3, ThemeDefaults.defaults),
+              painter: effect.buildPainter(10, 3, IndicatorColors.defaults),
             ),
           ),
         ),

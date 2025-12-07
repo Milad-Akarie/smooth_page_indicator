@@ -9,7 +9,7 @@ void main() {
     test('creates painter with correct properties', () {
       const effect = JumpingDotEffect();
       final painter = JumpingDotPainter(
-        themeDefaults: ThemeDefaults.defaults,
+        indicatorColors: IndicatorColors.defaults,
         effect: effect,
         count: 5,
         offset: 0.0,
@@ -23,12 +23,12 @@ void main() {
     test('shouldRepaint returns true when offset changes', () {
       const effect = JumpingDotEffect();
       final painter1 = JumpingDotPainter(
-          themeDefaults: ThemeDefaults.defaults,
+          indicatorColors: IndicatorColors.defaults,
           effect: effect,
           count: 5,
           offset: 0.0);
       final painter2 = JumpingDotPainter(
-          themeDefaults: ThemeDefaults.defaults,
+          indicatorColors: IndicatorColors.defaults,
           effect: effect,
           count: 5,
           offset: 1.0);
@@ -39,12 +39,12 @@ void main() {
     test('shouldRepaint returns false when offset is same', () {
       const effect = JumpingDotEffect();
       final painter1 = JumpingDotPainter(
-          themeDefaults: ThemeDefaults.defaults,
+          indicatorColors: IndicatorColors.defaults,
           effect: effect,
           count: 5,
           offset: 0.0);
       final painter2 = JumpingDotPainter(
-          themeDefaults: ThemeDefaults.defaults,
+          indicatorColors: IndicatorColors.defaults,
           effect: effect,
           count: 5,
           offset: 0.0);
@@ -61,7 +61,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: JumpingDotPainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -83,7 +83,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: JumpingDotPainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.3,
@@ -105,7 +105,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: JumpingDotPainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.7,
@@ -127,7 +127,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: JumpingDotPainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 4.5,
@@ -149,7 +149,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: JumpingDotPainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.5,
@@ -171,7 +171,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: JumpingDotPainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.5,
@@ -193,7 +193,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: JumpingDotPainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.3,
@@ -218,7 +218,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: JumpingDotPainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -243,7 +243,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: JumpingDotPainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -267,7 +267,7 @@ void main() {
               body: CustomPaint(
                 size: effect.calculateSize(5),
                 painter: JumpingDotPainter(
-                  themeDefaults: ThemeDefaults.defaults,
+                  indicatorColors: IndicatorColors.defaults,
                   effect: effect,
                   count: 5,
                   offset: offset,
@@ -343,7 +343,7 @@ void main() {
 }
 
 Widget _buildJumpingDotPainter({
-  ThemeDefaults themeDefaults = ThemeDefaults.defaults,
+  IndicatorColors indicatorColors = IndicatorColors.defaults,
   JumpingDotEffect effect = const JumpingDotEffect(),
   int count = 5,
   double offset = 0.0,
@@ -354,7 +354,7 @@ Widget _buildJumpingDotPainter({
     child: CustomPaint(
       size: effect.calculateSize(count),
       painter: JumpingDotPainter(
-        themeDefaults: themeDefaults,
+        indicatorColors: indicatorColors,
         effect: effect,
         count: count,
         offset: offset,

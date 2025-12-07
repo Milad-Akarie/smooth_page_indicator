@@ -8,7 +8,7 @@ void main() {
   group('ScrollingDotsWithFixedCenterPainter', () {
     test('creates painter with correct properties', () {
       const effect = ScrollingDotsEffect(fixedCenter: true);
-      final painter = ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+      final painter = ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
         effect: effect,
         count: 10,
         offset: 0.0,
@@ -21,16 +21,16 @@ void main() {
 
     test('shouldRepaint returns true when offset changes', () {
       const effect = ScrollingDotsEffect(fixedCenter: true);
-      final painter1 = ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 10, offset: 0.0);
-      final painter2 = ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 10, offset: 1.0);
+      final painter1 = ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, effect: effect, count: 10, offset: 0.0);
+      final painter2 = ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, effect: effect, count: 10, offset: 1.0);
 
       expect(painter1.shouldRepaint(painter2), isTrue);
     });
 
     test('shouldRepaint returns false when offset is same', () {
       const effect = ScrollingDotsEffect(fixedCenter: true);
-      final painter1 = ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 10, offset: 0.0);
-      final painter2 = ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, effect: effect, count: 10, offset: 0.0);
+      final painter1 = ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, effect: effect, count: 10, offset: 0.0);
+      final painter2 = ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, effect: effect, count: 10, offset: 0.0);
 
       expect(painter1.shouldRepaint(painter2), isFalse);
     });
@@ -43,7 +43,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 0.0,
@@ -64,7 +64,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 5.0,
@@ -85,7 +85,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 3.5,
@@ -106,7 +106,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(5),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 5,
                 offset: 2.0,
@@ -128,7 +128,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 2.5, // Tests boundary condition
@@ -149,7 +149,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 4.3, // Tests current + switchPoint scale
@@ -170,7 +170,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 5.7, // Tests current - (switchPoint - 1) scale
@@ -191,7 +191,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 4.8, // Tests current - switchPoint scale
@@ -212,7 +212,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 3.2, // Tests current + (switchPoint + 1) scale
@@ -237,7 +237,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 0.0,
@@ -262,7 +262,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 0.0,
@@ -286,7 +286,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 3.0,
@@ -310,7 +310,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 2.0,
@@ -333,7 +333,7 @@ void main() {
             home: Scaffold(
               body: CustomPaint(
                 size: effect.calculateSize(10),
-                painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+                painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                   effect: effect,
                   count: 10,
                   offset: offset,
@@ -355,7 +355,7 @@ void main() {
           home: Scaffold(
             body: CustomPaint(
               size: effect.calculateSize(10),
-              painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+              painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
                 effect: effect,
                 count: 10,
                 offset: 7.0, // Some dots will be outside visible range
@@ -445,7 +445,7 @@ Widget _buildScrollingDotsFixedCenterPainter({
     padding: const EdgeInsets.all(16.0),
     child: CustomPaint(
       size: effect.calculateSize(count),
-      painter: ScrollingDotsWithFixedCenterPainter(themeDefaults: ThemeDefaults.defaults, 
+      painter: ScrollingDotsWithFixedCenterPainter(indicatorColors: IndicatorColors.defaults, 
         effect: effect,
         count: count,
         offset: offset,

@@ -9,7 +9,7 @@ void main() {
     test('creates painter with correct properties', () {
       const effect = SlideEffect();
       final painter = SlidePainter(
-        themeDefaults: ThemeDefaults.defaults,
+        indicatorColors: IndicatorColors.defaults,
         effect: effect,
         count: 5,
         offset: 0.0,
@@ -23,12 +23,12 @@ void main() {
     test('shouldRepaint returns true when offset changes', () {
       const effect = SlideEffect();
       final painter1 = SlidePainter(
-          themeDefaults: ThemeDefaults.defaults,
+          indicatorColors: IndicatorColors.defaults,
           effect: effect,
           count: 5,
           offset: 0.0);
       final painter2 = SlidePainter(
-          themeDefaults: ThemeDefaults.defaults,
+          indicatorColors: IndicatorColors.defaults,
           effect: effect,
           count: 5,
           offset: 1.0);
@@ -39,12 +39,12 @@ void main() {
     test('shouldRepaint returns false when offset is same', () {
       const effect = SlideEffect();
       final painter1 = SlidePainter(
-          themeDefaults: ThemeDefaults.defaults,
+          indicatorColors: IndicatorColors.defaults,
           effect: effect,
           count: 5,
           offset: 0.0);
       final painter2 = SlidePainter(
-          themeDefaults: ThemeDefaults.defaults,
+          indicatorColors: IndicatorColors.defaults,
           effect: effect,
           count: 5,
           offset: 0.0);
@@ -61,7 +61,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SlidePainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -83,7 +83,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SlidePainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.5,
@@ -105,7 +105,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SlidePainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 1.0,
@@ -127,7 +127,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SlidePainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 4.5, // offset > count - 1
@@ -152,7 +152,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SlidePainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -177,7 +177,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SlidePainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 0.0,
@@ -203,7 +203,7 @@ void main() {
             body: CustomPaint(
               size: effect.calculateSize(5),
               painter: SlidePainter(
-                themeDefaults: ThemeDefaults.defaults,
+                indicatorColors: IndicatorColors.defaults,
                 effect: effect,
                 count: 5,
                 offset: 2.0,
@@ -284,7 +284,7 @@ void main() {
 }
 
 Widget _buildSlidePainter({
-  ThemeDefaults themeDefaults = ThemeDefaults.defaults,
+  IndicatorColors indicatorColors = IndicatorColors.defaults,
   SlideEffect effect = const SlideEffect(),
   int count = 5,
   double offset = 0.0,
@@ -295,7 +295,7 @@ Widget _buildSlidePainter({
     child: CustomPaint(
       size: effect.calculateSize(count),
       painter: SlidePainter(
-        themeDefaults: themeDefaults,
+        indicatorColors: indicatorColors,
         effect: effect,
         count: count,
         offset: offset,

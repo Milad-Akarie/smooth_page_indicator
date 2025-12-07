@@ -18,8 +18,8 @@ class ScalePainter extends BasicIndicatorPainter {
     required double offset,
     required this.effect,
     required int count,
-    required ThemeDefaults themeDefaults,
-  }) : super(offset, count, effect, themeDefaults);
+    required DefaultIndicatorColors indicatorColors,
+  }) : super(offset, count, effect, indicatorColors);
 
   @override
   void paint(Canvas canvas, Size size) {

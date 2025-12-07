@@ -12,8 +12,8 @@ abstract class BasicIndicatorPainter extends IndicatorPainter {
   /// to make some calculations and paint still dots
   final BasicIndicatorEffect _effect;
 
-  /// The resolved theme defaults
-  final ThemeDefaults themeDefaults;
+  /// The resolved indicator colors
+  final DefaultIndicatorColors indicatorColors;
 
   /// The resolved dot color (inactive dots)
   final Color effectiveInactiveColor;
@@ -32,12 +32,12 @@ abstract class BasicIndicatorPainter extends IndicatorPainter {
     super.offset,
     this.count,
     this._effect,
-    this.themeDefaults,
+    this.indicatorColors,
   )   : dotRadius = Radius.circular(_effect.radius),
-        effectiveInactiveColor = themeDefaults.resolveInactiveColor(_effect),
-        effectiveActiveColor = themeDefaults.resolveActiveColor(_effect),
+        effectiveInactiveColor = indicatorColors.resolveInactiveColor(_effect),
+        effectiveActiveColor = indicatorColors.resolveActiveColor(_effect),
         dotPaint = Paint()
-          ..color = themeDefaults.resolveInactiveColor(_effect)
+          ..color = indicatorColors.resolveInactiveColor(_effect)
           ..style = _effect.paintStyle
           ..strokeWidth = _effect.strokeWidth;
 

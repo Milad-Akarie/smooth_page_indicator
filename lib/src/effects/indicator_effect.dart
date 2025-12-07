@@ -1,3 +1,5 @@
+import 'dart:ui' as ui show lerpDouble;
+
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
 import 'package:smooth_page_indicator/src/theme_defaults.dart';
@@ -9,8 +11,8 @@ abstract class IndicatorEffect {
 
   /// Builds a new painter every time the page offset changes
   ///
-  /// [themeDefaults] is used to resolve null dot colors
-  IndicatorPainter buildPainter(int count, double offset, ThemeDefaults themeDefaults);
+  /// [indicatorColors] is used to resolve null dot colors
+  IndicatorPainter buildPainter(int count, double offset, DefaultIndicatorColors indicatorColors);
 
   /// Calculates the size of canvas based on
   /// dots count, size and spacing
@@ -24,6 +26,10 @@ abstract class IndicatorEffect {
   /// Sections or hit-targets are calculated differently
   /// in some effects
   int hitTestDots(double dx, int count, double current);
+
+  /// Linearly interpolates between two effects.
+  /// Returns [this] if [other] is null or not the same type.
+  IndicatorEffect lerp(covariant IndicatorEffect? other, double t);
 }
 
 /// Basic implementation of [IndicatorEffect] that holds some shared
@@ -82,4 +88,8 @@ abstract class BasicIndicatorEffect extends IndicatorEffect {
     }
     return -1;
   }
+
+  /// Helper method for lerping double values
+  @protected
+  static double? lerpDouble(double? a, double? b, double t) => ui.lerpDouble(a, b, t);
 }

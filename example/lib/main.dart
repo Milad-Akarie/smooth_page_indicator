@@ -14,7 +14,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Smooth Page Indicator Demo',
-      theme: ThemeData.light().copyWith(primaryColor: Colors.green),
+      theme: ThemeData.light().copyWith(primaryColor: Colors.green).copyWith(extensions: [
+        SmoothPageIndicatorTheme(
+          defaultColors: DefaultIndicatorColors(
+            active: Colors.green,
+            inactive: Colors.blue,
+          ),
+          effect: SlideEffect(
+            dotHeight: 20,
+            dotWidth: 20,
+          ),
+        ),
+      ]),
       home: HomePage(),
     );
   }
@@ -77,11 +88,11 @@ class HomePageState extends State<HomePage> {
               SmoothPageIndicator(
                 controller: controller,
                 count: pages.length,
-                effect: const WormEffect(
-                  dotHeight: 16,
-                  dotWidth: 16,
-                  type: WormType.thinUnderground,
-                ),
+                // effect: const WormEffect(
+                //   dotHeight: 16,
+                //   dotWidth: 16,
+                //   type: WormType.thinUnderground,
+                // ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16, bottom: 8),

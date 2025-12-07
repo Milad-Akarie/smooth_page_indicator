@@ -17,8 +17,8 @@ class TransitionPainter extends BasicIndicatorPainter {
     required this.effect,
     required int count,
     required double offset,
-    required ThemeDefaults themeDefaults,
-  }) : super(offset, count, effect, themeDefaults);
+    required DefaultIndicatorColors indicatorColors,
+  }) : super(offset, count, effect, indicatorColors);
 
   @override
   void paint(Canvas canvas, Size size) {

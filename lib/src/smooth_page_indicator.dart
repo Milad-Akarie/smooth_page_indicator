@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'effects/indicator_effect.dart';
@@ -18,7 +19,8 @@ class SmoothPageIndicator extends StatefulWidget {
   final PageController controller;
 
   /// Holds effect configuration to be used in the [BasicIndicatorPainter]
-  final IndicatorEffect effect;
+  /// If null, the effect will be read from [SmoothPageIndicatorTheme] or default to [WormEffect]
+  final IndicatorEffect? effect;
 
   /// Layout direction vertical || horizontal
   ///
@@ -44,7 +46,7 @@ class SmoothPageIndicator extends StatefulWidget {
     this.axisDirection = Axis.horizontal,
     this.textDirection,
     this.onDotClicked,
-    this.effect = const WormEffect(),
+    this.effect,
   });
 
   @override
@@ -86,16 +88,24 @@ mixin _SizeAndRotationCalculatorMixin {
 }
 
 class _SmoothPageIndicatorState extends State<SmoothPageIndicator> with _SizeAndRotationCalculatorMixin {
-  @override
-  void initState() {
-    super.initState();
-    updateSizeAndRotation();
-  }
+  late IndicatorEffect _effect;
 
   @override
   void didUpdateWidget(covariant SmoothPageIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
+    _updateEffect();
     updateSizeAndRotation();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateEffect();
+    updateSizeAndRotation();
+  }
+
+  void _updateEffect() {
+    _effect = widget.effect ?? SmoothPageIndicatorTheme.of(context)?.effect ?? const WormEffect();
   }
 
   @override
@@ -129,13 +139,22 @@ class _SmoothPageIndicatorState extends State<SmoothPageIndicator> with _SizeAnd
   int get count => widget.count;
 
   @override
-  IndicatorEffect get effect => widget.effect;
+  IndicatorEffect get effect => _effect;
 
   @override
   Axis get axisDirection => widget.axisDirection;
 
   @override
   TextDirection? get textDirection => widget.textDirection;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('count', count));
+    properties.add(DiagnosticsProperty<IndicatorEffect>('effect', effect));
+    properties.add(DiagnosticsProperty<Size>('size', size));
+    properties.add(IntProperty('quarterTurns', quarterTurns));
+  }
 }
 
 /// Draws dot-ish representation of pages by
@@ -174,7 +193,7 @@ class SmoothIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeDefaults = ThemeDefaults.fromContext(context);
+    final (_, indicatorColors) = SmoothPageIndicatorTheme.resolveDefaults(context);
     return RotatedBox(
       quarterTurns: quarterTurns,
       child: GestureDetector(
@@ -182,7 +201,7 @@ class SmoothIndicator extends StatelessWidget {
         child: CustomPaint(
           size: size,
           // rebuild the painter with the new offset every time it updates
-          painter: effect.buildPainter(count, offset, themeDefaults),
+          painter: effect.buildPainter(count, offset, indicatorColors),
         ),
       ),
     );
@@ -196,6 +215,16 @@ class SmoothIndicator extends StatelessWidget {
       }
     }
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('offset', offset));
+    properties.add(IntProperty('count', count));
+    properties.add(DiagnosticsProperty<IndicatorEffect>('effect', effect));
+    properties.add(DiagnosticsProperty<Size>('size', size));
+    properties.add(IntProperty('quarterTurns', quarterTurns));
+  }
 }
 
 /// Unlike [SmoothPageIndicator] this indicator is self-animated
@@ -207,7 +236,8 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
   final int activeIndex;
 
   /// Holds effect configuration to be used in the [BasicIndicatorPainter]
-  final IndicatorEffect effect;
+  /// If null, the effect will be read from [SmoothPageIndicatorTheme] or default to [WormEffect]
+  final IndicatorEffect? effect;
 
   /// layout direction vertical || horizontal
   final Axis axisDirection;
@@ -229,7 +259,7 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
     this.axisDirection = Axis.horizontal,
     this.textDirection,
     this.onDotClicked,
-    this.effect = const WormEffect(),
+    this.effect,
     super.curve = Curves.easeInOut,
     super.duration = const Duration(milliseconds: 300),
     super.onEnd,
@@ -242,17 +272,24 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
 class _AnimatedSmoothIndicatorState extends AnimatedWidgetBaseState<AnimatedSmoothIndicator>
     with _SizeAndRotationCalculatorMixin {
   Tween<double>? _offset;
-
-  @override
-  void initState() {
-    super.initState();
-    updateSizeAndRotation();
-  }
+  late IndicatorEffect _effect;
 
   @override
   void didUpdateWidget(covariant AnimatedSmoothIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
+    _updateEffect();
     updateSizeAndRotation();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateEffect();
+    updateSizeAndRotation();
+  }
+
+  void _updateEffect() {
+    _effect = widget.effect ?? SmoothPageIndicatorTheme.of(context)?.effect ?? const WormEffect();
   }
 
   @override
@@ -268,7 +305,7 @@ class _AnimatedSmoothIndicatorState extends AnimatedWidgetBaseState<AnimatedSmoo
   int get count => widget.count;
 
   @override
-  IndicatorEffect get effect => widget.effect;
+  IndicatorEffect get effect => _effect;
 
   @override
   Axis get axisDirection => widget.axisDirection;
@@ -285,10 +322,19 @@ class _AnimatedSmoothIndicatorState extends AnimatedWidgetBaseState<AnimatedSmoo
     return SmoothIndicator(
       offset: offset.evaluate(animation) % count,
       count: widget.count,
-      effect: widget.effect,
+      effect: effect,
       onDotClicked: widget.onDotClicked,
       size: size,
       quarterTurns: quarterTurns,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('count', count));
+    properties.add(DiagnosticsProperty<IndicatorEffect>('effect', effect));
+    properties.add(DiagnosticsProperty<Size>('size', size));
+    properties.add(IntProperty('quarterTurns', quarterTurns));
   }
 }
