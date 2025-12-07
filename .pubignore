@@ -1,8 +1,9 @@
 # Test files (not needed by package users, available on GitHub)
 test/
 
-# Demo GIFs (shown in README via GitHub links)
-demo/
+# Demo GIFs (shown in README via GitHub links, keep only four_squares_demo.gif for pub.dev)
+demo/*
+!demo/four_squares_demo.gif
 
 # Example app build artifacts (keep example/lib for pub.dev Example tab)
 example/android/
