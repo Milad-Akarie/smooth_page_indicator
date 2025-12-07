@@ -27,7 +27,9 @@ void main() {
       expect(colors.resolveActiveColor(effect), Colors.red);
     });
 
-    test('resolveActiveColor returns active color when effect activeDotColor is null', () {
+    test(
+        'resolveActiveColor returns active color when effect activeDotColor is null',
+        () {
       const colors = DefaultIndicatorColors(
         active: Colors.blue,
         inactive: Colors.grey,
@@ -45,7 +47,9 @@ void main() {
       expect(colors.resolveInactiveColor(effect), Colors.green);
     });
 
-    test('resolveInactiveColor returns inactive color when effect dotColor is null', () {
+    test(
+        'resolveInactiveColor returns inactive color when effect dotColor is null',
+        () {
       const colors = DefaultIndicatorColors(
         active: Colors.blue,
         inactive: Colors.grey,
@@ -130,7 +134,8 @@ void main() {
     test('copyWith copies with new effect', () {
       const original = SmoothPageIndicatorTheme(
         effect: WormEffect(),
-        defaultColors: DefaultIndicatorColors(active: Colors.blue, inactive: Colors.grey),
+        defaultColors:
+            DefaultIndicatorColors(active: Colors.blue, inactive: Colors.grey),
       );
       const newEffect = ExpandingDotsEffect();
       final copied = original.copyWith(effect: newEffect);
@@ -141,7 +146,8 @@ void main() {
     test('copyWith copies with new colors', () {
       const original = SmoothPageIndicatorTheme(
         effect: WormEffect(),
-        defaultColors: DefaultIndicatorColors(active: Colors.blue, inactive: Colors.grey),
+        defaultColors:
+            DefaultIndicatorColors(active: Colors.blue, inactive: Colors.grey),
       );
       const newColors = DefaultIndicatorColors(
         active: Colors.red,
@@ -155,7 +161,8 @@ void main() {
     test('copyWith keeps original values when null passed', () {
       const original = SmoothPageIndicatorTheme(
         effect: WormEffect(),
-        defaultColors: DefaultIndicatorColors(active: Colors.blue, inactive: Colors.grey),
+        defaultColors:
+            DefaultIndicatorColors(active: Colors.blue, inactive: Colors.grey),
       );
       final copied = original.copyWith();
       expect(copied.effect, original.effect);
@@ -206,7 +213,8 @@ void main() {
     test('lerp handles null colors in first theme', () {
       const theme1 = SmoothPageIndicatorTheme();
       const theme2 = SmoothPageIndicatorTheme(
-        defaultColors: DefaultIndicatorColors(active: Colors.red, inactive: Colors.green),
+        defaultColors:
+            DefaultIndicatorColors(active: Colors.red, inactive: Colors.green),
       );
       final resultBefore = theme1.lerp(theme2, 0.4);
       final resultAfter = theme1.lerp(theme2, 0.6);
@@ -232,7 +240,8 @@ void main() {
     testWidgets('of returns theme when extension is present', (tester) async {
       const expectedTheme = SmoothPageIndicatorTheme(
         effect: ExpandingDotsEffect(),
-        defaultColors: DefaultIndicatorColors(active: Colors.blue, inactive: Colors.grey),
+        defaultColors:
+            DefaultIndicatorColors(active: Colors.blue, inactive: Colors.grey),
       );
       SmoothPageIndicatorTheme? theme;
       await tester.pumpWidget(
@@ -251,10 +260,12 @@ void main() {
       expect(theme!.defaultColors?.active, Colors.blue);
     });
 
-    testWidgets('resolveDefaults returns theme effect and colors when present', (tester) async {
+    testWidgets('resolveDefaults returns theme effect and colors when present',
+        (tester) async {
       const expectedTheme = SmoothPageIndicatorTheme(
         effect: ExpandingDotsEffect(),
-        defaultColors: DefaultIndicatorColors(active: Colors.blue, inactive: Colors.grey),
+        defaultColors:
+            DefaultIndicatorColors(active: Colors.blue, inactive: Colors.grey),
       );
       late (IndicatorEffect, DefaultIndicatorColors) result;
       await tester.pumpWidget(
@@ -273,7 +284,9 @@ void main() {
       expect(result.$2.inactive, Colors.grey);
     });
 
-    testWidgets('resolveDefaults returns WormEffect and context colors when no theme', (tester) async {
+    testWidgets(
+        'resolveDefaults returns WormEffect and context colors when no theme',
+        (tester) async {
       late (IndicatorEffect, DefaultIndicatorColors) result;
       await tester.pumpWidget(
         MaterialApp(
@@ -292,12 +305,14 @@ void main() {
   });
 
   group('Theme integration', () {
-    testWidgets('SmoothPageIndicator uses theme effect when not specified', (tester) async {
+    testWidgets('SmoothPageIndicator uses theme effect when not specified',
+        (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData.light().copyWith(
             extensions: const [
-              SmoothPageIndicatorTheme(effect: ExpandingDotsEffect(expansionFactor: 2.5)),
+              SmoothPageIndicatorTheme(
+                  effect: ExpandingDotsEffect(expansionFactor: 2.5)),
             ],
           ),
           home: Scaffold(
@@ -312,11 +327,14 @@ void main() {
       expect(find.byType(SmoothPageIndicator), findsOneWidget);
     });
 
-    testWidgets('SmoothPageIndicator uses provided effect over theme', (tester) async {
+    testWidgets('SmoothPageIndicator uses provided effect over theme',
+        (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData.light().copyWith(
-            extensions: const [SmoothPageIndicatorTheme(effect: ExpandingDotsEffect())],
+            extensions: const [
+              SmoothPageIndicatorTheme(effect: ExpandingDotsEffect())
+            ],
           ),
           home: Scaffold(
             body: SmoothPageIndicator(
@@ -331,7 +349,8 @@ void main() {
       expect(find.byType(SmoothPageIndicator), findsOneWidget);
     });
 
-    testWidgets('AnimatedSmoothIndicator uses theme effect when not specified', (tester) async {
+    testWidgets('AnimatedSmoothIndicator uses theme effect when not specified',
+        (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData.light().copyWith(
@@ -352,7 +371,8 @@ void main() {
           theme: ThemeData.light().copyWith(
             extensions: const [
               SmoothPageIndicatorTheme(
-                defaultColors: DefaultIndicatorColors(active: Colors.purple, inactive: Colors.orange),
+                defaultColors: DefaultIndicatorColors(
+                    active: Colors.purple, inactive: Colors.orange),
               ),
             ],
           ),

@@ -46,8 +46,10 @@ void main() {
 
       final result = effect1.lerp(effect2, 0.5);
 
-      expect((result.dotColor!.r * 255.0).round().clamp(0, 255), closeTo(128, 1));
-      expect((result.activeDotColor!.r * 255.0).round().clamp(0, 255), closeTo(128, 1));
+      expect(
+          (result.dotColor!.r * 255.0).round().clamp(0, 255), closeTo(128, 1));
+      expect((result.activeDotColor!.r * 255.0).round().clamp(0, 255),
+          closeTo(128, 1));
     });
 
     test('switches type at t=0.5', () {
@@ -457,7 +459,8 @@ void main() {
 
     test('lerp handles null colors gracefully', () {
       const effect1 = WormEffect(dotColor: null, activeDotColor: null);
-      const effect2 = WormEffect(dotColor: Colors.red, activeDotColor: Colors.blue);
+      const effect2 =
+          WormEffect(dotColor: Colors.red, activeDotColor: Colors.blue);
 
       final result = effect1.lerp(effect2, 0.5);
 
