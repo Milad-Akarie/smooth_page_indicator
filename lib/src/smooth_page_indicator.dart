@@ -134,6 +134,7 @@ class _SmoothPageIndicatorState extends State<SmoothPageIndicator>
       if (offset == null || offset.isNaN) {
         return widget.controller.initialPage.toDouble();
       }
+      if (widget.count <= 0) return 0.0;
       return offset % widget.count;
     } catch (_) {
       return widget.controller.initialPage.toDouble();
@@ -330,7 +331,7 @@ class _AnimatedSmoothIndicatorState
       throw 'Offset has not been initialized';
     }
     return SmoothIndicator(
-      offset: offset.evaluate(animation) % count,
+      offset: count > 0 ? offset.evaluate(animation) % count : 0.0,
       count: widget.count,
       effect: effect,
       onDotClicked: widget.onDotClicked,
